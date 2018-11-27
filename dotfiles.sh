@@ -7,7 +7,7 @@ BACKUP_DIR="$DIR/backup"
 
 install_dotfiles () {
   for src in $(find $DIR -mindepth 2 -maxdepth 2 \
-      -not -path "$BACKUP_DIR)/*" \
+      -not -path "$BACKUP_DIR/*" \
       -not -path "$DIR/.*")
   do
     dst="$HOME/$(basename $src)"
