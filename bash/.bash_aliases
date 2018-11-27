@@ -9,4 +9,8 @@ alias pygrep="grep --include=*.py"
 alias jgrep="grep --include=*.java"
 alias jsgrep="grep --include=*.js"
 
+# git
+alias gis="git status"
+alias gcpc="git cherry-pick --continue"
+
 # Other alias files
