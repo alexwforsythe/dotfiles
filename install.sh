@@ -33,6 +33,7 @@ link_item () {
         echo -n "$dst: Removing bad link ... "
         rm $dst ; echo 'done'
       else
+        # todo: wouldn't we want to skip the linking step too?
         backup=true
       fi
     fi
