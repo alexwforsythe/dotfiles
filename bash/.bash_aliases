@@ -11,6 +11,8 @@ alias jsgrep="grep --include=*.js"
 
 # git
 alias gis="git status"
+alias gcpa="git cherry-pick --abort"
 alias gcpc="git cherry-pick --continue"
+alias gcop="git checkout '@{-1}'"
 
 # Other alias files
