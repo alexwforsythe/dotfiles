@@ -385,9 +385,31 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Custom
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" enable runtime manipulation
-execute pathogen#infect()
 
-" activate powerline
-set rtp+=$HOME/.vim/bundle/powerline/powerline/bindings/vim
+" vim-plug: install if needed
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
+" vim-plug: load plugins
+call plug#begin('~/.vim/plugged')
+Plug 'chriskempson/base16-vim'
+Plug 'itchyny/lightline.vim'
+Plug 'preservim/nerdtree'
+Plug 'chriskempson/base16-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+call plug#end()
+
+" base16: set color scheme
+colorscheme base16-tomorrow-night
+
+" lightline: set color scheme
+let g:lightline = {
+    \'colorscheme': 'Tomorrow_Night',
+\}
+
+" vim-go: use gopls
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
