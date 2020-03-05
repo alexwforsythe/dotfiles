@@ -1,3 +1,5 @@
+# Custom bash aliases
+
 alias c="clear; ls"
 
 # directories
@@ -16,3 +18,6 @@ alias gcpc="git cherry-pick --continue"
 alias gcop="git checkout '@{-1}'"
 
 # Other alias files
+
+WORK_ALIASES="$HOME/.work_aliases"
+[[ -s $WORK_ALIASES ]] && source $WORK_ALIASES 
