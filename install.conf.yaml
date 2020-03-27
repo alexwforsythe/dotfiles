@@ -36,6 +36,9 @@
     ~/:
       - glob: true
       - path: git/*
+    ~/.config/iterm2:
+      - path: iterm2
+      - if: '[ `uname` = Darwin ]'
     ~/:
       - glob: true
       - path: python/*
