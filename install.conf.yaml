@@ -33,6 +33,8 @@
     ~/:
       - glob: true
       - path: bash/*
+    ~/.config/copyq: copyq
+      - if: command -v copyq
     ~/:
       - glob: true
       - path: git/*
