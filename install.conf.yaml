@@ -1,0 +1,74 @@
+# https://github.com/anishathalye/dotbot
+
+# dotbot configuration
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~', '~/.config']
+
+
+# Set up Homebrew (OS X)
+- shell:
+  - # Homebrew depends on Xcode CLI
+    - command: xcode-select --install
+    - description: Installing Xcode CLI
+    - if: '[ `uname` = Darwin ]'
+
+# Link dotfiles and configs
+- link:
+    ~/:
+      - glob: true
+      - path: bash/*
+    ~/:
+      - glob: true
+      - path: git/*
+    ~/:
+      - glob: true
+      - path: python/*
+    ~/:
+      - glob: true
+      - path: shell/*
+    ~/:
+      - glob: true
+      - path: vim/*
+    ~/:
+      - glob: true
+      - path: zsh/*
+
+# Link configs for Sublime Text
+link:
+  ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/:
+    - glob: true
+    - path: sublime-text/*
+    - if: '[ `uname` = Darwin ]'
+  ~/.config/sublime-text-3:
+    - glob: true
+    - path: sublime-text/*
+    - if: '[ `uname` = Linux ]'
+  /usr/local/bin/subl:
+    - path: /Applications/Sublime Text.app/Contents/SharedSupport/bin/subl
+    - if: '[ `uname` = Darwin ]' # subl should be linked automatically on linux
+
+# todo: make sure these are idempotent
+- shell:
+  # ZSH & Prezto
+  - [chsh -s $(which zsh), Making zsh the default shell]
+  - [./$HOME/.zprezto/init.zsh, Initializing prezto for zsh]
+  - [source $HOME/.zshrc, Loading installed zsh settings] # maybe unnecessary with prezto
+  # NVM (Node.js)
+  - [nvm install --lts, Installing Node.js LTS]
+  - [npm install -g npm, Upgrading npm]
+  - [npm install -g tldr, Installing tldr]
+  # VIM
+  - [vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"]
+
+# Everything before this point should be idempotent. The following steps should
+# upgrade all the dependencies installed on the first run.
+  -
+    - command: nvm upgrade
+    - description: Upgrading nvm
+  -
+    - command: npm -g install npm
+    - description: Upgrading npm
