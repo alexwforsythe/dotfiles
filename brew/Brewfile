@@ -1,0 +1,28 @@
+
+# Brews
+# brew "fasd"
+brew "git"
+brew "htop"
+brew "jq"
+brew "mas"
+brew "python"
+brew "pyenv"
+brew "rg"
+brew "shellcheck"
+brew "tmux"
+
+# Applications
+cask "copyq"
+cask "dropbox"
+cask "iterm2"
+# cask "java"
+cask "kap"
+cask "rectangle"
+cask "spotify"
+cask "sublime-text"
+cask "the-unarchiver"
+cask "visual-studio-code"
+cask "zoomus"
+
+# App Store
+mas "Slack", id: 803453959

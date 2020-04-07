@@ -15,6 +15,18 @@
     - command: xcode-select --install
     - description: Installing Xcode CLI
     - if: '[ `uname` = Darwin ]'
+  -
+    - command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)
+    - description: Installing homebrew
+    - if: '[ `uname` = Darwin ]'
+  -
+    - command: brew update
+    - description: Updating homebrew
+    - if: '[ `uname` = Darwin ]'
+  -
+    - command: brew bundle
+    - description: Installing homebrew bundle
+    - if: '[ `uname` = Darwin ]'
 
 # Link dotfiles and configs
 - link:
@@ -70,6 +82,18 @@ link:
 
 # Everything before this point should be idempotent. The following steps should
 # upgrade all the dependencies installed on the first run.
+  -
+    - command: brew update
+    - description: Updating homebrew
+    - if: '[ `uname` = Darwin ]'
+    -
+  - command: brew upgrade
+    - description: Upgrading homebrew
+    - if: '[ `uname` = Darwin ]'
+  -
+    - command: mas upgrade
+    - description: Upgrading App Store apps
+    - if: '[ `uname` = Darwin ]'
   -
     - command: nvm upgrade
     - description: Upgrading nvm
