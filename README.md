@@ -1,34 +1,65 @@
-# osx
-zsh
+# @alexwforsythe's dotfiles
+(for OS X and Linux)
 
-todo: configure git
+## Installation
 
-homebrew
-pip
-node
-npm
-jq
-ack
+Clone this repository:
+```
+mkdir ~/.config && cd ~/.config
+git clone git@github.com/alexwforsythe/dotfiles
+```
 
-# fonts
-https://github.com/sgolovine/PlexNerdfont
+Run the installation script:
+```
+cd dotfiles
+./install.sh
+```
 
+Manual Steps (for now):
+* SSH
+    [ ] Generate SSH Key: https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+* VIM
+    [ ] Open `vim` and install configured plugins
+* Sublime Text
+    [ ] Add license
+    [ ] Install Package Control: https://packagecontrol.io/installation
+    [ ] Restart Sublime Text to install configured plugins
+* VSCode
+    [ ] Sync config: https://github.com/shanalikhan/code-settings-sync/wiki/Setup-Guide
+    [ ] Install `code` command in path: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line
+ITerm2 (OS X)
+    [ ] Set config directory to `$HOME/.iterm2`
 
-brew install screenfetch
-brew install autojump
+## Dependencies
 
-npm install -g tldr
-npm install jq.node -g
+* `git`
+* `curl`
 
-git clone https://github.com/zplug/zplug $HOME/.zplug
-source ~/.zplug/init.zsh
-# stage plugins
-zplug "zsh-users/zsh-history-substring-search"
-zplug "modules/prompt", from:prezto
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug load --verbose
-zplug install
+The following dependencies are managed under `modules/` by this repository's [git subtree](https://www.atlassian.com/git/tutorials/git-subtree).
 
-chsh -s /bin/zsh
+* https://github.com/anishathalye/dotbot
+* https://github.com/powerline/fonts
+* https://github.com/alexwforsythe/prezto
+* https://github.com/alexwforsythe/vimrc
 
-ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+Various tools and plugins are loaded in the following files:
+* zsh: `modules/prezto/runcoms/zpreztorc`
+* vim: `vim/.vimrc`
+* npm: `npm/package.json`
+* Homebrew (OS X): `brew/Brewfile`
+
+---
+
+## Resources
+
+* Dotfiles
+    - dotbot: https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/
+    - git bare alternative: https://www.atlassian.com/git/tutorials/dotfiles
+* ZSH
+    - prezto: https://github.com/sorin-ionescu/prezto
+    - zsh-nvm: https://github.com/lukechilds/zsh-nvm/
+* VIM
+    - https://github.com/junegunn/vim-plug
+      - https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+* OS X
+    - https://sourabhbajaj.com/mac-setup/
