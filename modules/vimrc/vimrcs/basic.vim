@@ -395,7 +395,6 @@ endif
 
 " vim-plug: load plugins
 call plug#begin('~/.vim/plugged')
-Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'chriskempson/base16-vim'
