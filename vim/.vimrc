@@ -397,6 +397,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
+Plug 'edkolev/tmuxline.vim'
 Plug 'preservim/nerdtree'
 Plug 'chriskempson/base16-vim'
 Plug 'airblade/vim-gitgutter'
@@ -410,6 +411,11 @@ colorscheme base16-tomorrow-night
 let g:lightline = {
     \'colorscheme': 'Tomorrow_Night',
 \}
+
+" tmuxline: set theme
+let g:tmuxline_theme = 'lightline'
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_preset = 'minimal'
 
 " vim-go: use gopls
 let g:go_def_mode='gopls'
