@@ -53,6 +53,8 @@ link:
 
 # todo: make sure these are idempotent
 - shell:
+  # Fonts
+  - [./fonts/install.sh, Installing powerline fonts]
   # ZSH & Prezto
   - [chsh -s $(which zsh), Making zsh the default shell]
   - [./$HOME/.zprezto/init.zsh, Initializing prezto for zsh]
