@@ -4,3 +4,6 @@
 [submodule "modules/fonts"]
 	path = modules/fonts
 	url = git@github.com:powerline/fonts.git
+[submodule "modules/prezto"]
+	path = modules/prezto
+	url = git@github.com:alexwforsythe/prezto.git

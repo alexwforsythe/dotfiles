@@ -33,6 +33,10 @@
     ~/:
       - glob: true
       - path: vim/*
+    # prezto installs most of the zsh configs and plugins in the "shell" section
+    # below, such as .zshrc, etc.
+    ~/.zprezto: modules/prezto
+    # zsh/ contains other zsh customizations such as the prompt theme
     ~/:
       - glob: true
       - path: zsh/*
