@@ -1,6 +1,0 @@
-# Custom zsh aliases
-
-# Other alias files
-
-BASH_ALIASES="$HOME/.bash_aliases"
-[[ -s $BASH_ALIASES ]] && source $BASH_ALIASES
