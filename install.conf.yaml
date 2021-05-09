@@ -30,9 +30,7 @@
     ~/:
       - glob: true
       - path: shell/*
-    ~/:
-      - glob: true
-      - path: vim/*
+    ~/.vimrc: modules/vimrc/vimrcs/basic.vim
     # prezto installs most of the zsh configs and plugins in the "shell" section
     # below, such as .zshrc, etc.
     ~/.zprezto: modules/prezto

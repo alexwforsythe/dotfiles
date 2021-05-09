@@ -7,3 +7,6 @@
 [submodule "modules/prezto"]
 	path = modules/prezto
 	url = git@github.com:alexwforsythe/prezto.git
+[submodule "modules/vimrc"]
+	path = modules/vimrc
+	url = git@github.com:alexwforsythe/vimrc.git
