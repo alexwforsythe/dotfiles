@@ -8,6 +8,11 @@
 
 - clean: ['~', '~/.config']
 
+# Set up OS X
+- shell:
+  - command: launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist
+  - description: Disable launching iTunes when the "play" key is pressed
+  - if: '[ `uname` = Darwin ]'
 
 # Set up Homebrew (OS X)
 - shell:
