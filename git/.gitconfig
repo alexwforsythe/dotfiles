@@ -4,16 +4,7 @@
 [core]
         filemode = false
 [alias]
-        st = status
-        df = diff
-        br = branch -v
-        co = checkout
-        cb = checkout -b
-        aa = add -A
-        cm = commit -m
-        ca = commit -a -m
         up = pull --rebase origin master
-        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
         alias = config --get-regexp alias
         summon = "!summon () { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b; }; summon"
         attic = "!attic() { b=$1; git tag archive/$b $b; git branch -D $b; }; attic"
