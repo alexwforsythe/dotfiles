@@ -15,5 +15,6 @@
         up = pull --rebase origin master
         lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
         alias = config --get-regexp alias
+        summon = "!summon () { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b; }; summon"
 [color]
         ui = true
