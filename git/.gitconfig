@@ -4,7 +4,6 @@
 [core]
         filemode = false
 [alias]
-        up = pull --rebase origin master
         alias = config --get-regexp alias
         summon = "!summon () { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b; }; summon"
         attic = "!attic() { b=$1; git tag archive/$b $b; git branch -D $b; }; attic"
