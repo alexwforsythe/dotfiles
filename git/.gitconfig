@@ -9,3 +9,7 @@
     attic = "!attic() { b=$1; git tag archive/$b $b; git branch -D $b; }; attic"
 [color]
     ui = true
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
