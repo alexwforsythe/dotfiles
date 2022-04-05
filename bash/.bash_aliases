@@ -19,6 +19,15 @@ alias gcpc="git cherry-pick --continue"
 alias gcop="git checkout '@{-1}'"
 alias gwip="git add -A && git commit -m 'wip'"
 
+# tmux
+
+tmuxs () {
+    tmux source-file "$HOME/.tmux/$1.conf";
+}
+
+alias tmuxa="tmux attach -t"
+alias tmuxk="tmux kill-session -t"
+
 # Other alias files
 
 WORK_ALIASES="$HOME/.work_aliases"
