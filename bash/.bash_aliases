@@ -13,7 +13,6 @@ alias jsgrep="grep --include=*.js"
 
 # git
 alias gis="git status"
-alias gbl="git branch --verbose --sort=-committerdate"
 alias gpr="git pull --rebase origin master"
 alias gcpa="git cherry-pick --abort"
 alias gcpc="git cherry-pick --continue"
