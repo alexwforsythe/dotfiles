@@ -36,9 +36,11 @@ fi
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -ga POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+      # os_icon               # os identifier
       dir                     # current directory
       vcs                     # git status
-      # prompt_char           # prompt symbol
+      prompt_char             # prompt symbol
+      # vi_mode               # vi mode (you don't need this if you've enabled prompt_char)
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -49,17 +51,18 @@ fi
       status                  # exit code of the last command
       command_execution_time  # duration of the last command
       background_jobs         # presence of background jobs
+      direnv                  # direnv status (https://direnv.net/)
       virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-      anaconda                # conda environment (https://conda.io/)
+      # anaconda              # conda environment (https://conda.io/)
       pyenv                   # python environment (https://github.com/pyenv/pyenv)
       nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-      nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
+      # nvm                   # node.js version from nvm (https://github.com/nvm-sh/nvm)
       nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
       # node_version          # node.js version
       # go_version            # golang version
-      kubecontext             # current kubernetes context (https://kubernetes.io/)
+      # kubecontext             # current kubernetes context (https://kubernetes.io/)
       context                 # user@host
-      nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
+      # nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
       # public_ip             # public IP address
       # battery               # internal battery
       # time                  # current time
@@ -166,9 +169,9 @@ fi
   # Separator between different-color segments on the right.
   typeset -g POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
   # The right end of left prompt.
-  typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='▓▒░'
+  # typeset -g POWERLEVEL9K_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL='▓▒░'
   # The left end of right prompt.
-  typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='░▒▓'
+  # typeset -g POWERLEVEL9K_RIGHT_PROMPT_FIRST_SEGMENT_START_SYMBOL='░▒▓'
   # The left end of left prompt.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=''
   # The right end of right prompt.
@@ -200,7 +203,8 @@ fi
   # No line introducer if prompt_char is the first segment.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_PROMPT_FIRST_SEGMENT_START_SYMBOL=
   # No surrounding whitespace.
-  typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_{LEFT,RIGHT}_WHITESPACE=
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_LEFT_WHITESPACE=' '
+  typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_RIGHT_WHITESPACE=
 
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
@@ -308,7 +312,7 @@ fi
   vcs="\${P9K_CONTENT:-$vcs}"
 
   # Branch icon. Set this parameter to $'\uF126' for the popular Powerline branch icon.
-  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=
+  typeset -g POWERLEVEL9K_VCS_BRANCH_ICON=$'\uF126 '
 
   # Disable the default Git status formatting.
   typeset -g POWERLEVEL9K_VCS_DISABLE_GITSTATUS_FORMATTING=true
@@ -402,16 +406,27 @@ fi
   # Icon to show when there are background jobs.
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER// }'
 
-  ##########[ nordvpn: nordvpn connection status, linux only (https://nordvpn.com/) ]###########
-  # NordVPN connection indicator color.
-  typeset -g POWERLEVEL9K_NORDVPN_FOREGROUND=4
-  # Hide NordVPN connection indicator when not connected.
-  typeset -g POWERLEVEL9K_NORDVPN_{DISCONNECTED,CONNECTING,DISCONNECTING}_CONTENT_EXPANSION=
-  typeset -g POWERLEVEL9K_NORDVPN_{DISCONNECTED,CONNECTING,DISCONNECTING}_VISUAL_IDENTIFIER_EXPANSION=
+  #######################[ direnv: direnv status (https://direnv.net/) ]########################
+  # Direnv color.
+  typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=178
   # Custom icon.
-  # typeset -g POWERLEVEL9K_NORDVPN_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
-  ####################################[ context: user@host ]####################################
+  ###########[ vi_mode: vi mode (you don't need this if you've enabled prompt_char) ]###########
+  # Text and color for normal (a.k.a. command) vi mode.
+  typeset -g POWERLEVEL9K_VI_COMMAND_MODE_STRING=C
+  typeset -g POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND=106
+  # Text and color for visual vi mode.
+  typeset -g POWERLEVEL9K_VI_VISUAL_MODE_STRING=V
+  typeset -g POWERLEVEL9K_VI_MODE_VISUAL_FOREGROUND=68
+  # Text and color for overtype (a.k.a. overwrite and replace) vi mode.
+  typeset -g POWERLEVEL9K_VI_OVERWRITE_MODE_STRING=O
+  typeset -g POWERLEVEL9K_VI_MODE_OVERWRITE_FOREGROUND=172
+  # Text and color for insert vi mode.
+  typeset -g POWERLEVEL9K_VI_INSERT_MODE_STRING=
+  typeset -g POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND=66
+
+    ####################################[ context: user@host ]####################################
   # Default context color.
   typeset -g POWERLEVEL9K_CONTEXT_FOREGROUND=180 # tan
   # Default context format: %n is username, %m is hostname.
@@ -441,16 +456,6 @@ fi
   # Custom icon.
   # typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
-  #####################[ anaconda: conda environment (https://conda.io/) ]######################
-  # Anaconda environment color.
-  typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND=2
-  # Don't show Python version next to the anaconda environment name.
-  typeset -g POWERLEVEL9K_ANACONDA_SHOW_PYTHON_VERSION=false
-  # Separate environment name from Python version only with a space.
-  typeset -g POWERLEVEL9K_ANACONDA_{LEFT,RIGHT}_DELIMITER=
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_ANACONDA_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
   ################[ pyenv: python environment (https://github.com/pyenv/pyenv) ]################
   # Pyenv color.
   typeset -g POWERLEVEL9K_PYENV_FOREGROUND=2
@@ -459,29 +464,11 @@ fi
   # Custom icon.
   # typeset -g POWERLEVEL9K_PYENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
-  ##########[ nodenv: node.js version from nodenv (https://github.com/nodenv/nodenv) ]##########
-  # Nodenv color.
-  typeset -g POWERLEVEL9K_NODENV_FOREGROUND=2
-  # Don't show node version if it's the same as global: $(nodenv version-name) == $(nodenv global).
-  typeset -g POWERLEVEL9K_NODENV_PROMPT_ALWAYS_SHOW=false
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_NODENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
   ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
   # Nvm color.
   typeset -g POWERLEVEL9K_NVM_FOREGROUND=2
   # Custom icon.
   # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  ############[ nodeenv: node.js environment (https://github.com/ekalinin/nodeenv) ]############
-  # Nodeenv color.
-  typeset -g POWERLEVEL9K_NODEENV_FOREGROUND=2
-  # Don't show Node version next to the environment name.
-  typeset -g POWERLEVEL9K_NODEENV_SHOW_NODE_VERSION=false
-  # Separate environment name from Node version only with a space.
-  typeset -g POWERLEVEL9K_NODEENV_{LEFT,RIGHT}_DELIMITER=
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_NODEENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ##############################[ node_version: node.js version ]###############################
   # Node version color.
@@ -496,78 +483,6 @@ fi
   typeset -g POWERLEVEL9K_GO_VERSION_FOREGROUND=2
   # Custom icon.
   # typeset -g POWERLEVEL9K_GO_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
-  # Kubernetes context classes for the purpose of using different colors, icons and expansions with
-  # different contexts.
-  #
-  # POWERLEVEL9K_KUBECONTEXT_CLASSES is an array with even number of elements. The first element
-  # in each pair defines a pattern against which the current kubernetes context gets matched.
-  # More specifically, it's P9K_CONTENT prior to the application of context expansion (see below)
-  # that gets matched. If you unset all POWERLEVEL9K_KUBECONTEXT_*CONTENT_EXPANSION parameters,
-  # you'll see this value in your prompt. The second element of each pair in
-  # POWERLEVEL9K_KUBECONTEXT_CLASSES defines the context class. Patterns are tried in order. The
-  # first match wins.
-  #
-  # For example, if your current kubernetes context is "deathray-testing/default", its class is TEST
-  # because "deathray-testing/default" doesn't match the pattern '*prod*' but does match '*test*'.
-  #
-  # You can define different colors, icons and content expansions for different classes:
-  #
-  #   typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_FOREGROUND=2
-  #   typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_VISUAL_IDENTIFIER_EXPANSION='⭐'
-  #   typeset -g POWERLEVEL9K_KUBECONTEXT_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
-  typeset -g POWERLEVEL9K_KUBECONTEXT_CLASSES=(
-      # '*prod*'  PROD    # These values are examples that are unlikely
-      # '*test*'  TEST    # to match your needs. Customize them as needed.
-      '*'       DEFAULT)
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_FOREGROUND=5
-  # typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  # Use POWERLEVEL9K_KUBECONTEXT_CONTENT_EXPANSION to specify the content displayed by kubecontext
-  # segment.
-  #
-  # Within the expansion the following parameters are always available:
-  #
-  # - P9K_CONTENT                The content that would've been displayed if there was no content
-  #                              expansion defined.
-  # - P9K_KUBECONTEXT_NAME       The current context's name. Corresponds to column NAME in the
-  #                              output of `kubectl config get-contexts`.
-  # - P9K_KUBECONTEXT_CLUSTER    The current context's cluster. Corresponds to column CLUSTER in the
-  #                              output of `kubectl config get-contexts`.
-  # - P9K_KUBECONTEXT_NAMESPACE  The current context's namespace. Corresponds to column NAMESPACE
-  #                              in the output of `kubectl config get-contexts`. If there is no
-  #                              namespace, the parameter is set to "default".
-  #
-  # If the context points to GKE or EKS, the following extra parameters are available:
-  #
-  # - P9K_KUBECONTEXT_CLOUD_NAME     Either "gke" or "eks".
-  # - P9K_KUBECONTEXT_CLOUD_ACCOUNT  Account/project ID.
-  # - P9K_KUBECONTEXT_CLOUD_ZONE     Availability zone.
-  # - P9K_KUBECONTEXT_CLOUD_CLUSTER  Cluster.
-  #
-  # P9K_KUBECONTEXT_CLOUD_* parameters are derived from P9K_KUBECONTEXT_CLUSTER. For example,
-  # if P9K_KUBECONTEXT_CLUSTER is "gke_my-account_us-east1-a_my-cluster-01":
-  #
-  #   - P9K_KUBECONTEXT_CLOUD_NAME=gke
-  #   - P9K_KUBECONTEXT_CLOUD_ACCOUNT=my-account
-  #   - P9K_KUBECONTEXT_CLOUD_ZONE=us-east1-a
-  #   - P9K_KUBECONTEXT_CLOUD_CLUSTER=my-cluster-01
-  #
-  # If P9K_KUBECONTEXT_CLUSTER is "arn:aws:eks:us-east-1:123456789012:cluster/my-cluster-01":
-  #
-  #   - P9K_KUBECONTEXT_CLOUD_NAME=eks
-  #   - P9K_KUBECONTEXT_CLOUD_ACCOUNT=123456789012
-  #   - P9K_KUBECONTEXT_CLOUD_ZONE=us-east-1
-  #   - P9K_KUBECONTEXT_CLOUD_CLUSTER=my-cluster-01
-  #
-  # The expansion below will show P9K_KUBECONTEXT_CLOUD_CLUSTER if it's not empty and fall back
-  # to P9K_KUBECONTEXT_NAME. Parameter expansions are very flexible and fast, too. See reference:
-  # http://zsh.sourceforge.net/Doc/Release/Expansion.html#Parameter-Expansion.
-  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION='${P9K_KUBECONTEXT_CLOUD_CLUSTER:-${P9K_KUBECONTEXT_NAME}}'
-
-  # Custom prefix.
-  # typeset -g POWERLEVEL9K_KUBECONTEXT_PREFIX='%248Fat '
 
   ###############################[ public_ip: public IP address ]###############################
   # Public IP color.
@@ -618,6 +533,18 @@ fi
   # User-defined prompt segments can be customized the same way as built-in segments.
   typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=17
   typeset -g POWERLEVEL9K_EXAMPLE_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'
+
+  # Instant prompt mode.
+  #
+  #   - off:     Disable instant prompt. Choose this if you've tried instant prompt and found
+  #              it incompatible with your zsh configuration files.
+  #   - quiet:   Enable instant prompt and don't print warnings when detecting console output
+  #              during zsh initialization. Choose this if you've read and understood
+  #              https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
+  #   - verbose: Enable instant prompt and print a warning when detecting console output during
+  #              zsh initialization. Choose this if you've never tried instant prompt, haven't
+  #              seen the warning, or if you are unsure what this all means.
+  typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
 }
 
 (( ! p9k_classic_restore_aliases )) || setopt aliases
