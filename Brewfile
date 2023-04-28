@@ -10,6 +10,11 @@ brew fd
 brew fzf
 brew git
 brew git-delta
+# Install coreutils to get gls (GNU ls), which supports colorization from
+# LS_COLORS (instead of bash's LSCOLORS).
+#
+# https://github.com/sharkdp/vivid#on-macos
+brew coreutils
 brew htop
 brew jq
 brew koekeishiya/formulae/skhd
