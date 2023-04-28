@@ -7,12 +7,44 @@ pager = delta
 editor = code --reuse-window --wait
 [delta]
 # https://github.com/dandavison/delta
+# @todo new file
+features = theme-base16 decorations
 navigate = true # use n and N to move between diff sections
-light = false   # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
-features = decorations
-# keep-plus-minus-markers = true
-# line-numbers = true
 # side-by-side = true
+[delta "decorations"]
+decorations = true
+hyperlinks = true
+[delta "theme-base16"]
+# Color reference: https://www.ditig.com/256-colors-cheat-sheet
+dark = true
+syntax-theme = base16
+commit-style = yellow bold
+commit-decoration-style = ul
+file-style = omit
+# hunk-label = omit
+hunk-header-decoration-style = omit
+hunk-header-file-style = magenta # ul
+hunk-header-line-number-style = magenta
+hunk-header-style = file line-number italic syntax
+line-numbers = true
+line-numbers-left-style = black
+line-numbers-zero-style = "#999999" italic
+line-numbers-minus-style = red
+line-numbers-plus-style = green
+line-numbers-right-style = "#515151"
+minus-style = red
+minus-non-emph-style = red
+minus-emph-style = white bold brown
+minus-empty-line-marker-style = normal red
+plus-style = green
+plus-non-emph-style = green
+plus-emph-style = white bold forestgreen
+plus-empty-line-marker-style = normal green
+# whitespace-error-style = magenta reverse
+[delta "interactive"]
+keep-plus-minus-markers = false
+[pager]
+blame = delta
 [interactive]
 diffFilter = delta --color-only --features=interactive
 [alias]
