@@ -27,6 +27,7 @@ brew rg
 brew ruby
 brew shellcheck
 brew tmux
+brew wget
 brew zoxide # @todo learn it
 
 # Apps: brew install --cask
