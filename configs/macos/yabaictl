@@ -1,0 +1,188 @@
+#!/usr/bin/env sh
+
+set -x
+
+#
+# Constants
+#
+
+queryd="yabai -m query --displays --display"
+queryd_space="yabai -m query --displays --space"
+querys="yabai -m query --spaces --space"
+queryw="yabai -m query --windows --window"
+
+#
+# Helpers
+#
+
+display_sel() {
+    case $1 in
+    prev_or_last) ($queryd prev || $queryd last) | jq '.index' ;;
+    next_or_first) ($queryd next || $queryd first) | jq '.index' ;;
+    *) echo "$1" ;;
+    esac
+}
+
+space_sel() {
+    case $1 in
+    # display.spaces is an ascending slice of contiguous space indices, so
+    # space.index-display.spaces[0] is its index in display.spaces.
+    prev_or_last) $queryd_space |
+        jq -r ".spaces[$($querys | jq -r '.index')-.spaces[0] - 1]" ;;
+    next_or_first) $queryd_space |
+        jq -r ".spaces[$($querys | jq -r '.index')-.spaces[0] + 1] // .spaces[0]" ;;
+    *) echo "$1" ;;
+    esac
+}
+
+window_sel() {
+    case $1 in
+    recent_in_space) yabai -m query --windows --space | jq '.[1].id // .[0].id' ;;
+    prev_or_last) ($queryw prev || $queryw last) | jq '.id' ;;
+    next_or_first) ($queryw next || $queryw first) | jq '.id' ;;
+    stack.prev_or_last) ($queryw stack.prev || $queryw stack.last) | jq '.id' ;;
+    stack.next_or_first) ($queryw stack.next || $queryw stack.first) | jq '.id' ;;
+    *) echo "$1" ;;
+    esac
+}
+
+#
+# Displays
+#
+
+focusd() {
+    seld=$1
+    case $1 in [[:digit:]]) ;; *) seld="$(display_sel "$1")" ;; esac
+    yabai -m display --focus "$seld"
+}
+
+#
+# Spaces
+#
+
+# focuss focuses the space at the given SPACE_SEL and then, if SPACE_SEL is a
+# valid Mission Control index, focuses its display because the MacOS shortcuts
+# won't focus a space if it's already visible on an unfocused display.
+#
+# Spaces are focused by synthesizing their default MacOS keyboard shortcuts,
+# because I don't want to disable SIP. This means only spaces 1-9 are supported,
+# but a tenth can be added by changing its shortcut to ctrl+0.
+focuss() {
+    case $1 in
+    [[:digit:]]) skhd -k "ctrl - $1" ;;
+    *)
+        read -r index display <<EOF
+$($querys "$(space_sel "$1")" | jq -r '"\(.index) \(.display)"')
+EOF
+        skhd -k "ctrl - $index" && yabai -m display --focus "$display"
+        ;;
+    esac
+}
+
+toggles_padding_and_gap() {
+    yabai -m space --toggle padding
+    yabai -m space --toggle gap
+}
+
+#
+# Windows
+#
+
+# focusw focuses the window at the given WINDOW_SEL.
+focusw() {
+    selw=$1
+    case $1 in [[:digit:]]) ;; *) selw="$(window_sel "$1")" ;; esac
+    yabai -m window --focus "$selw"
+}
+
+swapw() {
+    selw=$1
+    case $1 in [[:digit:]]) ;; *) selw="$(window_sel "$1")" ;; esac
+    yabai -m window --swap "$selw"
+}
+
+warpw() {
+    selw=$1
+    case $1 in [[:digit:]]) ;; *) selw="$(window_sel "$1")" ;; esac
+    yabai -m window --warp "$selw"
+}
+
+# movew_to_space moves the focused window to the space at the given SPACE_SEL.
+movew_to_space() {
+    sels=$1
+    case $1 in [[:digit:]]) ;; *) sels="$(space_sel "$1")" ;; esac
+    yabai -m window --space "$sels" && focuss "$sels"
+}
+
+movew_to_display() {
+    yabai -m window --display "$1" && yabai -m display --focus "$1"
+}
+
+gridw_to_preset() {
+    case $1 in                                 # r:c:x:y:w:h
+    maximize) grid="1:1:0:0:1:1" ;;            # 1:1:0:0:1:1
+    center) grid="4:4:1:1:2:2" ;;              # 6:6:1:1:4:4
+    left_half) grid="1:2:0:0:1:1" ;;           # 1:2:0:0:1:1
+    bottom_half) grid="2:1:0:1:1:1" ;;         # 2:1:0:1:1:1
+    top_half) grid="2:1:0:0:1:1" ;;            # 2:1:0:0:1:1
+    right_half) grid="1:2:1:0:1:1" ;;          # 1:2:1:0:1:1
+    top_left_corner) grid="2:2:0:0:1:1" ;;     # 2:2:0:0:1:1
+    bottom_left_quarter) grid="2:2:0:1:1:1" ;; # 2:2:0:1:1:1
+    top_right_corner) grid="2:2:1:0:1:1" ;;    # 2:2:1:0:1:1
+    bottom_right_corner) grid="2:2:1:1:1:1" ;; # 2:2:1:1:1:1
+    *)
+        printf "unknown preset: %s\n" "$1"
+        exit 2
+        ;;
+    esac
+
+    yabai -m window --grid $grid
+}
+
+togglew_float_and_center() {
+    yabai -m window --toggle float && gridw_with_preset center
+}
+
+#
+# Main
+#
+
+usage() {
+    printf '%s\n' "usage: $(basename "$0") [-h] [-e] (-m YABAI_MSG | COMMAND) [ARG ...]" \
+        '; ' 'options:' \
+        '        -h, --help;Show this help message and exit.' \
+        '        -e, --escape;Instruct skhd to synthesize an "escape" keypress upon completion. This is useful for exiting skhd modes with hotkey actions.' \
+        '        -m, --message YABAI_MSG;Send YABAI_MSG with ARGS to the running instance of yabai via the -m option.' \
+        '; ' 'positional arguments:' \
+        '        COMMAND [ARG ...];Run COMMAND in the current shell with ARGS. Can be used to run functions defined by this script.' |
+        column -t -s ';'
+}
+
+while [ $# -gt 0 ]; do
+    case $1 in
+    -h | --help)
+        usage
+        exit 0
+        ;;
+    -e | --escape) opt_escape=true ;;
+    -m | --message) opt_msg=true ;;
+    *) break ;;
+    esac
+    shift
+done
+
+if [ $# -eq 0 ]; then
+    usage
+    exit 2
+fi
+
+if [ -n "$opt_msg" ]; then
+    cmd="yabai"
+    set -- '-m' "$@"
+else
+    cmd=$1
+    shift
+fi
+
+"$cmd" "$@"
+$opt_escape && skhd -k 'escape'
