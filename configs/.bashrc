@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
 
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#
+# ~/.bashrc: executed by bash(1) for non-login shells
+#
+# https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files
+#
+# @todo
+#   - https://github.com/rockandska/fzf-obc
+#
 
 # If not running interactively, don't do anything
 case $- in
@@ -10,109 +15,96 @@ case $- in
 *) return ;;
 esac
 
-# don't put duplicate lines or lines starting with space in the history.
-# See bash(1) for more options
+# Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# check the window size after each command and, if necessary,
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+shopt -s globstar
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+# Set variable identifying the chroot you work in (used in the prompt below)
+if [[ -z "${debian_chroot:-}" && -r /etc/debian_chroot ]]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
-# set a fancy prompt (non-color, unless we know we "want" color)
+# Set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-xterm-color) color_prompt=yes ;;
-esac
-
-# uncomment for a colored prompt, if the terminal has the capability; turned
-# off by default to not distract the user: the focus in a terminal window
-# should be on the output of commands, not on the prompt
-#force_color_prompt=yes
-
-if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
-fi
-
-if [ "$color_prompt" = yes ]; then
+xterm-color)
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-fi
-unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
+    ;&
 xterm* | rxvt*)
+    # If this is an xterm set the title to user@host:dir
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*) ;;
-
+*) PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ ' ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b "$HOME/.dircolors")" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+#
+# Hard dependencies
+#
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+# @todo remove old way if new one works
+shellrc="$XDG_CONFIG_HOME/configs/shellrc.sh"
+source:file "$shellrc" || return 1
+# shellcheck disable=SC1090
+# if [[ ! -s $shellrc ]] || ! source "$shellrc"; then
+#     log:error "file not found: $shellrc"
+#     return 1
+# fi
+
+#
+# Plugins
+#
+
+# gitstatus: https://github.com/romkatv/gitstatus#using-from-bash
+_gitstatus_dir=$XDG_CONFIG_HOME/dotfiles/submodules/prezto/modules/prompt/external/powerlevel10k/gitstatus
+if source:file "$_gitstatus_dir/gitstatus.prompt.sh"; then
+    PS1='\w "$GITSTATUS_PROMPT" \$ '
 fi
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# fzf
+setup-fzf "$HOME/.fzf.bash"
 
 #
-# Alias definitions.
-#
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-#
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+# Bash completions
 #
 
-# shellcheck source=/dev/null
-[ -s "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
-
-# Enable programmable completion features.
-#
-# You don't need to enable this if it's already enabled in /etc/bash.bashrc and
-# /etc/profile sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        # shellcheck source=/dev/null
-        source /usr/share/bash-completion/bash_completion
-    elif [ -f /etc/bash_completion ]; then
-        # shellcheck source=/dev/null
-        source /etc/bash_completion
-    fi
+    source:file /usr/share/bash-completion/bash_completion ||
+        source:file /etc/bash_completion || {
+        [[ -d /usr/local/etc/bash_completion.d ]] &&
+            for f in /usr/local/etc/bash_completion.d/*; do source:file "$f"; done
+    }
 fi
+
+#
+# Colors
+#
+# GNU ls (installed by brew as part of corutils on MacOS) uses LS_COLORS to
+# colorize output. Here's a good reference:
+# https://the.exa.website/docs/colour-themes
+#
+
+# Use dircolors to set LS_COLORS to a nice them (its output is the setter
+# command)
+run:if-cmd dircolors eval "$(dircolors)"
+
+# fzf
+
+# @todo _fzf_setup_completion not found
+# usage: _fzf_setup_completion path|dir|var|alias|host COMMANDS...
+# _fzf_setup_completion path dir alias git tree
+
+# forgit
+# @todo _completion_loader not found
+[[ -d $FORGIT_INSTALL_DIR ]] &&
+    source:file "$FORGIT_INSTALL_DIR/completions/git-forgit.bash"
