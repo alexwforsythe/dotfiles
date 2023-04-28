@@ -1,0 +1,38 @@
+<!-- Custom plist file for skhd -->
+<!-- Copied from /usr/local/Cellar/skhd/.../homebrew.mxcl.skhd.plist -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>homebrew.mxcl.skhd</string>
+    <key>ProgramArguments</key>
+    <array>
+      <string>/usr/local/opt/skhd/bin/skhd</string>
+      <!-- Enable verbose output to log files. -->
+      <string>-V</string>
+    </array>
+    <key>EnvironmentVariables</key>
+    <dict>
+      <!-- Use the system command interpreter (dash) instead of the default
+    shell (zsh) for faster executions. -->
+      <key>SHELL</key>
+      <string>/bin/dash</string>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+    <key>RunAtLoad</key>
+    <true />
+    <key>KeepAlive</key>
+    <true />
+    <key>ProcessType</key>
+    <string>Interactive</string>
+    <key>Nice</key>
+    <integer>-20</integer>
+    <!-- Write output to log files for debugging. -->
+    <key>StandardErrorPath</key>
+    <string>/usr/local/var/log/skhd/skhd.err.log</string>
+    <key>StandardOutPath</key>
+    <string>/usr/local/var/log/skhd/skhd.out.log</string>
+  </dict>
+</plist>
