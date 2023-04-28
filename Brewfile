@@ -17,7 +17,6 @@ brew git-delta
 brew coreutils
 brew htop
 brew jq
-brew koekeishiya/formulae/skhd
 brew koekeishiya/formulae/yabai
 brew mas # needed for appstore commands
 brew MisterTea/et/et
@@ -31,13 +30,13 @@ brew tmux
 brew zoxide # @todo learn it
 
 # Apps: brew install --cask
-cask alt-tab
+# cask alt-tab
 cask bettertouchtool
 # cask copyq
 cask font-meslo-lg-nerd-font
+cask hammerspoon
 cask iterm2
 cask meetingbar
-cask notunes
 cask rectangle
 # cask spotify
 cask visual-studio-code
