@@ -1,10 +1,6 @@
 {
   "name": "dotfiles",
-  "description": "Global NPM packages",
   "devDependencies": {
     "prettier": "latest"
-  },
-  "dependencies": {
-    "tldr": "latest"
   }
 }

@@ -29,6 +29,7 @@ brew pyenv
 brew rg
 brew ruby
 brew shellcheck
+brew tldr
 brew tmux
 brew tree
 brew wget
