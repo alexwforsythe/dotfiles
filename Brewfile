@@ -38,7 +38,6 @@ cask hammerspoon
 cask iterm2
 cask meetingbar
 cask rectangle
-# cask spotify
 cask visual-studio-code
 cask zoom
 
