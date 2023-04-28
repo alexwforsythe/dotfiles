@@ -41,7 +41,7 @@ cask notunes
 cask rectangle
 # cask spotify
 cask visual-studio-code
-cask zoomus
+cask zoom
 
 # App Store
 # appstore 803453959 Slack
