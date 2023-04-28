@@ -20,7 +20,10 @@ brew jq
 brew koekeishiya/formulae/yabai
 brew mas # needed for appstore commands
 brew MisterTea/et/et
-brew ncdu # @todo try & configure
+# @todo learn it
+# https://thevaluable.dev/mysql-command-line-tool-mycli/
+# brew mycli
+# brew ncdu # @todo try & configure
 brew python
 brew pyenv
 brew rg
@@ -28,6 +31,7 @@ brew ruby
 brew shellcheck
 brew tmux
 brew wget
+# brew vhs
 brew zoxide # @todo learn it
 
 # Apps: brew install --cask
