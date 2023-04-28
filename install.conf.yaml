@@ -55,6 +55,10 @@
 # MacOS
 - shell:
   -
+    command: defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+    description: Enabling key key repeat
+    if: '[ "$(uname)" = Darwin ]'
+  -
     command: defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.config/iterm2"
     description: Setting iTerm2 config directory
     if: '[ "$(uname)" = Darwin ]'
