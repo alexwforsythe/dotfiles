@@ -30,6 +30,7 @@ brew rg
 brew ruby
 brew shellcheck
 brew tmux
+brew tree
 brew wget
 # brew vhs
 brew zoxide # @todo learn it
