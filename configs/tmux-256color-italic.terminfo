@@ -1,0 +1,6 @@
+# A tmux-256color based TERMINFO that adds the escape sequences for italic.
+# The third line is necessary to make home and end keys work inside tmux.
+tmux-256color-italic|tmux with 256 colors and italic,
+  ritm=\E[23m, rmso=\E[27m, sitm=\E[3m, smso=\E[7m, Ms@,
+  khome=\E[1~, kend=\E[4~,
+  use=xterm-256color, use=screen-256color,
