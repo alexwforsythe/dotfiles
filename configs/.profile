@@ -1,92 +1,153 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-export EDITOR=vi
-export VISUAL=vi
+#
+# .profile: shared environment setup for bash and zsh
+#
+#  - Runs on startup for login shells:
+#    - bash: after /etc/profile, before .bashrc
+#     - @todo maybe we should break out other pre-plugin-setups into "yarc"?
+#    - zsh: sourced via zshrc
+#  - Should only run commands needed by plugins
+#  - All other shared setup should go in shellrc
+#
+
+is-macos() { [[ $OSTYPE == darwin* ]]; }
+
+#
+# Terminal
+#
+
+[[ -n "$LANG" ]] || export LANG='en_US.UTF-8'
+[[ -n "$TMUX" ]] || export TERM="xterm-256color-italic"
+
+#
+# Default commands
+#
+
+export EDITOR=vim
+export VISUAL=vim
 export PAGER=less
+export LESS="--hilite-search \
+--hilite-unread \
+--ignore-case \
+--LONG-PROMPT \
+--mouse \
+--quiet \
+--quit-if-one-screen \
+--RAW-CONTROL-CHARS \
+--window=-4 \
+--use-color"
+
+is-macos && export BROWSER=open
 
 #
-# Path
+# Config
 #
 
-export PATH=/opt/bin:"$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
+export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
 
 #
-# Colors
+# Logging
 #
 
-# base16
-# @audit do we need it if we have iterm2? seems not to work without iterm2
-# anyway
-# Base16 Shell: https://github.com/tinted-theming/base16-shell
-# base16_shell="$HOME/.config/base16-shell"
-# # shellcheck source=/dev/null
-# if [ -n "$PS1" ] && [ -s "$base16_shell/profile_helper.sh" ]; then
-#     . "$base16_shell/profile_helper.sh"
-#     base_16_tomorrow_night_eighties
-# fi
+export LOG_LEVEL_DEBUG=1
+export LOG_LEVEL_INFO=2
+export LOG_LEVEL_WARN=3
+export LOG_LEVEL_ERROR=4
+
+RC_LOG_LEVEL=${RC_LOG_LEVEL:-$LOG_LEVEL_DEBUG}
+export RC_LOG_LEVEL
+
+_red=$'\e[1;31m'
+_grn=$'\e[1;32m'
+_yel=$'\e[1;33m'
+_blu=$'\e[1;34m'
+_mag=$'\e[1;35m'
+_cyn=$'\e[1;36m'
+_end=$'\e[0m'
+
+log:debug() { ((RC_LOG_LEVEL <= LOG_LEVEL_DEBUG)) && printf "[${_cyn}debug${_end}] %s\n" "$@"; }
+log:info() { ((RC_LOG_LEVEL <= LOG_LEVEL_INFO)) && printf "[${_grn}info${_end}] %s\n" "$@"; }
+log:warn() { ((RC_LOG_LEVEL <= LOG_LEVEL_WARN)) && printf "[${_yel}warn${_end}] %s\n" "$@"; }
+log:error() { ((RC_LOG_LEVEL <= LOG_LEVEL_ERROR)) && printf "[${_red}error${_end}] %s\n" "$@"; }
 
 #
-# fzf
+# Helpers
+#
+# Only the most basic, common functions should be defined in .profile.
+# Everything else should go in RC files.
 #
 
-if [ -x "$(command -v fd)" ]; then
-    export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --exclude .git'
-    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    export FZF_ALT_C_COMMAND="$FZF_DEFAULT_COMMAND"
-else
-    echo "[warn]: fd not found"
+# @todo rename to source-file and replace source:if-cmd with:
+#
+# if-cmd $1 source:file $2
+source:file() {
+  if [[ ! -r "$1" ]]; then
+    log:debug "file not found: $1"
+    return 1
+  fi
+
+  # shellcheck disable=SC1090
+  if . "$1"; then
+    log:debug "file loaded: $1"
+    return 0
+  else
+    log:error "file not loaded: $1"
+    return 1
+  fi
+}
+
+run:if-cmd() {
+  if ! command -v "$1" >/dev/null; then
+    log:warn "command not found: $1"
+    return 1
+  fi
+
+  "${@:2}"
+}
+
+run:if-not-cmd() {
+  if ! command -v "$1" >/dev/null; then
+    "${@:2}"
+  fi
+}
+
+setup-fzf() {
+  # Install fzf.
+  run:if-not-cmd fzf run:if-cmd brew brew install fzf
+  run:if-not-cmd fzf return 1
+
+  # Install fzfrc.
+  if [ ! -r "$1" ]; then
+    log:info "Installing $1 - enter Y, Y, N ..."
+    /opt/homebrew/opt/fzf/install
+  fi
+
+  # Load fzfrc.
+  source:file "$1"
+}
+
+#
+# Shared setup
+#
+
+# Prepend gnubin to path to use gls and gdircolors instead of ls and dircolors.
+# Unlike the macOS builtins, the GNU versions read and write to LS_COLORS
+# instead of LSCOLORS. Most zsh plugins--including completion--use LS_COLORS, so
+# this leads to more consistent output colorization.
+#
+# @todo use constant for homebrew opt path
+if is-macos; then
+  gnubin="/opt/homebrew/opt/coreutils/libexec/gnubin"
+  if [ ! -d $gnubin ]; then
+    run:if-cmd brew brew install coreutils
+  fi
+
+  if [ ! -d $gnubin ]; then
+    log:warn "gnubin not found"
+  else
+    export PATH="$gnubin:$PATH"
+  fi
 fi
-
-export FZF_DEFAULT_OPTS="--layout=reverse --info=inline"
-
-# Start fzf in a tmux split pane.
-# export FZF_TMUX=1
-
-# If there's only one result, select it. Exit if the list is empty.
-export FZF_CTRL_T_OPTS="--select-1 --exit-0"
-export FZF_ALT_C_OPTS="--select-1 --exit-0"
-
-#
-# bat
-#
-
-export BAT_THEME="base16"
-
-#
-# Python
-#
-
-export PYTHONSTARTUP="$HOME/.pystartup"
-
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-#command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-#eval "$(pyenv init --path)"
-
-# virtualenvwrapper
-# @todo need to source/export so it knows about env vars?
-# WORKON_HOME=$HOME/.virtualenvs
-# PROJECT_HOME=$HOME/workspace
-#/usr/local/bin/virtualenvwrapper.sh
-
-#
-# Node
-# @todo commented out because it's slow
-#
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-# shellcheck source=/dev/null
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-# shellcheck source=/dev/null
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-
-#
-# Ruby
-#
-
-# rvm
-# shellcheck source=/dev/null
-[ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
