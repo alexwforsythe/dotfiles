@@ -1,4 +1,7 @@
-# Brews
+# Taps: brew tap
+tap homebrew/cask
+
+# Brews: brew install
 brew "git"
 brew "htop"
 brew "jq"
@@ -9,7 +12,7 @@ brew "rg"
 brew "shellcheck"
 brew "tmux"
 
-# Applications
+# Apps: brew install --cask
 cask "copyq"
 cask "iterm2"
 cask "rectangle"
