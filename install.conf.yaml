@@ -75,6 +75,21 @@ link:
     - path: /Applications/Sublime Text.app/Contents/SharedSupport/bin/subl
     - if: '[ `uname` = Darwin ]' # subl should be linked automatically on linux
 
+# MacOS
+- shell:
+  -
+    command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)
+    description: Installing homebrew
+    if: '[ "$(uname)" = Darwin ]'
+  -
+    command: brew update
+    description: Updating homebrew
+    if: '[ "$(uname)" = Darwin ]'
+  -
+    command: brew bundle
+    description: Installing homebrew bundle
+    if: '[ "$(uname)" = Darwin ]'
+
 # todo: make sure these are idempotent
 - shell:
   # Fonts
