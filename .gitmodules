@@ -10,3 +10,6 @@ url = git@github.com:alexwforsythe/vimrc.git
 [submodule "submodules/forgit"]
 path = submodules/forgit
 url = git@github.com:wfxr/forgit.git
+[submodule "submodules/tpm"]
+	path = submodules/tpm
+	url = git@github.com:tmux-plugins/tpm.git
