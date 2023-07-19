@@ -20,9 +20,8 @@ brew jq
 brew koekeishiya/formulae/yabai
 brew mas # needed for appstore commands
 brew MisterTea/et/et
-# @todo learn it
 # https://thevaluable.dev/mysql-command-line-tool-mycli/
-# brew mycli
+brew mycli
 # brew ncdu # @todo try & configure
 brew python
 brew pyenv
