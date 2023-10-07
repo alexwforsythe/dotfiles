@@ -25,8 +25,10 @@ brew mycli
 # brew ncdu # @todo try & configure
 brew python
 brew pyenv
+brew rbenv
 brew rg
 brew ruby
+brew ruby-build
 brew shellcheck
 brew tldr
 brew tmux
