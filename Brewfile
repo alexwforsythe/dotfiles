@@ -5,8 +5,10 @@ tap homebrew/cask-fonts
 # Brews: brew install
 brew bat
 brew chezmoi
+# brew derailed/k9s/k9s
 brew direnv
 brew fd
+brew fnm
 brew fzf
 brew git
 brew git-delta
@@ -17,6 +19,7 @@ brew git-delta
 brew coreutils
 brew graphviz # needed for the PlantUML VSCode extension
 brew htop
+brew httpie
 brew java # needed for the PlantUML VSCode extension
 brew jq
 brew koekeishiya/formulae/yabai
