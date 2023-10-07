@@ -1,0 +1,10 @@
+#
+# editline configuration.
+#  - Used by programs like python, lua, and other REPLs
+#
+# MacOS uses editline instead of readline (~/.inputrc). See:
+# https://stackoverflow.com/questions/16093679/set-editing-mode-vi-in-python-readline-os-x
+#
+
+# This line tells editline to use vi key bindings.
+bind -v
