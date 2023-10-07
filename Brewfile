@@ -15,7 +15,9 @@ brew git-delta
 #
 # https://github.com/sharkdp/vivid#on-macos
 brew coreutils
+brew graphviz # needed for the PlantUML VSCode extension
 brew htop
+brew java # needed for the PlantUML VSCode extension
 brew jq
 brew koekeishiya/formulae/yabai
 brew mas # needed for appstore commands
