@@ -48,6 +48,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
 export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
 
+# Readline config:
+# https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
+export INPUTRC="$XDG_CONFIG_HOME/dotfiles/configs/.inputrc"
+
 #
 # Logging
 #
