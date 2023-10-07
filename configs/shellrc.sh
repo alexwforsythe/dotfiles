@@ -17,6 +17,14 @@
 export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins
 
 #
+# Path
+#
+
+# java: prepend to path to override system installation. This is needed for the
+# PlantUML VSCode extension.
+path-append "$HOMEBREW_PREFIX/opt/openjdk/bin"
+
+#
 # Other RC files
 #
 
