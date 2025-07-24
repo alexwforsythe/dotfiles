@@ -116,10 +116,3 @@ if ! shopt -oq posix; then
         source /etc/bash_completion
     fi
 fi
-
-# Base16 Shell
-# https://github.com/chriskempson/base16-shell#bashzsh
-BASE16_SHELL="$HOME/.config/base16-shell/base16-tomorrow.dark.sh"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        eval "$("$BASE16_SHELL/profile_helper.sh")"
