@@ -3,7 +3,18 @@ name = Alex Forsythe
 email = alexwforsythe@gmail.com
 [core]
 filemode = false
+pager = delta
 editor = code --reuse-window --wait
+[delta]
+# https://github.com/dandavison/delta
+navigate = true # use n and N to move between diff sections
+light = false   # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+features = decorations
+# keep-plus-minus-markers = true
+# line-numbers = true
+# side-by-side = true
+[interactive]
+diffFilter = delta --color-only --features=interactive
 [alias]
 alias = config --get-regexp alias
 summon = "!summon () { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b; }; summon"
