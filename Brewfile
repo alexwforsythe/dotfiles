@@ -14,7 +14,6 @@ brew htop
 brew jq
 brew koekeishiya/formulae/skhd
 brew koekeishiya/formulae/yabai
-brew lazygit
 brew mas # needed for appstore commands
 brew MisterTea/et/et
 brew ncdu # @todo try & configure
