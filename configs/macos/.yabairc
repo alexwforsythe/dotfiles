@@ -1,0 +1,153 @@
+#!/usr/bin/env sh
+
+#
+# yabai global settings
+#
+# See this wiki page for more information:
+# - https://github.com/koekeishiya/yabai/wiki/Configuration#configuration-file
+#
+# directory containing log files (HOMEBREW_PREFIX defaults to /usr/local unless
+# you manually specified otherwise):
+# - HOMEBREW_PREFIX/var/log/yabai/
+#
+# view the last lines of the error log:
+# - tail -f /usr/local/var/log/yabai/yabai.err.log
+#
+# view the last lines of the debug log:
+# - tail -f /usr/local/var/log/yabai/yabai.out.log
+#
+
+#
+# Configure scripting addition (optional)
+#
+# Only possible with System Integrity Protection (SIP) disabled. For this to
+# work, you must configure sudo such that it will be able to run the command
+# without password. See this wiki page for information:
+# - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
+#
+# Create a new file for writing - visudo uses the vim editor by default.
+# Go read about this if you have no idea what is going on.
+#
+#     sudo visudo -f /private/etc/sudoers.d/yabai
+#
+# Input the line below into the file you are editing:
+# - replace <yabai> with the path to the yabai binary (output of: which yabai)
+# - replace <user> with your username (output of: whoami)
+# - replace <hash> with the sha256 hash of the yabai binary (output of: shasum -a 256 $(which yabai))
+#
+#     <user> ALL=(root) NOPASSWD: sha256:<hash> <yabai> --load-sa
+#
+# This hash must be updated manually after running brew upgrade.
+#
+
+#
+# Layout
+#
+
+yabai -m config layout bsp
+
+# on or off (default: off)
+yabai -m config auto_balance off
+
+# Floating point value between 0 and 1 (default: 0.5)
+# Only active if auto_balance is off
+yabai -m config split_ratio 0.50
+yabai -m config split_type auto
+
+#
+# Windows
+#
+
+# bsp or float (default: float)
+yabai -m config window_origin_display default
+
+# New window spawns to the left if vertical split, or top if horizontal split
+# yabai -m config window_placement first_child
+# New window spawns to the right if vertical split, or bottom if horizontal split
+yabai -m config window_placement second_child
+
+# floating windows are always on top (default: off)
+yabai -m config window_topmost off
+
+# modify window shadows (default: on, options: on, off, float)
+# example: show shadows only for floating windows
+yabai -m config window_shadow float
+
+# Disabled because it requires screen recording permissions, and we're not using
+# animation anyway:
+# yabai -m config window_animation_duration 0.0
+
+# window opacity (default: off)
+# Disabled because it requires SIP to be disabled.
+# example: render all unfocused windows with 90% opacity
+# yabai -m config window_opacity on
+# yabai -m config window_opacity_duration 0.0
+# yabai -m config active_window_opacity 1.0
+# yabai -m config normal_window_opacity 0.90
+
+# yabai -m config top_padding 12
+# yabai -m config bottom_padding 12
+# yabai -m config left_padding 12
+# yabai -m config right_padding 12
+# yabai -m config window_gap 06
+
+# Disabled because coloring borders requires the scripting addition--which we
+# aren't using--so we might as well just hide them.
+# yabai -m config insert_feedback_color 0xffd75f5f
+# yabai -m config active_window_border_color 0xff775759
+# yabai -m config normal_window_border_color 0xff555555
+
+# yabai -m config window_border on
+# yabai -m config window_border_width 2
+# yabai -m config window_border_radius 0
+# yabai -m config window_border_blur off
+# yabai -m config window_border_hidpi on
+
+#
+# Status bar
+#
+
+# add 20 padding to the top and 0 padding to the bottom of every space located on the main display
+# yabai -m config external_bar main:20:0
+# add 20 padding to the top and bottom of all spaces regardless of the display it belongs to
+# yabai -m config external_bar all:20:20
+
+# When using spacebar: @audit
+# spacebar_height=$(spacebar -m config height)
+# yabai -m config external_bar all:0:"$spacebar_height"
+
+#
+# Mouse
+#
+
+# set mouse follows focus mode (default: off)
+yabai -m config mouse_follows_focus off
+
+# set focus follows mouse mode (default: off, options: off, autoraise, autofocus)
+yabai -m config focus_follows_mouse off
+
+# set mouse interaction modifier key (default: fn)
+yabai -m config mouse_modifier fn
+
+# set modifier + left-click drag to move window (default: move)
+yabai -m config mouse_action1 move
+
+# set modifier + right-click drag to resize window (default: resize)
+yabai -m config mouse_action2 resize
+
+# https://user-images.githubusercontent.com/4488655/61372700-23c32e00-a898-11e9-8052-aeb5db9f4e13.png
+yabai -m config mouse_drop_action swap
+
+#
+# Rules
+#
+
+yabai -m rule --add app="^CopyQ$" manage=off
+yabai -m rule --add app="^iTerm2$" manage=off
+yabai -m rule --add app="^.+ Preferences$" manage=off
+yabai -m rule --add app="^System Information|System Settings$" manage=off
+# yabai -m rule --add app="^Digital Colou?r Meter$" sticky=on
+
+# ---
+
+echo "yabai configuration loaded.."
