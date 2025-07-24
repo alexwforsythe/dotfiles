@@ -1,9 +1,9 @@
 [submodule "modules/dotbot"]
-	path = modules/dotbot
-	url = git@github.com:anishathalye/dotbot.git
+path = modules/dotbot
+url = git@github.com:anishathalye/dotbot.git
 [submodule "modules/prezto"]
-	path = modules/prezto
-	url = git@github.com:alexwforsythe/prezto.git
+path = modules/prezto
+url = git@github.com:alexwforsythe/prezto.git
 [submodule "modules/vimrc"]
-	path = modules/vimrc
-	url = git@github.com:alexwforsythe/vimrc.git
+path = modules/vimrc
+url = git@github.com:alexwforsythe/vimrc.git

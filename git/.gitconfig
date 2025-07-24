@@ -1,26 +1,26 @@
 [user]
-    name = Alex Forsythe
-    email = alexwforsythe@gmail.com
+name = Alex Forsythe
+email = alexwforsythe@gmail.com
 [core]
-    filemode = false
-    editor = code --wait
+filemode = false
+editor = code --wait
 [alias]
-    alias = config --get-regexp alias
-    summon = "!summon () { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b; }; summon"
-    attic = "!attic() { b=$1; git tag archive/$b $b; git branch -D $b; }; attic"
+alias = config --get-regexp alias
+summon = "!summon () { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b; }; summon"
+attic = "!attic() { b=$1; git tag archive/$b $b; git branch -D $b; }; attic"
 [color]
-    ui = true
+ui = true
 [diff]
-    tool = vscode
+tool = vscode
 [merge]
-    tool = vscode
+tool = vscode
 [mergetool "vscode"]
-    cmd = code --wait $MERGED
-    keepBackup = false
+cmd = code --wait $MERGED
+keepBackup = false
 [branch]
-    sort = -committerdate
+sort = -committerdate
 [filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
