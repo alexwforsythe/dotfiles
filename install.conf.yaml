@@ -1,6 +1,11 @@
-# https://github.com/anishathalye/dotbot
+#
+# Dotbot configuration. More info:
+#   - https://github.com/anishathalye/dotbot
+#
+# @todo split based on use case
+#   - e.g. shell-only, ui (by platform)
+#
 
-# dotbot configuration
 - defaults:
     link:
       create: true
@@ -8,75 +13,55 @@
 
 - clean: ['~', '~/.config']
 
-# Set up OS X
-- shell:
-  - command: launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist
-  - description: Disable launching iTunes when the "play" key is pressed
-  - if: '[ `uname` = Darwin ]'
+#
+# Links
+# @todo can we dedupe list entries?
+#
 
-# Set up Homebrew (OS X)
-- shell:
-  - # Homebrew depends on Xcode CLI
-    - command: xcode-select --install
-    - description: Installing Xcode CLI
-    - if: '[ `uname` = Darwin ]'
-  -
-    - command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)
-    - description: Installing homebrew
-    - if: '[ `uname` = Darwin ]'
-  -
-    - command: brew update
-    - description: Updating homebrew
-    - if: '[ `uname` = Darwin ]'
-  -
-    - command: brew bundle
-    - description: Installing homebrew bundle
-    - if: '[ `uname` = Darwin ]'
-
-# Link dotfiles and configs
 - link:
     ~/:
-      - glob: true
-      - path: bash/*
-    ~/.config/copyq: copyq
-      - if: command -v copyq
+      glob: true
+      path: configs/.*
     ~/:
-      - glob: true
-      - path: git/*
-    ~/.config/iterm2:
-      - path: iterm2
-      - if: '[ `uname` = Darwin ]'
-    ~/:
-      - glob: true
-      - path: python/*
-    ~/:
-      - glob: true
-      - path: shell/*
-    ~/.vimrc: modules/vimrc/vimrcs/basic.vim
-    # prezto installs most of the zsh configs and plugins in the "shell" section
-    # below, such as .zshrc, etc.
-    ~/.zprezto: modules/prezto
-    # zsh/ contains other zsh customizations such as the prompt theme
-    ~/:
-      - glob: true
-      - path: zsh/*
+      glob: true
+      path: configs/macos/.*
+      if: '[ "$(uname)" = Darwin ]'
+    # ~/:
+    #   glob: true
+    #   path: submodules/prezto/runcoms/*
+    #   prefix: '.'
+    #   # exclude: [ README.md ]
+    ~/.vimrc: submodules/vimrc/vimrcs/basic.vim
+    ~/.config/copyq/:
+      glob: true
+      path: apps/copyq/*
+      if: '[ "$(uname)" = Darwin ] && [ -x "$(command -v copyq)" ]'
+    # @todo gets cleared by iterm2
+    ~/.config/iterm2/com.googlecode.iterm2.plist:
+      # force: true
+      path: apps/iterm2/com.googlecode.iterm2.plist
+      if: '[ "$(uname)" = Darwin ]'
+    ~/.config/lazygit: apps/lazygit
+    ~/Library/Preferences/com.brassmonkery.Multitouch.plist:
+      # force: true
+      path: apps/multitouch/com.brassmonkery.Multitouch.plist
+      if: '[ "$(uname)" = Darwin ]'
 
-# Link configs for Sublime Text
-link:
-  ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/:
-    - glob: true
-    - path: sublime-text/*
-    - if: '[ `uname` = Darwin ]'
-  ~/.config/sublime-text-3:
-    - glob: true
-    - path: sublime-text/*
-    - if: '[ `uname` = Linux ]'
-  /usr/local/bin/subl:
-    - path: /Applications/Sublime Text.app/Contents/SharedSupport/bin/subl
-    - if: '[ `uname` = Darwin ]' # subl should be linked automatically on linux
+#
+# Setup commands
+# @audit make sure these are idempotent
+#
 
 # MacOS
 - shell:
+  -
+    command: defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.config/iterm2"
+    description: Setting iTerm2 config directory
+    if: '[ "$(uname)" = Darwin ]'
+  -
+    command: xcode-select --install
+    description: Installing Xcode CLI tools
+    if: '[ "$(uname)" = Darwin ]'
   -
     command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)
     description: Installing homebrew
@@ -89,39 +74,60 @@ link:
     command: brew bundle
     description: Installing homebrew bundle
     if: '[ "$(uname)" = Darwin ]'
+  -
+    command: brew services start skhd
+    description: Registering skhd
+    if: '[ "$(uname)" = Darwin ]'
+  -
+    command: brew services start yabai
+    description: Registering yabai
+    if: '[ "$(uname)" = Darwin ]'
 
-# todo: make sure these are idempotent
 - shell:
-  # Fonts
-  - [./fonts/install.sh, Installing powerline fonts]
-  # ZSH & Prezto
-  - [chsh -s $(which zsh), Making zsh the default shell]
-  - [./$HOME/.zprezto/init.zsh, Initializing prezto for zsh]
-  - [source $HOME/.zshrc, Loading installed zsh settings] # maybe unnecessary with prezto
-  # NVM (Node.js)
+  - [chsh -s "$(command -v zsh)", Making zsh the default shell]
+  - [$HOME/.zprezto/init.zsh, Initializing prezto]
+  - [source $HOME/.zshrc, Loading installed zsh settings] # @todo maybe unnecessary with prezto
+  - [vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa", Installing Vim plugins]
   - [nvm install --lts, Installing Node.js LTS]
   - [npm install -g npm, Upgrading npm]
-  - [npm install -g tldr, Installing tldr]
-  # VIM
-  - [vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa"]
+  - [npm install -g, Installing npm packages]
+
+#
+# Updates
+#
 
 # Everything before this point should be idempotent. The following steps should
 # upgrade all the dependencies installed on the first run.
   -
-    - command: brew update
-    - description: Updating homebrew
-    - if: '[ `uname` = Darwin ]'
-    -
-  - command: brew upgrade
-    - description: Upgrading homebrew
-    - if: '[ `uname` = Darwin ]'
+    command: brew update
+    description: Updating homebrew packages
+    if: '[ "$(uname)" = Darwin ]'
   -
-    - command: mas upgrade
-    - description: Upgrading App Store apps
-    - if: '[ `uname` = Darwin ]'
+    command: brew upgrade
+    description: Upgrading homebrew packages
+    if: '[ "$(uname)" = Darwin ]'
   -
-    - command: nvm upgrade
-    - description: Upgrading nvm
+    command: mas upgrade
+    description: Upgrading App Store apps
+    if: '[ "$(uname)" = Darwin ]'
   -
-    - command: npm -g install npm
-    - description: Upgrading npm
+    command: sudo apt update
+    description: Updating packages
+    if: '[ "$(uname)" = Linux ] '
+  -
+    command: sudo apt upgrade
+    description: Upgrading packages
+    if: '[ "$(uname)" = Linux ] '
+  -
+    command: sudo apt autoremove
+    description: Pruning packages
+    if: '[ "$(uname)" = Linux ] '
+  -
+    command: nvm upgrade
+    description: Upgrading nvm
+  -
+    command: npm -g update
+    description: Updating npm
+  -
+    command: npm -g upgrade
+    description: Upgrading npm
