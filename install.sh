@@ -1,15 +1,37 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 set -e
 
-CONFIG="install.conf.yaml"
-DOTBOT_DIR="dotbot"
+#
+# install:
+#
+# Installs (or updates) all dotfiles using dotbot:
+#   - Files in config/ are symlinked to $HOME
+#   - Files & directories in apps/ are symlinked to their respective locations
+# packages are installed via curl, brew, apt, npm, tmux, vim
+#
+# @todo switch for which config(s), default to all
+#
 
-DOTBOT_BIN="bin/dotbot"
-BASEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+script_dir=$(dirname "$(readlink -f "$0")")
+dotbot_dir="$script_dir/submodules/dotbot"
+dotbot="$dotbot_dir/bin/dotbot"
 
-cd "${BASEDIR}"
-git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
-git submodule update --init --recursive "${DOTBOT_DIR}"
+cfg_file="install.conf.yaml"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir dotbot-brew -c "${CONFIG}" "${@}"
+# Update dotbot.
+git -C "$dotbot_dir" submodule sync --quiet --recursive
+git -C "$dotbot_dir" submodule update --init --recursive
+
+# Bootstrap dotfiles.
+"$dotbot" \
+    --verbose \
+    --base-directory "$script_dir" \
+    --plugin-dir dotbot-brew \
+    --config-file "$cfg_file" \
+    "$@"
+
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.config/dotfiles/configs/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
