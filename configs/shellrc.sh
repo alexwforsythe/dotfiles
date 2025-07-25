@@ -1,31 +1,9 @@
 #!/usr/bin/env bash
 
 #
-# shellrc
+# shellrc.sh: sourced by .zshrc and .bashrc to finish setup
 #
-# A shared RC file for bash and zsh containing aliases, functions, and other
-# things that shouldn't go in .profile. Should be sourced by .bashrc and .zshrc.
-#
-# @todo merge with .profile (need before & after files tho, bc of plugins?)
-#
-
-#
-# Environment variables
-#
-
-# @todo move into config dir, do we need a tmuxrc?
-export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins
-
-#
-# Path
-#
-
-# java: prepend to path to override system installation. This is needed for the
-# PlantUML VSCode extension.
-path-append "$HOMEBREW_PREFIX/opt/openjdk/bin"
-
-#
-# Other RC files
+#  - Should contain aliases, expensive commands, and other non-essential configs
 #
 
 # @audit handled by python plugin
