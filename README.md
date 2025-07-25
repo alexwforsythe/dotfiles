@@ -147,6 +147,12 @@ Update this repository and all its dependencies:
 git pull --recurse-submodules
 ```
 
+@todo or maybe
+
+```sh
+git submodule update --recursive --remote
+```
+
 Rerun the installation script:
 
 ```shell
@@ -277,7 +283,7 @@ Startup files
 
 ### Plugins
 
-VIM
+Vim
 
 - [vim-plug](https://github.com/junegunn/vim-plug)
 - [Automatic Installation](https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation)

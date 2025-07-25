@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+# Convert the space-delimited `$fpath` into a newline-delimited `(F)` array.
+# <https://zsh.sourceforge.io/Doc/Release/Expansion.html#Parameter-Expansion-Flags>
+<<<${(F)fpath}
+
+# Alternative:
+# printf '%s\n' "${fpath[@]}"

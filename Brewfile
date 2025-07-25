@@ -61,6 +61,7 @@ brew ripgrep
 brew ruby
 brew ruby-build
 brew rust
+brew sd
 brew shellcheck
 brew shfmt
 brew tinted-theming/tinted/tinty
@@ -70,7 +71,8 @@ brew tree
 brew vhs
 brew wget
 brew yarn
-brew zoxide # @todo learn it
+brew yq
+brew zoxide
 
 # Apps: brew install --cask
 # cask alt-tab

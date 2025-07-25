@@ -5,6 +5,9 @@
 #
 # https://github.com/junegunn/fzf
 #
+# Guides:
+#  - https://thevaluable.dev/fzf-shell-integration
+#
 
 # @todo tmux menu for invoking fzf commands
 #  - ctrl-r: Paste the selected command from history onto the command-line
@@ -29,7 +32,7 @@ fzf_header_default="$(
         'C-d: Dirs / C-f: Files / C-r: Reload / C-e: Exact' \
         'C-k: Up / C-j: Down / Tab: Select / C-y: Copy / C-/: Preview'
 )"
-if command -v column >/dev/null; then
+if iscmd column; then
     delim=' / '
     fzf_header_default="$(printf '%s\n' "$fzf_header_default" "$delim " | column -t -s "$delim")"
 fi
@@ -76,7 +79,7 @@ fzf_keybinds_guide=$(
 #
 
 # @todo add fdignore and common excludes for find
-if command -v fd >/dev/null; then
+if iscmd fd; then
     header_lines_find=0
     _cmd_find_base=(fd --full-path --strip-cwd-prefix --hidden --follow --exclude .git)
     _cmd_find() {
@@ -112,6 +115,7 @@ export FZF_ALT_C_COMMAND="$cmd_find_d"
 #  - actually add a hotkey to render syntax guide instead of preview
 
 # @todo set a default binding (ctrl-r) to switch to rg instead of fd!
+#  - and use rgp zfunc (highlight w/ delta)
 #  - or do we need to set it in comprun to avoid using it for non-file commands?
 
 # Any args containing whitespace need to be wrapped in '' and then "" for array
@@ -123,6 +127,7 @@ opts_fzf_default=(
     --border=none
     "--prompt='fzf> '"
     # --marker="*"
+    # --color=16
     --color="$fzf_theme"
 )
 export FZF_DEFAULT_OPTS="${opts_fzf_default[*]}"
@@ -146,7 +151,7 @@ opts_fzf_path=(
     --bind "'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'" # @todo doesn't work
 )
 
-if command -v tree >/dev/null; then
+if iscmd tree; then
     cmd_preview_dir="tree -C {} | head -200"
     opts_preview_dir=("$cmd_preview_dir")
 else
@@ -154,7 +159,7 @@ else
     cmd_preview_dir="ls -lahF {} | head -200"
     opts_preview_dir=("$cmd_preview_dir" --header-lines=1)
 fi
-if command -v bat >/dev/null; then
+if iscmd bat; then
     cmd_preview_file="bat --color=always --style=grid,header,header-filesize --line-range :500 {}"
 else
     log:warn "command not found: bat"

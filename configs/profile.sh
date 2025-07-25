@@ -31,7 +31,7 @@ fi
 #
 
 export EDITOR=vim
-export VISUAL=vim
+export VISUAL=$EDITOR
 export PAGER=less
 export LESS="--hilite-search \
 --hilite-unread \
@@ -147,3 +147,10 @@ path-prepend \
   "$HOME/.local/sbin" \
   "$HOME/.cargo/bin" \
   "$GOPATH/bin"
+
+#
+# Environment: path/command-dependent
+#
+
+# Use bat for manpages: https://github.com/sharkdp/bat?tab=readme-ov-file#man
+run:if-cmd bat export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"

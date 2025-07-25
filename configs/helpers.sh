@@ -30,6 +30,16 @@ log:error() { ((RC_LOG_LEVEL > log_level_error)) || printf "[${_red}error${_end}
 # Helpers
 #
 
+# Print the PATH with new lines.
+path() {
+    echo "${PATH//:/\n}"
+}
+
+# Make a dir and then cd to it.
+mkcd() {
+    mkdir -p "$1" && cd "$1" || return
+}
+
 # @todo run:if-dir
 run:if-path() {
     if [ ! -d "$1" ]; then
