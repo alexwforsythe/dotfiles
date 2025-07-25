@@ -67,7 +67,9 @@ fi
 source:file "$XDG_CONFIG_HOME/dotfiles/configs/shellrc.sh"
 
 # fzf
-setup-fzf "$HOME/.fzf.bash"
+# https://thevaluable.dev/fzf-shell-integration/
+source:file "$FZF_DIR/shell/completion.bash"   # @audit-ok
+source:file "$FZF_DIR/shell/key-bindings.bash" # @audit-ok
 
 # Use dircolors to set LS_COLORS to a nice theme (its output is the setter
 # command).
