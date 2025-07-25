@@ -66,6 +66,7 @@
     # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     # nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     # node_version          # node.js version
+    fnm                     # fnm version (@todo )
     go_version              # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
     # java_version          # java version (https://www.java.com/)
@@ -690,6 +691,15 @@
   typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ###################################[ fnm: node.js version ]###################################
+  # fnm color.
+  # @todo
+  #  - prompt integration (move from vendored p10k code into rc file)
+  typeset -g POWERLEVEL9K_FNM_FOREGROUND=0
+  typeset -g POWERLEVEL9K_FNM_BACKGROUND=5
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_FNM_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
