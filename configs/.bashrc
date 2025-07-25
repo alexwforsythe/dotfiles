@@ -12,6 +12,16 @@ case $- in
 *) return ;;
 esac
 
+helpers="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/configs/helpers.sh"
+# shellcheck disable=1090
+if [ ! -r "$helpers" ] || ! source "$helpers"; then
+    printf '[error] %s\n' "file not loaded: $helpers"
+    return 1
+fi
+
+log:debug "file loaded: $helpers"
+unset "$helpers"
+
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
