@@ -32,10 +32,6 @@
     #   prefix: '.'
     #   # exclude: [ README.md ]
     ~/.vimrc: submodules/vimrc/vimrcs/basic.vim
-    ~/.config/copyq/:
-      glob: true
-      path: apps/copyq/*
-      if: '[ "$(uname)" = Darwin ] && [ -x "$(command -v copyq)" ]'
     # @todo gets cleared by iterm2
     ~/.config/iterm2/com.googlecode.iterm2.plist:
       # force: true
