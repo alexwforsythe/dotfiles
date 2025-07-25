@@ -3,6 +3,7 @@ tap homebrew/cask
 tap homebrew/cask-fonts
 
 # Brews: brew install
+brew bash-completion@2
 brew bat
 brew btop
 brew chezmoi
