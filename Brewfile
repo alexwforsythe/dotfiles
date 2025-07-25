@@ -1,6 +1,5 @@
 # Taps: brew tap
-tap homebrew/cask
-tap homebrew/cask-fonts
+tap koekeishiya/formulae
 
 # Brews: brew install
 brew bash-completion@2
