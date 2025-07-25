@@ -43,12 +43,16 @@ is-macos && export BROWSER=open
 # Config
 #
 
+# https://specifications.freedesktop.org/basedir-spec/latest/
+# @todo replace all instances with these var, including ~/.config, etc
 export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
-export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
 
 # Readline config:
 # https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
+# @todo maybe link to ~/.inputrc
 export INPUTRC="$XDG_CONFIG_HOME/dotfiles/configs/.inputrc"
 
 #
