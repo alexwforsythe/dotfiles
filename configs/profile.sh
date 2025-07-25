@@ -10,14 +10,21 @@
 #    prompt and other plugins aren't set up yet
 #
 
-is-macos() { [[ $OSTYPE == darwin* ]]; }
-
 #
 # Terminal
 #
 
-[[ -n "$LANG" ]] || export LANG='en_US.UTF-8'
-[[ -n "$TMUX" ]] || export TERM="xterm-256color-italic"
+export LANG="${LANG:-'en_US.UTF-8'}"
+
+if [[ $OSTYPE == darwin* ]]; then
+  export IS_MACOS=true
+  [ -z "$BROWSER" ] && export BROWSER=open
+fi
+
+if [ -n "$TMUX" ] || [ "${TERM%%[-.]*}" = "tmux" ]; then
+  export IS_TMUX=true
+  export TERM="xterm-256color-italic"
+fi
 
 #
 # Default commands
@@ -37,8 +44,6 @@ export LESS="--hilite-search \
 --window=-4 \
 --use-color"
 
-is-macos && export BROWSER=open
-
 #
 # Config
 #
@@ -55,71 +60,20 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # @todo maybe link to ~/.inputrc
 export INPUTRC="$XDG_CONFIG_HOME/dotfiles/configs/.inputrc"
 
-#
-# Logging
-#
-
-export LOG_LEVEL_DEBUG=1
-export LOG_LEVEL_INFO=2
-export LOG_LEVEL_WARN=3
-export LOG_LEVEL_ERROR=4
-
-RC_LOG_LEVEL=${RC_LOG_LEVEL:-$LOG_LEVEL_DEBUG}
-export RC_LOG_LEVEL
-
-_red=$'\e[1;31m'
-_grn=$'\e[1;32m'
-_yel=$'\e[1;33m'
-_blu=$'\e[1;34m'
-_mag=$'\e[1;35m'
-_cyn=$'\e[1;36m'
-_end=$'\e[0m'
-
-log:debug() { ((RC_LOG_LEVEL <= LOG_LEVEL_DEBUG)) && printf "[${_cyn}debug${_end}] %s\n" "$@"; }
-log:info() { ((RC_LOG_LEVEL <= LOG_LEVEL_INFO)) && printf "[${_grn}info${_end}] %s\n" "$@"; }
-log:warn() { ((RC_LOG_LEVEL <= LOG_LEVEL_WARN)) && printf "[${_yel}warn${_end}] %s\n" "$@"; }
-log:error() { ((RC_LOG_LEVEL <= LOG_LEVEL_ERROR)) && printf "[${_red}error${_end}] %s\n" "$@"; }
 
 #
 # Helpers
 #
-# Only the most basic, common functions should be defined in .profile.
-# Everything else should go in RC files.
-#
 
-# @todo rename to source-file and replace source:if-cmd with:
-#
-# if-cmd $1 source:file $2
-source:file() {
-  if [[ ! -r "$1" ]]; then
-    log:debug "file not found: $1"
-    return 1
-  fi
+helpers="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/configs/helpers.sh"
+# shellcheck disable=1090
+if [ ! -r "$helpers" ] || ! source "$helpers"; then
+  printf '[error] %s\n' "file not loaded: $helpers"
+  return 1
+fi
 
-  # shellcheck disable=SC1090
-  if . "$1"; then
-    log:debug "file loaded: $1"
-    return 0
-  else
-    log:error "file not loaded: $1"
-    return 1
-  fi
-}
-
-run:if-cmd() {
-  if ! command -v "$1" >/dev/null; then
-    log:warn "command not found: $1"
-    return 1
-  fi
-
-  "${@:2}"
-}
-
-run:if-not-cmd() {
-  if ! command -v "$1" >/dev/null; then
-    "${@:2}"
-  fi
-}
+log:debug "file loaded: $helpers"
+unset helpers
 
 #
 # Shared setup
