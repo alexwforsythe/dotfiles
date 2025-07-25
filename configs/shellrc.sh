@@ -9,7 +9,7 @@
 # @audit handled by python plugin
 run:if-cmd python source:file "$XDG_CONFIG_HOME/dotfiles/configs/pythonrc.sh"
 run:if-cmd fzf source:file "$XDG_CONFIG_HOME/dotfiles/configs/fzf-rc.sh"
-run:if-cmd fzf source:file "$XDG_CONFIG_HOME/dotfiles/configs/forgit-rc.sh"
+# run:if-cmd fzf source:file "$XDG_CONFIG_HOME/dotfiles/configs/forgit-rc.sh"
 
 # Load aliases last to overwrite any conflicting ones defined by plugins.
 source:file "$XDG_CONFIG_HOME/dotfiles/configs/aliases.sh"
