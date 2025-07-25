@@ -21,6 +21,8 @@ brew java # needed for the PlantUML VSCode extension
 brew jq
 brew koekeishiya/formulae/yabai
 brew mas # needed for appstore commands
+brew lua-language-server
+brew luarocks
 brew MisterTea/et/et
 # https://thevaluable.dev/mysql-command-line-tool-mycli/
 brew mycli
@@ -41,10 +43,10 @@ brew zoxide # @todo learn it
 
 # Apps: brew install --cask
 # cask alt-tab
-# cask copyq
 cask font-meslo-lg-nerd-font
 cask hammerspoon
 cask iterm2
+cask maccy
 cask meetingbar
 cask multitouch
 cask visual-studio-code
