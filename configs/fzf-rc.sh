@@ -34,22 +34,26 @@ if command -v column >/dev/null; then
     fzf_header_default="$(printf '%s\n' "$fzf_header_default" "$delim " | column -t -s "$delim")"
 fi
 
-# https://github.com/junegunn/fzf/wiki/Color-schemes
-# https://github.com/tinted-theming/base16-fzf/blob/main/bash/base16-tomorrow-night-eighties.config
+# Color theme
+#
+# References:
+#  - https://github.com/junegunn/fzf/wiki/Color-schemes
+#  - https://github.com/tinted-theming/home/blob/main/styling.md
 fzf_theme="\
-bg:black,\
-bg+:#393939,\
-border:#515151,\
-fg:#b4b7b4,\
-fg+:#e0e0e0,\
-header:#999999:italic,\
-hl:blue,\
-hl+:bright-blue,\
-info:yellow,\
-marker:magenta,\
-pointer:cyan,\
-prompt:yellow,\
-spinner:cyan"
+bg:0,\
+bg+:19,\
+gutter:18,\
+border:18,\
+fg:21,\
+fg+:7,\
+header:20:italic,\
+hl:4,\
+hl+:12,\
+info:3,\
+marker:5,\
+pointer:6,\
+prompt:3,\
+spinner:6"
 
 # @todo fill this out
 # fzf_syntax_guide="hello im syntax guide.\ndo not use single quotes in here!"

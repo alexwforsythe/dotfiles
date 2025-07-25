@@ -79,6 +79,11 @@ export GOPATH="$HOME/go"
 # @todo make TPM a submodule
 export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins
 
+# tinty: https://github.com/tinted-theming/tinted-shell?tab=readme-ov-file#customization
+export TINTED_SHELL_ENABLE_BASE16_VARS=1
+export TINTED_SHELL_ENABLE_BASE24_VARS=1
+export TINTY_DIR="$XDG_DATA_HOME/tinted-theming/tinty"
+
 #
 # Helpers
 #
@@ -92,6 +97,16 @@ fi
 
 log:debug "file loaded: $helpers"
 unset helpers
+
+#
+# Theme
+#
+
+# Load shell color theme early (before prompt plugins) so colors look good for
+# the rest of setup.
+#
+# https://github.com/tinted-theming/tinted-shell/blob/main/USAGE.md#oh-my-zsh
+source:file "$TINTY_DIR/tinted-shell-scripts-file.sh"
 
 #
 # Path

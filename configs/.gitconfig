@@ -52,3 +52,5 @@ required = true
 
 [include]
 path = ~/.config/dotfiles/configs/delta.conf
+# https://github.com/tinted-theming/tinty/blob/main/USAGE.md#delta
+path = ~/.local/share/tinted-theming/tinty/tinted-delta-configs-file.gitconfig
