@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+# Allow tinty to set environment variables by aliasing it to a function that
+# sources its scripts after running the command.
+#
+# https://github.com/tinted-theming/tinty/blob/main/USAGE.md#sourcing-scripts-that-set-environment-variables
+if iscmd fd; then
+    local start_ms
+    start_ms="@$(date +%s%3N)"
+else
+    local pre_run_file
+    pre_run_file="$TINTY_DIR/artifacts/last_init_timestamp"
+    touch -m "$pre_run_file"
+fi
+command tinty "$@"
+
+if [ "$1" = "apply" ] || [ "$1" = "init" ]; then
+    if [ -n "$start_ms" ]; then
+        fd --max-depth=1 --type=x --extension=sh --changed-after="$start_ms" ".*" "$TINTY_DIR" \
+            --threads=1 --exec source
+    else
+        find "$TINTY_DIR" -maxdepth 1 -type f -name "*.sh" -newer "$pre_run_file" \
+            -exec source {} \;
+    fi
+fi
