@@ -2,6 +2,7 @@
 tap koekeishiya/formulae
 tap oven-sh/bun
 tap rilldata/tap
+tap tinted-theming/tinted
 
 # Brews: brew install
 # brew awscli
@@ -62,6 +63,7 @@ brew ruby-build
 brew rust
 brew shellcheck
 brew shfmt
+brew tinted-theming/tinted/tinty
 brew tlrc
 brew tmux
 brew tree
