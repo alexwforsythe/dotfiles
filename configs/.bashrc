@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #
-# ~/.bashrc: executed by bash(1) for non-login shells
+# ~/.bashrc: executed by bash for interactive non-login shells
 #
 # https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files
 #
@@ -28,9 +28,9 @@ shopt -s checkwinsize
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
 
-# Set variable identifying the chroot you work in (used in the prompt below)
-if [[ -z "${debian_chroot:-}" && -r /etc/debian_chroot ]]; then
-    debian_chroot=$(cat /etc/debian_chroot)
+# Set variable identifying the chroot you work in (used in the prompt below).
+if [[ -z ${debian_chroot:-} && -r /etc/debian_chroot ]]; then
+    debian_chroot=$(</etc/debian_chroot)
 fi
 
 # Set a fancy prompt (non-color, unless we know we "want" color)
@@ -49,14 +49,8 @@ esac
 # Hard dependencies
 #
 
-# @todo remove old way if new one works
 shellrc="$XDG_CONFIG_HOME/configs/shellrc.sh"
 source:file "$shellrc" || return 1
-# shellcheck disable=SC1090
-# if [[ ! -s $shellrc ]] || ! source "$shellrc"; then
-#     log:error "file not found: $shellrc"
-#     return 1
-# fi
 
 #
 # Plugins
@@ -77,14 +71,10 @@ if ! shopt -oq posix; then
     }
 fi
 
-#
-# Colors
+# Use dircolors to set LS_COLORS to a nice theme (its output is the setter
+# command).
 #
 # GNU ls (installed by brew as part of corutils on MacOS) uses LS_COLORS to
 # colorize output. Here's a good reference:
 # https://the.exa.website/docs/colour-themes
-#
-
-# Use dircolors to set LS_COLORS to a nice them (its output is the setter
-# command)
 run:if-cmd dircolors eval "$(dircolors)"
