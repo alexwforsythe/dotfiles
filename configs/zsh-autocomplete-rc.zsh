@@ -1,19 +1,25 @@
 #!/usr/bin/env zsh
 
+#
+# zsh-autocomplete
+#
+# https://github.com/marlonrichert/zsh-autocomplete/blob/main/.zshrc
+#
 # @todo
 #  - history menu above prompt?
-#  - auto fzf "do you want to display x items?"
-#    - or at least prevent it from stealing input
+#  - "do you want to display x items?"
+#    - always no so it doesn't steal input
+#    - or just pipe into fzf
+#  - use ctrl+h/j/k/l to navigate menus, and opt+h/j/k/l to navigate panes
+#  - decide on a completion hotkey (ctrl+. or something)
+#
 
-# https://github.com/marlonrichert/zsh-autocomplete/blob/main/.zshrc
-
-zstyle ':autocomplete:*' min-delay 0.08 # seconds (float)
+zstyle ':autocomplete:*' min-delay 0.3 # seconds (float)
 # Wait this many seconds for typing to stop, before showing completions.
 
 zstyle ':autocomplete:*' min-input 2 # characters (int)
 # Wait until this many characters have been typed, before showing completions.
 
-# @audit not working?
 # This setting cannot be changed at runtime.
 zstyle ':autocomplete:*' fzf-completion yes
 # no:  Tab uses Zsh's completion system only.
@@ -24,19 +30,24 @@ zstyle ':autocomplete:*' add-space \
     executables aliases functions builtins reserved-words commands
 
 #
-# Config in this section should come AFTER sourcing zsh-autocomplete.
+# Configs in this section should come AFTER sourcing zsh-autocomplete.
 #
 
 # Up arrow:
-bindkey '\e[A' up-line-or-search
-bindkey '\eOA' up-line-or-search
+# @audit wtf are these in-strings?
+# bindkey '\e[A' up-line-or-search
+# bindkey '\eOA' up-line-or-search
+bindkey "$key_info[Up]" up-line-or-search
+bindkey -M vicmd 'k' up-line-or-search
 # up-line-or-search:  Open history menu.
 # up-line-or-history: Cycle to previous history line.
 
 # Down arrow:
-bindkey '\e[B' down-line-or-select
-bindkey '\eOB' down-line-or-select
-# down-line-or-select:  Open completion menu.
+# bindkey '\e[B' down-line-or-select
+# bindkey '\eOB' down-line-or-select
+bindkey "$key_info[Down]" down-line-or-select
+bindkey -M vicmd 'j' down-line-or-history
+# down-line-or-select:  Open history menu.
 # down-line-or-history: Cycle to next history line.
 
 # @todo should we replace it with fzf? should we also make tab open fzf if it's
@@ -48,6 +59,7 @@ bindkey '^_' list-expand
 # set-mark-command: Activate text selection.
 
 # Uncomment the following lines to disable live history search:
+# @todo don't we want this if fzf is inactive?
 zle -A {.,}history-incremental-search-forward
 zle -A {.,}history-incremental-search-backward
 
