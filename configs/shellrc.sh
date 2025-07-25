@@ -45,3 +45,15 @@ run:if-cmd fzf source:file "$XDG_CONFIG_HOME/dotfiles/configs/forgit-rc.sh"
 # Load aliases last to overwrite any conflicting ones defined by plugins.
 source:file "$XDG_CONFIG_HOME/dotfiles/configs/aliases.sh"
 source:file "$XDG_CONFIG_HOME/dotfiles/configs/workrc.sh"
+
+#
+# Hooks
+#
+
+# node: fnm
+# @audit
+eval:if-cmd fnm fnm env --use-on-cd --log-level quiet
+
+# rbenv
+# @audit
+eval:if-cmd rbenv rbenv init -
