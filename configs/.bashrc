@@ -35,7 +35,7 @@ fi
 
 # Set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-xterm-color)
+xterm-color* | xterm-256color* | tmux*)
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     ;&
 xterm* | rxvt*)
