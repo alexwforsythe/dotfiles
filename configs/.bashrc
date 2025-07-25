@@ -46,30 +46,28 @@ xterm* | rxvt*)
 esac
 
 #
-# Hard dependencies
+# Completions
 #
 
-shellrc="$XDG_CONFIG_HOME/configs/shellrc.sh"
-source:file "$shellrc" || return 1
+# brew
+if ! shopt -oq posix; then
+    source:file "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+fi
+
+# gcloud
+if [ -n "$HOMEBREW_PREFIX" ]; then
+    source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.bash.inc"
+    source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.bash.inc"
+fi
 
 #
 # Plugins
 #
 
+source:file "$XDG_CONFIG_HOME/dotfiles/configs/shellrc.sh"
+
 # fzf
 setup-fzf "$HOME/.fzf.bash"
-
-#
-# Bash completions
-#
-
-if ! shopt -oq posix; then
-    source:file /usr/share/bash-completion/bash_completion ||
-        source:file /etc/bash_completion || {
-        [[ -d /usr/local/etc/bash_completion.d ]] &&
-            for f in /usr/local/etc/bash_completion.d/*; do source:file "$f"; done
-    }
-fi
 
 # Use dircolors to set LS_COLORS to a nice theme (its output is the setter
 # command).
