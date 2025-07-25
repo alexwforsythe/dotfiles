@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+
+# Sets the cursor mode based on the current keymap.
+#
+# See:
+#  - https://thevaluable.dev/zsh-install-configure-mouseless/
+#  - https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode
+#
+# For cursor shapes, see:
+# https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html
+case $KEYMAP in
+vicmd) echo -ne '\e[1 q' ;;        # blinking block
+main | viins) echo -ne '\e[5 q' ;; # blinking beam
+*) echo -ne '\e[3 q' ;;            # blinking underline
+esac

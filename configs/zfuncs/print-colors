@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+for C in {0..255}; do
+    tput setab "$C"
+    echo -n "$C "
+done
+tput sgr0
+echo
+
+# for i in {0..255}; do
+#     print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}
+# done
+# x=$(tput op)
+# y=$(printf %76s)
+# for i in {0..256}; do
+#     o=00$i
+#     echo -e "${o:${#o}-3:3}" "$(
+#         tput setaf "$i"
+#         tput setab "$i"
+#     )${y// /=}$x"
+# done

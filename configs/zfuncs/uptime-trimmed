@@ -1,0 +1,5 @@
+#!/usr/bin/env zsh
+
+val=$(uptime)
+trimmed=$(printf '%s' "$val#$val%%[![:space:]]*")
+echo "$trimmed" | tr -s '[:blank:],' ',' | cut -d ',' -f 3-4
