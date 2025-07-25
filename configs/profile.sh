@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 
 #
-# .profile: shared environment setup for bash and zsh
+# profile.sh: executed by sh for login shells
 #
-#  - Runs on startup for login shells:
-#    - bash: after /etc/profile, before .bashrc
-#     - @todo maybe we should break out other pre-plugin-setups into "yarc"?
-#    - zsh: sourced via zshrc
-#  - Should only run commands needed by plugins
-#  - All other shared setup should go in shellrc
+#  - Contains initial environment setup for bash and zsh
+#    - bash: sourced by .bash_profile
+#    - zsh: sourced by .zshrc
+#  - Should not run any external commands or expensive operations because the
+#    prompt and other plugins aren't set up yet
 #
 
 is-macos() { [[ $OSTYPE == darwin* ]]; }
