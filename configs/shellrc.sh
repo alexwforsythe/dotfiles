@@ -11,15 +11,6 @@ run:if-cmd python source:file "$XDG_CONFIG_HOME/dotfiles/configs/pythonrc.sh"
 run:if-cmd fzf source:file "$XDG_CONFIG_HOME/dotfiles/configs/fzf-rc.sh"
 run:if-cmd fzf source:file "$XDG_CONFIG_HOME/dotfiles/configs/forgit-rc.sh"
 
-# @note Commented out because nvm is slow to start.
-# @todo do they have a lazy loader?
-# source:file "$NVM_DIR/nvm.sh" &&
-#     export NVM_DIR="$HOME/.nvm" &&
-#     source:file "$NVM_DIR/bash_completion"
-
-# @note currently unused
-# source:file "$HOME/.rvm/scripts/rvm"
-
 # Load aliases last to overwrite any conflicting ones defined by plugins.
 source:file "$XDG_CONFIG_HOME/dotfiles/configs/aliases.sh"
 if [ -r "$XDG_CONFIG_HOME/dotfiles/configs/workrc.sh" ]; then
