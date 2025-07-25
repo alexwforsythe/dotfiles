@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+# Provide syntax highlighting for rg from delta if available.
+# https://dandavison.github.io/delta/grep.html
+# shellcheck disable=SC2068
+rg --context=2 --json $@ | delta
