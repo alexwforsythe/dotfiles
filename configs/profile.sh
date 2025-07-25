@@ -117,21 +117,6 @@ run:if-not-cmd() {
   fi
 }
 
-setup-fzf() {
-  # Install fzf.
-  run:if-not-cmd fzf run:if-cmd brew brew install fzf
-  run:if-not-cmd fzf return 1
-
-  # Install fzfrc.
-  if [ ! -r "$1" ]; then
-    log:info "Installing $1 - enter Y, Y, N ..."
-    /opt/homebrew/opt/fzf/install
-  fi
-
-  # Load fzfrc.
-  source:file "$1"
-}
-
 #
 # Shared setup
 #
