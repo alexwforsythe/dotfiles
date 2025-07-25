@@ -10,6 +10,7 @@
 #  - ctrl-r: Paste the selected command from history onto the command-line
 #  - ctrl-t: Paste the selected files and directories onto the command-line
 #  - alt-c: cd into the selected directory
+#    - @todo not working, overridden by zsh binding?
 #  - ctrl-r: rg files
 #  - edit-command-line (zle widget)
 #  - extrakto (tmux plugin)
@@ -50,10 +51,27 @@ pointer:cyan,\
 prompt:yellow,\
 spinner:cyan"
 
+# @todo fill this out
+# fzf_syntax_guide="hello im syntax guide.\ndo not use single quotes in here!"
+fzf_syntax_guide=$(
+    printf '%s\n' \
+        'hello im syntax guide' \
+        'do not use single quotes here!'
+)
+
+# @todo move header stuff into preview too!
+#  - how to cycle through them?
+fzf_keybinds_guide=$(
+    printf '%s\n' \
+        'hello im bindings guide' \
+        'do not use single quotes here!'
+)
+
 #
 # Options
 #
 
+# @todo add fdignore and common excludes for find
 if command -v fd >/dev/null; then
     header_lines_find=0
     _cmd_find_base=(fd --full-path --strip-cwd-prefix --hidden --follow --exclude .git)
@@ -70,8 +88,8 @@ else
     _cmd_find() {
         local _cmd_find_base=(find "$1" -not -path './.git*' -not -path './node_modules*')
         case $1 in
-        f) echo "${_cmd_find_base[@]}" --type f ;;
-        d) echo "${_cmd_find_base[@]}" --type d ;;
+        f) echo "${_cmd_find_base[@]}" -type f ;;
+        d) echo "${_cmd_find_base[@]}" -type d ;;
         *) echo "${_cmd_find_base[@]}" ;;
         esac
     }
@@ -87,7 +105,7 @@ export FZF_CTRL_T_COMMAND="$cmd_find_f"
 export FZF_ALT_C_COMMAND="$cmd_find_d"
 
 # @todo default binding ctrl-e to toggle --exact (-e)
-#  - actually add a hotkey to render syntax guide in preview
+#  - actually add a hotkey to render syntax guide instead of preview
 
 # @todo set a default binding (ctrl-r) to switch to rg instead of fd!
 #  - or do we need to set it in comprun to avoid using it for non-file commands?
@@ -113,16 +131,16 @@ opts_fzf_path=(
     --bind 'ctrl-k:up'
     --bind 'space:toggle+down'
     --bind 'tab:replace-query'
-    --bind 'ctrl-space:jump'
+    # --bind 'ctrl-space:jump'
     --bind 'ctrl-s:toggle-sort'
     --bind 'ctrl-/:toggle-preview'
-    "--bind '?:execute(echo $fzf_header_default)'"
-    --bind 'ctrl-r:toggle-all'
-    --bind "'ctrl-d:change-prompt(Directories> )+reload($(_cmd_find d '{q}'))'"
-    --bind "'ctrl-f:change-prompt(Files> )+reload($(_cmd_find f '{q}'))'"
-    --bind "'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'"
+    "--bind 'ctrl-e:change-preview(echo \"$fzf_syntax_guide\")'"
+    # "--bind '?:execute(echo $fzf_header_default)'"
+    --bind 'ctrl-a:toggle-all'
+    # --bind "'ctrl-d:change-prompt(Directories> )+reload($(_cmd_find d '{q}'))'"
+    # --bind "'ctrl-f:change-prompt(Files> )+reload($(_cmd_find f '{q}'))'"
+    --bind "'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'" # @todo doesn't work
 )
-export FZF_DEFAULT_OPTS="${opts_fzf_default[*]}"
 
 if command -v tree >/dev/null; then
     cmd_preview_dir="tree -C {} | head -200"
