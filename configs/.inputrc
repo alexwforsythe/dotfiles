@@ -1,13 +1,17 @@
 #
-# readline configuration
-#  - Used by programs like python, lua, and other REPLs
+# ~/.inputrc: readline configuration
 #
-# https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File-Syntax.html#index-vi_002dcmd_002dmode_002dstring
+#  - Used by programs like python, lua, and other REPLs
+#  - The path at $INPUTRC is tried first, then ~/.inputrc
+#
+# Syntax:
+# https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File-Syntax.html
 #
 
 # This line tells readline to use key bindings for vi.
 set editing-mode vi
 set show-mode-in-prompt on
+
 # These lines change the cursor character based on the vi mode.
 set vi-ins-mode-string \1\e[5 q\2
 set vi-cmd-mode-string \1\e[2 q\2
@@ -18,13 +22,12 @@ set keyseq-timeout 0
 # This line tells readline to ignore the case of characters when completing
 # commands and filenames.
 set completion-ignore-case on
-# This line tells readline to include whitespace characters when completing
-# commands and filenames.
-set completion-whitespace on
-# This line enables a prompt when selecting from a list of completions.
-set select-prompt on
+set search-ignore-case on
+set show-all-if-ambiguous on
+set skip-completed-text on
+set colored-completion-prefix on
+set colored-stats on
+
 # This line changes the way that the bell is displayed when an error occurs.
-set bell-style visual
-# This line enables the expansion of variables and other special characters in
-# the prompt.
-set prompt-expand on
+# set bell-style visible
+set prefer-visible-bell on
