@@ -1,7 +1,8 @@
 #
 # git config
 #
-# https://git-scm.com/docs/git-config
+# - https://git-scm.com/docs/git-config
+# - https://dandavison.github.io/delta/get-started.html
 #
 
 [user]
@@ -12,6 +13,9 @@ email = alexwforsythe@gmail.com
 filemode = false
 pager = delta
 editor = code --reuse-window --wait
+
+[interactive]
+diffFilter = delta --color-only
 
 [alias]
 alias = config --get-regexp alias
@@ -29,7 +33,8 @@ colorMoved = default
 tool = vscode
 
 [merge]
-conflictstyle = diff3
+# https://dandavison.github.io/delta/merge-conflicts.html
+conflictstyle = zdiff3
 tool = vscode
 
 [mergetool "vscode"]
