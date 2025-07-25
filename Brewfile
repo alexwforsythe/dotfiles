@@ -38,7 +38,7 @@ brew rg
 brew ruby
 brew ruby-build
 brew shellcheck
-brew tldr
+brew tlrc
 brew tmux
 brew tree
 brew wget
