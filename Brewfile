@@ -4,6 +4,7 @@ tap homebrew/cask-fonts
 
 # Brews: brew install
 brew bat
+brew btop
 brew chezmoi
 # brew derailed/k9s/k9s
 brew direnv
