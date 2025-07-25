@@ -47,13 +47,16 @@ brew zoxide # @todo learn it
 
 # Apps: brew install --cask
 # cask alt-tab
+cask bitwarden
 cask font-meslo-lg-nerd-font
 cask hammerspoon
 cask iterm2
 cask maccy
 cask meetingbar
 cask multitouch
+cask obsidian
 cask slack
+cask steam
 cask visual-studio-code
 cask zoom
 
