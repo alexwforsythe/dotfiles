@@ -5,9 +5,6 @@
 #
 # https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files
 #
-# @todo
-#   - https://github.com/rockandska/fzf-obc
-#
 
 # If not running interactively, don't do anything
 case $- in
@@ -65,12 +62,6 @@ source:file "$shellrc" || return 1
 # Plugins
 #
 
-# gitstatus: https://github.com/romkatv/gitstatus#using-from-bash
-_gitstatus_dir=$XDG_CONFIG_HOME/dotfiles/submodules/prezto/modules/prompt/external/powerlevel10k/gitstatus
-if source:file "$_gitstatus_dir/gitstatus.prompt.sh"; then
-    PS1='\w "$GITSTATUS_PROMPT" \$ '
-fi
-
 # fzf
 setup-fzf "$HOME/.fzf.bash"
 
@@ -97,14 +88,3 @@ fi
 # Use dircolors to set LS_COLORS to a nice them (its output is the setter
 # command)
 run:if-cmd dircolors eval "$(dircolors)"
-
-# fzf
-
-# @todo _fzf_setup_completion not found
-# usage: _fzf_setup_completion path|dir|var|alias|host COMMANDS...
-# _fzf_setup_completion path dir alias git tree
-
-# forgit
-# @todo _completion_loader not found
-[[ -d $FORGIT_INSTALL_DIR ]] &&
-    source:file "$FORGIT_INSTALL_DIR/completions/git-forgit.bash"
