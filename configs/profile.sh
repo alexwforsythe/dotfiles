@@ -60,6 +60,24 @@ export XDG_CACHE_HOME="$HOME/.cache"
 # @todo maybe link to ~/.inputrc
 export INPUTRC="$XDG_CONFIG_HOME/dotfiles/configs/.inputrc"
 
+#
+# Environment
+#
+
+# js
+export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn/v6"
+export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME/bun/install/cache"
+
+# gcloud
+export GOOGLE_APPLICATION_CREDENTIALS="$XDG_CONFIG_HOME/gcloud/application_default_credentials.json"
+
+# go
+export GOPATH="$HOME/go"
+
+# tmux
+# @todo move into xdg_config dir, do we need a tmuxrc?
+# @todo make TPM a submodule
+export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins
 
 #
 # Helpers
@@ -76,24 +94,41 @@ log:debug "file loaded: $helpers"
 unset helpers
 
 #
-# Shared setup
+# Path
+#
+# Set the list of directories where the shell searches for programs.
 #
 
-# Prepend gnubin to path to use gls and gdircolors instead of ls and dircolors.
-# Unlike the macOS builtins, the GNU versions read and write to LS_COLORS
-# instead of LSCOLORS. Most zsh plugins--including completion--use LS_COLORS, so
-# this leads to more consistent output colorization.
-#
-# @todo use constant for homebrew opt path
-if is-macos; then
-  gnubin="/opt/homebrew/opt/coreutils/libexec/gnubin"
-  if [ ! -d $gnubin ]; then
-    run:if-cmd brew brew install coreutils
-  fi
+path-append \
+  /usr/local/bin \
+  /usr/local/sbin \
+  /usr/bin \
+  /usr/sbin \
+  /bin \
+  /sbin
 
-  if [ ! -d $gnubin ]; then
-    log:warn "gnubin not found"
+if [ -z "$HOMEBREW_PREFIX" ]; then
+  # Set homebrew prefix and add bins to path.
+  if [ -d /opt/homebrew/bin ]; then
+    path-prepend /opt/homebrew/bin
+    eval:if-cmd brew brew shellenv
   else
-    export PATH="$gnubin:$PATH"
+    log:warn "homebrew not found in /opt/homebrew/bin"
   fi
 fi
+
+# java: override system installation. This is needed for the PlantUML VSCode
+# extension.
+if [ -n "$HOMEBREW_PREFIX" ]; then
+  path-prepend \
+    "$HOMEBREW_PREFIX/opt/mysql@8.0/bin" \
+    "$HOMEBREW_PREFIX/opt/openjdk/bin"
+
+  # @todo link brew completions if not linked
+fi
+
+path-prepend \
+  "$HOME/.local/bin" \
+  "$HOME/.local/sbin" \
+  "$HOME/.cargo/bin" \
+  "$GOPATH/bin"
