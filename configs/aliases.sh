@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+# Use Xcode make on MacOS to override any other versions that might be
+# added later.
+if $IS_MACOS; then
+    run:if-file /Library/Developer/CommandLineTools/usr/bin/make \
+        alias make=/Library/Developer/CommandLineTools/usr/bin/make
+fi
+
 # git (extends prezto/modules/git)
 alias gis="git status"
 alias gbl='git branch --verbose -v'
