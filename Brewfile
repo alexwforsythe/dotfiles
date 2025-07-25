@@ -53,9 +53,9 @@ cask iterm2
 cask maccy
 cask meetingbar
 cask multitouch
+cask slack
 cask visual-studio-code
 cask zoom
 
 # App Store
-# appstore 803453959 Slack
 appstore 1246969117 Steam Link
