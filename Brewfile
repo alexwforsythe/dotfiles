@@ -74,6 +74,7 @@ brew zoxide # @todo learn it
 # cask alt-tab
 cask bitwarden
 cask font-meslo-lg-nerd-font
+cask font-jetbrains-mono-nerd-font # for ligaturizer
 cask gcloud-cli
 cask hammerspoon
 cask iterm2
