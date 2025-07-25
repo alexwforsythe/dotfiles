@@ -44,7 +44,9 @@ run:if-cmd fzf source:file "$XDG_CONFIG_HOME/dotfiles/configs/forgit-rc.sh"
 
 # Load aliases last to overwrite any conflicting ones defined by plugins.
 source:file "$XDG_CONFIG_HOME/dotfiles/configs/aliases.sh"
-source:file "$XDG_CONFIG_HOME/dotfiles/configs/workrc.sh"
+if [ -r "$XDG_CONFIG_HOME/dotfiles/configs/workrc.sh" ]; then
+    source:file "$XDG_CONFIG_HOME/dotfiles/configs/workrc.sh"
+fi
 
 #
 # Hooks
