@@ -31,7 +31,7 @@ fi
 #
 
 export EDITOR=vim
-export VISUAL=vim
+export VISUAL=$EDITOR
 export PAGER=less
 export LESS="--hilite-search \
 --hilite-unread \
