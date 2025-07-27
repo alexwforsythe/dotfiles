@@ -26,3 +26,26 @@ alias dkB="docker builder"
 alias dkBpr="docker builder prune"
 alias dkBprA="docker builder prune --all"
 alias dkprA="docker container prune && docker image prune && docker volume prune"
+
+# Print the PATH with new lines.
+path() {
+    echo "${PATH//:/\n}"
+}
+
+# Go up N directories (default is 1).
+# https://github.com/peterhurford/up.zsh
+up() {
+    if [ $# -eq 0 ]; then
+        cd ..
+    elif ! [[ $1 =~ ^[0-9]+$ ]]; then
+        log:error "Number of up dirs must be between at least 1"
+        return 2
+    else
+        local d=""
+        for ((i = 1; i <= $1; i++)); do
+            if [ -n "$d" ]; then d+=/; fi
+            d+=..
+        done
+        cd "$d" || return 1
+    fi
+}
