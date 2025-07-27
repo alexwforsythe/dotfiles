@@ -108,14 +108,14 @@ Make sure the following command-line tools are installed:
 Clone this repository:
 
 ```shell
-mkdir -p "$HOME/.config"
-git clone --recurse-submodules git@github.com/alexwforsythe/dotfiles "$HOME/.config"
+mkdir -p "$HOME/.local/share"
+git clone --recurse-submodules git@github.com/alexwforsythe/dotfiles "$HOME/.local/share"
 ```
 
 Run the installation script:
 
 ```shell
-$HOME/.config/dotfiles/install.sh
+$HOME/.local/share/dotfiles/install.sh
 ```
 
 Manual steps (for now):

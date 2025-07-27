@@ -55,7 +55,7 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-export DOTFILES_DIR="$XDG_CONFIG_HOME/dotfiles"
+export DOTFILES_DIR="$XDG_DATA_HOME/dotfiles"
 
 # Readline config:
 # https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
