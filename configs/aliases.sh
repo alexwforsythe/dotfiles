@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
+alias sudo="sudo --preserve-env=VISUAL,EDITOR,GIT_EDITOR"
+
 # Use Xcode make on MacOS to override any other versions that might be
 # added later.
 if $IS_MACOS; then
     run:if-file /Library/Developer/CommandLineTools/usr/bin/make \
         alias make=/Library/Developer/CommandLineTools/usr/bin/make
 fi
+
+alias v="\$VISUAL"
 
 # git (extends prezto/modules/git)
 alias gis="git status"
