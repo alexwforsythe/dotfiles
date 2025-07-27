@@ -6,7 +6,7 @@
 # https://github.com/wfxr/forgit
 #
 
-forgit_dir=$XDG_CONFIG_HOME/dotfiles/submodules/forgit
+forgit_dir=$DOTFILES_DIR/submodules/forgit
 plugin="$forgit_dir/forgit.plugin.sh"
 # @todo zsh or sh, conditionally
 plugin="$forgit_dir/forgit.plugin.zsh"

@@ -12,7 +12,7 @@ case $- in
 *) return ;;
 esac
 
-helpers="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/configs/helpers.sh"
+helpers="$DOTFILES_DIR/configs/helpers.sh"
 # shellcheck disable=1090
 if [ ! -r "$helpers" ] || ! source "$helpers"; then
     printf '[error] %s\n' "file not loaded: $helpers"
@@ -74,7 +74,7 @@ fi
 # Plugins
 #
 
-source:file "$XDG_CONFIG_HOME/dotfiles/configs/shellrc.sh"
+source:file "$DOTFILES_DIR/configs/shellrc.sh"
 
 # fzf
 # https://thevaluable.dev/fzf-shell-integration/

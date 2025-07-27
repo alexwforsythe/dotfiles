@@ -9,7 +9,7 @@
 # https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files
 #
 
-profile="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/configs/profile.sh"
+profile="$DOTFILES_DIR/configs/profile.sh"
 
 # Load shell profile to share environment variables, etc.
 # shellcheck disable=1090
@@ -21,5 +21,5 @@ fi
 log:debug "file loaded: $profile"
 unset profile
 
-source:file "${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/configs/.bashrc" \
+source:file "$DOTFILES_DIR/configs/.bashrc" \
     || source:file "$HOME/.bashrc"
