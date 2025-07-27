@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck shell=bash
 
 val=$(uptime)
 trimmed=$(printf '%s' "$val#$val%%[![:space:]]*")

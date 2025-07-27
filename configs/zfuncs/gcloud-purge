@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck shell=bash
 
 # Purges all messages for a given subscription.
 gcloud pubsub subscriptions seek "$1" --time="$(date -u +%Y-%m-%dT%H:%M:%SZ)"

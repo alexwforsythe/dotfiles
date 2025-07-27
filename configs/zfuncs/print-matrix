@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck shell=bash
 
 # Source: https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/functions.md
 
