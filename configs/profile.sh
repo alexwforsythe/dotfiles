@@ -55,10 +55,12 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
+export DOTFILES_DIR="$XDG_CONFIG_HOME/dotfiles"
+
 # Readline config:
 # https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
 # @todo maybe link to ~/.inputrc
-export INPUTRC="$XDG_CONFIG_HOME/dotfiles/configs/.inputrc"
+export INPUTRC="$DOTFILES_DIR/configs/.inputrc"
 
 #
 # Environment
@@ -88,7 +90,7 @@ export TINTY_DIR="$XDG_DATA_HOME/tinted-theming/tinty"
 # Helpers
 #
 
-helpers="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles/configs/helpers.sh"
+helpers="$DOTFILES_DIR/configs/helpers.sh"
 # shellcheck disable=1090
 if [ ! -r "$helpers" ] || ! source "$helpers"; then
   printf '[error] %s\n' "file not loaded: $helpers"
