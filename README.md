@@ -135,8 +135,8 @@ Install terminal profiles for italics support (optional):
 - [guide 2](https://medium.com/@dubistkomisch/how-to-actually-get-italics-and-true-colour-to-work-in-iterm-tmux-vim-9ebe55ebc2be)
 
 ```shell
-tic -x ~/.config/dotfiles/configs/xterm-256color-italic.terminfo
-tic -x ~/.config/dotfiles/configs/tmux-256color.terminfo
+tic -x $DOTFILES_DIR/configs/xterm-256color-italic.terminfo
+tic -x $DOTFILES_DIR/configs/tmux-256color.terminfo
 ```
 
 ## Updating
