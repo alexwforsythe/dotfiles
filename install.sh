@@ -32,6 +32,9 @@ git -C "$dotbot_dir" submodule update --init --recursive
     "$@"
 
 setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.config/dotfiles/configs/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+dotfiles_dir=${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles
+# shellcheck disable=1036,1058,1072,1073
+for rcfile in "$dotfiles_dir"/configs/^README.md(.N); do
+  ln -s "$rcfile" "$dotfiles_dir/configs/.${rcfile:t}"
 done
+unset dotfiles_dir
