@@ -29,7 +29,7 @@ fzf_header_default="$(
         'C-d: Dirs / C-f: Files / C-r: Reload / C-e: Exact' \
         'C-k: Up / C-j: Down / Tab: Select / C-y: Copy / C-/: Preview'
 )"
-if command -v column >/dev/null; then
+if iscmd column; then
     delim=' / '
     fzf_header_default="$(printf '%s\n' "$fzf_header_default" "$delim " | column -t -s "$delim")"
 fi
@@ -76,7 +76,7 @@ fzf_keybinds_guide=$(
 #
 
 # @todo add fdignore and common excludes for find
-if command -v fd >/dev/null; then
+if iscmd fd; then
     header_lines_find=0
     _cmd_find_base=(fd --full-path --strip-cwd-prefix --hidden --follow --exclude .git)
     _cmd_find() {
@@ -146,7 +146,7 @@ opts_fzf_path=(
     --bind "'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'" # @todo doesn't work
 )
 
-if command -v tree >/dev/null; then
+if iscmd tree; then
     cmd_preview_dir="tree -C {} | head -200"
     opts_preview_dir=("$cmd_preview_dir")
 else
@@ -154,7 +154,7 @@ else
     cmd_preview_dir="ls -lahF {} | head -200"
     opts_preview_dir=("$cmd_preview_dir" --header-lines=1)
 fi
-if command -v bat >/dev/null; then
+if iscmd bat; then
     cmd_preview_file="bat --color=always --style=grid,header,header-filesize --line-range :500 {}"
 else
     log:warn "command not found: bat"
