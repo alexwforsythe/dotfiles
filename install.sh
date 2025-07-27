@@ -1,4 +1,5 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
+# shellcheck shell=bash
 
 set -e
 
@@ -25,11 +26,11 @@ git -C "$dotbot_dir" submodule update --init --recursive
 
 # Bootstrap dotfiles.
 "$dotbot" \
-    --verbose \
-    --base-directory "$script_dir" \
-    --plugin-dir dotbot-brew \
-    --config-file "$cfg_file" \
-    "$@"
+  --verbose \
+  --base-directory "$script_dir" \
+  --plugin-dir dotbot-brew \
+  --config-file "$cfg_file" \
+  "$@"
 
 setopt EXTENDED_GLOB
 dotfiles_dir=${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles
