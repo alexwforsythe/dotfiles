@@ -5,7 +5,7 @@
 #
 
 setup:pyenv() {
-    if ! command -v pyenv >/dev/null; then
+    if ! iscmd pyenv; then
         python_bin_dir="/usr/local/bin"
         return
     fi
