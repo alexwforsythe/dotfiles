@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# shellcheck shell=bash
 
 # Provide syntax highlighting for rg from delta if available.
 # https://dandavison.github.io/delta/grep.html
