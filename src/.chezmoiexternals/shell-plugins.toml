@@ -1,0 +1,7 @@
+['.local/share/shell-plugins/forgit']
+type = 'archive'
+url = 'https://github.com/wfxr/forgit/archive/main.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*']
