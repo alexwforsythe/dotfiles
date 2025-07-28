@@ -34,10 +34,6 @@
       path: apps/iterm2/com.googlecode.iterm2.plist
       if: '[ "$(uname)" = Darwin ]'
     ~/.config/lazygit: apps/lazygit
-    ~/Library/Preferences/com.brassmonkery.Multitouch.plist:
-      # force: true
-      path: apps/multitouch/com.brassmonkery.Multitouch.plist
-      if: '[ "$(uname)" = Darwin ]'
 
 #
 # Setup commands
