@@ -51,7 +51,7 @@ export LESS="--hilite-search \
 # Readline config:
 # https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
 # @todo maybe link to ~/.inputrc
-export INPUTRC="$DOTFILES_DIR/configs/.inputrc"
+export INPUTRC="$HOME/.inputrc"
 
 #
 # Environment
@@ -70,7 +70,7 @@ export GOPATH="$HOME/go"
 # tmux
 # @todo move into xdg_config dir, do we need a tmuxrc?
 # @todo make TPM a submodule
-export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins
+export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
 
 # tinty: https://github.com/tinted-theming/tinted-shell?tab=readme-ov-file#customization
 export TINTED_SHELL_ENABLE_BASE16_VARS=1

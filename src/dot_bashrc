@@ -15,10 +15,8 @@ case $- in
 *) return ;;
 esac
 
-DOTFILES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles"
-
 # Load shared helpers (required by profile.sh).
-rchelpers="$DOTFILES_DIR/configs/helpers.sh"
+rchelpers="${XDG_CONFIG_HOME:-$HOME/.config}/shell/helpers.sh"
 # shellcheck disable=1090
 if [ ! -r "$rchelpers" ] || ! source "$rchelpers"; then
     printf '[error] %s\n' "file not loaded: $rchelpers"
@@ -28,9 +26,9 @@ log:debug "file loaded: $rchelpers"
 unset rchelpers
 
 # Load shared shell environment (required by profile.sh).
-source:file "$DOTFILES_DIR/configs/env.sh"
+source:file "$XDG_CONFIG_HOME/shell/env.sh"
 # Load shared shell profile.
-source:file "$DOTFILES_DIR/configs/profile.sh"
+source:file "$XDG_CONFIG_HOME/shell/profile.sh"
 
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
@@ -84,7 +82,7 @@ fi
 # Plugins
 #
 
-source:file "$DOTFILES_DIR/configs/shellrc.sh"
+source:file "$XDG_CONFIG_HOME/shell/shellrc.sh"
 
 # fzf
 # https://thevaluable.dev/fzf-shell-integration/
