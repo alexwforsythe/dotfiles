@@ -97,4 +97,4 @@ source:file "$FZF_DIR/shell/key-bindings.bash" # @audit-ok
 # GNU ls (installed by brew as part of corutils on MacOS) uses LS_COLORS to
 # colorize output. Here's a good reference:
 # https://the.exa.website/docs/colour-themes
-run:if-cmd dircolors eval "$(dircolors)"
+run:if-cmd gdircolors eval "$(gdircolors)"
