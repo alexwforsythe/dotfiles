@@ -5,6 +5,9 @@
 #
 # https://github.com/junegunn/fzf
 #
+# Guides:
+#  - https://thevaluable.dev/fzf-shell-integration
+#
 
 # @todo tmux menu for invoking fzf commands
 #  - ctrl-r: Paste the selected command from history onto the command-line
@@ -112,6 +115,7 @@ export FZF_ALT_C_COMMAND="$cmd_find_d"
 #  - actually add a hotkey to render syntax guide instead of preview
 
 # @todo set a default binding (ctrl-r) to switch to rg instead of fd!
+#  - and use rgp zfunc (highlight w/ delta)
 #  - or do we need to set it in comprun to avoid using it for non-file commands?
 
 # Any args containing whitespace need to be wrapped in '' and then "" for array
@@ -123,6 +127,7 @@ opts_fzf_default=(
     --border=none
     "--prompt='fzf> '"
     # --marker="*"
+    # --color=16
     --color="$fzf_theme"
 )
 export FZF_DEFAULT_OPTS="${opts_fzf_default[*]}"
