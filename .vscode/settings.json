@@ -1,5 +1,6 @@
 {
   "files.associations": {
+    "**/zsh/**/*functions/*": "shellscript",
     "*bash_profile": "shellscript",
     "*bashrc": "shellscript",
     "*delta.conf": "ini",
@@ -7,6 +8,8 @@
     "*gitconfig": "ini",
     "*inputrc": "inputrc",
     "*myclirc": "toml",
-    "*tmux.conf": "tmux"
+    "*tmux.conf": "tmux",
+    "*vimrc": "viml",
+    "chezmoiignore": "gitignore"
   }
 }

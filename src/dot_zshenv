@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+# shellcheck shell=bash
+
+#
+# ~/.zshenv: sourced on all invocations of the shell
+#
+#  - Should set the command search path and other important env vars
+#  - Should not produce output or assume the shell is attached to a tty
+#
+# https://zsh.sourceforge.io/Intro/intro_3.html
+#
+
+# Disable global startup files because we set up everything manually:
+# https://zsh.sourceforge.io/Doc/Release/Options.html
+unsetopt globalrcs
+
+# @todo only export with EXPORT
+# unsetopt globalexport
+
+# Load shared shell environment.
+if [ -r "${XDG_CONFIG_HOME:-$HOME/.config}/shell/env.sh" ]; then
+  # shellcheck disable=1091
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/env.sh"
+fi

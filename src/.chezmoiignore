@@ -1,0 +1,4 @@
+# Ignore zsh word code files. Some externals compile them in their own
+# directories, which causes chezmoi to report changes.
+# https://www.chezmoi.io/user-guide/include-files-from-elsewhere/#include-a-subdirectory-from-a-url
+**/*.zwc
