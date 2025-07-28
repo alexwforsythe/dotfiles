@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
 #
+# helpers.sh: shared helper functions for other shell configs.
+#
+#  - Sourced by .bash_profile and .zprofile before the environment is set up
+#  - Should not assume existence of any user env vars, functions, or paths
+#
+
+#
 # Logging
 #
 

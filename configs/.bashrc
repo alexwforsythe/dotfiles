@@ -3,6 +3,9 @@
 #
 # ~/.bashrc: executed by bash for interactive non-login shells
 #
+#  - Sourced by .bash_profile so that it's loaded for all interactive shells
+#    (similar to .zshrc)
+#
 # https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files
 #
 
@@ -12,15 +15,22 @@ case $- in
 *) return ;;
 esac
 
-helpers="$DOTFILES_DIR/configs/helpers.sh"
+DOTFILES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles"
+
+# Load shared helpers (required by profile.sh).
+rchelpers="$DOTFILES_DIR/configs/helpers.sh"
 # shellcheck disable=1090
-if [ ! -r "$helpers" ] || ! source "$helpers"; then
-    printf '[error] %s\n' "file not loaded: $helpers"
+if [ ! -r "$rchelpers" ] || ! source "$rchelpers"; then
+    printf '[error] %s\n' "file not loaded: $rchelpers"
     return 1
 fi
+log:debug "file loaded: $rchelpers"
+unset rchelpers
 
-log:debug "file loaded: $helpers"
-unset "$helpers"
+# Load shared shell environment (required by profile.sh).
+source:file "$DOTFILES_DIR/configs/env.sh"
+# Load shared shell profile.
+source:file "$DOTFILES_DIR/configs/profile.sh"
 
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
