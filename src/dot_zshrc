@@ -1,0 +1,369 @@
+#!/usr/bin/env zsh
+# shellcheck shell=bash
+
+#
+# ~/.zshrc: sourced in interactive shells
+#
+#  - Should set up options, key bindings, functions, aliases, etc.
+#
+# Guides:
+#  - https://zsh.sourceforge.io/Intro/intro_3.html
+#  - https://zsh.sourceforge.io/Guide/zshguide02.html
+#
+# Examples:
+#  - https://github.com/zsh-users/zsh/blob/master/StartupFiles/zshrc
+#  - https://github.com/marlonrichert/zsh-launchpad/tree/main
+#  - https://github.com/romkatv/zsh4humans/blob/v5/.zshrc
+#  - https://github.com/romkatv/zsh4humans/blob/v5/.zshrc.mac
+#
+
+# @note Uncomment the following line to profile startup time.
+# zmodload zsh/zprof
+
+# Load shared helpers (required by profile.sh).
+rchelpers="${XDG_CONFIG_HOME:-$HOME/.config}/shell/helpers.sh"
+# shellcheck disable=1090
+if [ ! -r "$rchelpers" ] || ! source "$rchelpers"; then
+    printf '[error] %s\n' "file not loaded: $rchelpers"
+    return 1
+fi
+log:debug "file loaded: $rchelpers"
+unset rchelpers
+
+# Load shared shell profile.
+source:file "$XDG_CONFIG_HOME/shell/profile.sh"
+
+#
+# Options
+#
+#  - Reference: https://zsh.sourceforge.io/Doc/Release/Options.html
+#  - Examples
+#    - https://github.com/willghatch/zsh-saneopt/tree/master
+#    - https://github.com/sorin-ionescu/prezto/tree/master/modules
+#
+
+# Correctly display UTF-8 with combining characters.
+if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
+  setopt COMBINING_CHARS
+fi
+
+# Disable the log builtin, so we don't conflict with /usr/bin/log
+disable log
+
+# Use extended glob patterns.
+setopt extendedglob
+# Include hidden files.
+setopt globdots
+# Remove superfluous blanks before recording entry.
+setopt histreduceblanks
+# No beeping
+unsetopt beep
+# No c-s/c-q output freezing
+unsetopt flowcontrol
+# Try to avoid the 'zsh: no matches found...'
+unsetopt nomatch
+
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+#
+# Path
+#
+
+# Ensure path arrays do not contain duplicates.
+# shellcheck disable=2034
+typeset -gU cdpath fpath mailpath manpath path
+
+# Register user funcs, which can be called after running `autoload $func` or
+# invoked as scripts.
+# https://zsh.sourceforge.io/Intro/intro_4.html
+fpath+=$XDG_CONFIG_HOME/shell/zsh/functions
+
+# @audit
+# eval "$(brew shellenv)"
+# gnubin="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
+# if [ ! -d "$gnubin" ]; then
+#   brew install coreutils
+# fi
+# path=($gnubin $path)
+
+#
+# Instant prompt
+#
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+#
+# Activate direnv here for compatibility:
+# https://github.com/romkatv/powerlevel10k/blob/master/README.md#how-do-i-initialize-direnv-when-using-instant-prompt
+#
+# @note tmux sessions should be created after instant prompt because tmux
+# generates output to parent process:
+# https://github.com/romkatv/powerlevel10k/issues/1203
+# shellcheck disable=2296
+p10k_cache="${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
+run:if-cmd direnv emulate zsh -c "$(direnv export zsh)"
+source:file "$p10k_cache"
+run:if-cmd direnv emulate zsh -c "$(direnv hook zsh)"
+
+#
+# Completions
+#
+
+# Use fuzzy searching for history substring search
+export HISTORY_SUBSTRING_SEARCH_FUZZY=1
+
+# homebrew
+if [ -n "$HOMEBREW_PREFIX" ]; then
+  # Register homebrew completions so they'll be loaded by the completion plugin.
+  # @todo this should be done by the completion plugin, maybe try updating it?
+  # @todo I needed to run these commands to fix zcompinit security issues from
+  # docker completions:
+  # compaudit | xargs chown -R $(whoami)
+  # compaudit | xargs chmod go-w
+  fpath+=$HOMEBREW_PREFIX/completions/zsh
+  fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
+  fpath+=$HOMEBREW_PREFIX/share/bash-completion/completions
+
+  # Rename bash completions for git so the completion plugin loads its own
+  # (better) ones instead:
+  # https://stackoverflow.com/questions/65833258/git-completion-on-zsh-not-listing-ambiguous-options-on-macos
+  brew_completions_dir="$HOMEBREW_PREFIX/share/zsh/site-functions"
+  if [ -r "$brew_completions_dir/_git" ]; then
+    mv "$brew_completions_dir/_git" "$brew_completions_dir/git_renamed"
+  fi
+  unset brew_completions_dir
+fi
+
+# Load bash completions because there might be some that zsh doesn't have. We
+# load these before prezto so the completion plugin will override any
+# conflicting definitions, because zsh completions are usually better.
+if ! autoload -Uz bashcompinit || ! bashcompinit; then
+  log:warn "failed to load bash completions"
+fi
+
+# gcloud
+if [ -d "$HOMEBREW_PREFIX" ]; then
+    source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.zsh.inc"
+    source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.zsh.inc"
+fi
+
+# ngrok
+eval:if-cmd ngrok ngrok completion
+
+# dbt
+# @todo prompt for sudo if file dne
+# sudo curl https://raw.githubusercontent.com/dbt-labs/dbt-completion.bash/master/_dbt -o /usr/share/zsh/site-functions/_dbt
+
+# zsh-autocomplete: this config must be set before loading the plugin and cannot
+# be changed at runtime.
+zstyle ':autocomplete:*' widget-style menu-select
+# complete-word: (Shift-)Tab inserts the top (bottom) completion.
+# menu-complete: Press again to cycle to next (previous) completion.
+# menu-select:   Same as `menu-complete`, but updates selection in menu.
+
+#
+# Plugins
+#
+
+source:file "$XDG_DATA_HOME/prezto/init.zsh"
+# Load p10k immediately after plugins for a fast prompt.
+# https://github.com/romkatv/zsh-bench
+source:file "$XDG_CONFIG_HOME/shell/zsh/p10k.zsh"
+source:file "$XDG_CONFIG_HOME/shell/shellrc.sh"
+
+# fzf
+# https://thevaluable.dev/fzf-shell-integration/
+source:file "$FZF_DIR/shell/completion.zsh" # @audit-ok
+source:file "$FZF_DIR/shell/key-bindings.zsh" # @audit-ok
+# source:file "$XDG_CONFIG_HOME/shell/zsh/fzf-tab-rc.zsh"
+
+# zsh-autocomplete
+source:file "$XDG_CONFIG_HOME/shell/zsh/zsh-autocomplete-rc.zsh"
+
+# cdr
+# https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
+autoload -Uz cdr chpwd_recent_dirs add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+# zstyle ':completion:*:*:cdr:*:*' menu selection
+
+# zoxide (load after compinit, fzf-rc, zsh-autocomplete)
+export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS"
+eval:if-cmd zoxide zoxide init zsh # @audit-ok
+
+#
+# Completions
+#
+
+# Only show completions for exact matches.
+unsetopt completeinword
+# Complete globs instead of inserting them. The expansion will be shown in the
+# zsh-autocomplete menu anyway.
+setopt globcomplete
+
+# Override the match (ma) color to be more subtle--fg white, bg gray, bold--to
+# match our fzf theme.
+# @todo update based on new fzf theme
+zstyle ':completion:*' list-colors "ma=38;5;251;48;5;237;1"
+
+# ignore completion to functions starting with _
+zstyle ':completion:*:functions' ignored-patterns '_*'
+# menu selection with a cursor will be used when the number of possible matches doesn't fit the screen
+zstyle ':completion:*' menu select=long
+# menu selection with a cursor will be used for git commands
+zstyle ':completion:*:git*:*' menu select=2
+
+#
+# Key bindings
+#
+
+# @todo
+#  - history substring search
+#   - up/down line
+#   - accept
+#   - accept and enter
+
+# Remove mode switching delay for vicmd and viins.
+export KEYTIMEOUT=1
+
+
+
+
+# Extend (don't override) the built-in hooks to set the cursor mode.
+# https://zsh.sourceforge.io/Doc/Release/User-Contributions.html
+autoload -Uz set-cursor-mode add-zle-hook-widget
+add-zle-hook-widget zle-line-init set-cursor-mode
+add-zle-hook-widget zle-keymap-select set-cursor-mode
+
+# Natural text editing
+# @todo can we copy some from iterm2's key mappings?
+# bindkey "\e[1;3C" forward-word
+# bindkey "\e[1;3D" backward-word
+# bindkey "\e[[3~" forward-delete-char # @todo delete word, add forward delete
+
+# Open tmux launcher when space is pressed in vicmd mode (like VSpaceCode).
+# @todo move this to tmux-launcher.plugin.zsh and add zstyle option to configure
+# key
+if [ -n "$IS_TMUX" ]; then
+  tmux-which-key() { tmux show-wk-menu-root; }
+  zle -N tmux-which-key
+  bindkey -M vicmd " " tmux-which-key
+fi
+
+#
+# Expand aliases when pressing space. Use ctrl-space to skip expansion.
+# glob-alias is defined by the editor plugin.
+#
+# https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/aliases.md#automatically-expand-aliases
+#
+
+setopt ALIASES # Expand aliases.
+
+# space expands all aliases, including global
+bindkey -M viins " " glob-alias
+
+# control-space to make a normal space
+bindkey -M viins "^ " magic-space
+
+# # normal space during searches
+bindkey -M isearch " " magic-space
+
+#
+# Add vim key bindings for completion menus.
+#
+# Note: must be loaded after compinit (i.e. prezto/init.zsh)
+#
+# https://thevaluable.dev/zsh-install-configure-mouseless/
+#
+
+# Load complist for access to the menuselect keymap.
+zmodload zsh/complist
+# Toggle interactive mode
+# bindkey -M menuselect '^F' vi-insert
+# @todo can we just globally map these to arrow keys?
+bindkey -M menuselect '^h' backward-char
+bindkey -M menuselect '^j' down-line-or-history
+bindkey -M menuselect '^k' up-line-or-history
+bindkey -M menuselect '^l' forward-char
+
+#
+# vim-surround
+#
+# https://thevaluable.dev/zsh-install-configure-mouseless/
+#
+
+autoload -Uz surround
+
+zle -N add-surround surround
+zle -N change-surround surround
+zle -N delete-surround surround
+
+bindkey -M vicmd ys add-surround
+bindkey -M visual S add-surround
+bindkey -M vicmd cs change-surround
+bindkey -M vicmd ds delete-surround
+
+#
+# zsh-bracketed
+#
+# https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-quoted
+#
+
+autoload -Uz select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+  for c in {a,i}{\',\",\`}; do
+    bindkey -M $m $c select-quoted
+  done
+done
+
+#
+# zsh-quoted
+#
+# https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-bracketed
+#
+
+autoload -Uz select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+  # shellcheck disable=2296
+  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    bindkey -M $m $c select-bracketed
+  done
+done
+
+# History substring search
+# @todo trigger history menu or fzf?
+# bindkey -M viins "$key_info[Control]K" history-substring-search-up
+# bindkey -M viins "$key_info[Control]J" history-substring-search-down
+bindkey -M viins "^k" up-line-or-search
+bindkey -M viins "^j" down-line-or-search
+
+# @todo history-incremental-search doesn't trigger with ^r (with fzf
+# disabled)
+
+#
+# builtin functions
+#
+
+# https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/widgets.md
+autoload -Uz tetris tetriscurses
+
+#
+# User functions
+#
+
+autoload -Uz print-colors print-matrix uptime-trimmed
+run:if-cmd tinty autoload -Uz tinty
+run:if-cmd rg run:if-cmd delta autoload -Uz rgp
+run:if-cmd gcloud autoload -Uz gcloud-purge
+
+#
+# Aliases
+#
+
+source:file "$XDG_CONFIG_HOME/shell/zsh/aliases.zsh"
+
+# @note Uncomment the following line to print startup time.
+# zprof

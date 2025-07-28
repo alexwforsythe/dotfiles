@@ -6,31 +6,7 @@
 #   - e.g. shell-only, ui (by platform)
 #
 
-- defaults:
-    link:
-      create: true
-      relink: true
-
-- clean: ['~', '~/.config']
-
-#
-# Links
-# @todo can we dedupe list entries?
-#
-
-- link:
-    ~/:
-      glob: true
-      path: configs/.*
-    # ~/:
-    #   glob: true
-    #   path: submodules/prezto/runcoms/*
-    #   prefix: '.'
-    #   # exclude: [ README.md ]
-
-# Setup commands
 # @audit make sure these are idempotent
-#
 
 # MacOS
 - shell:

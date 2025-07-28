@@ -17,5 +17,3 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 export ZDOTDIR="$HOME"
-
-export DOTFILES_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles"

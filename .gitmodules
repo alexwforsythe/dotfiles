@@ -1,6 +1,3 @@
 [submodule "modules/dotbot"]
 path = submodules/dotbot
 url = git@github.com:anishathalye/dotbot.git
-[submodule "modules/prezto"]
-path = submodules/prezto
-url = git@github.com:alexwforsythe/prezto.git
