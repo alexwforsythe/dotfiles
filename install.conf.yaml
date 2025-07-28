@@ -28,12 +28,6 @@
     #   prefix: '.'
     #   # exclude: [ README.md ]
     ~/.vimrc: submodules/vimrc/vimrcs/basic.vim
-    # @todo gets cleared by iterm2
-    ~/.config/iterm2/com.googlecode.iterm2.plist:
-      # force: true
-      path: apps/iterm2/com.googlecode.iterm2.plist
-      if: '[ "$(uname)" = Darwin ]'
-    ~/.config/lazygit: apps/lazygit
 
 #
 # Setup commands
