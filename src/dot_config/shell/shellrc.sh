@@ -7,14 +7,19 @@
 #
 
 # @audit handled by python plugin
-run:if-cmd python source:file "$DOTFILES_DIR/configs/pythonrc.sh"
-run:if-cmd fzf source:file "$DOTFILES_DIR/configs/fzf-rc.sh"
-# run:if-cmd fzf source:file "$DOTFILES_DIR/configs/forgit-rc.sh"
+run:if-cmd python3 source:file "$XDG_CONFIG_HOME/shell/pythonrc.sh"
+if iscmd fzf; then
+    export FZF_DIR="$HOMEBREW_PREFIX/opt/fzf"
+    path-append "$FZF_DIR/bin"
+    source:file "$XDG_CONFIG_HOME/shell/fzf-rc.sh"
+    # @audit removed plugin -- still want to use it?
+    # source:file "$XDG_CONFIG_HOME/shell/forgit-rc.sh"
+fi
 
 # Load aliases last to overwrite any conflicting ones defined by plugins.
-source:file "$DOTFILES_DIR/configs/aliases.sh"
-if [ -r "$DOTFILES_DIR/configs/workrc.sh" ]; then
-    source:file "$DOTFILES_DIR/configs/workrc.sh"
+source:file "$XDG_CONFIG_HOME/shell/aliases.sh"
+if [ -r "$XDG_CONFIG_HOME/shell/workrc.sh" ]; then
+    source:file "$XDG_CONFIG_HOME/shell/workrc.sh"
 fi
 
 #

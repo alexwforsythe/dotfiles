@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*bash_profile": "shellscript",
+    "*bashrc": "shellscript",
+    "*editrc": "inputrc",
+    "*gitconfig": "ini",
+    "*inputrc": "inputrc",
+    "*myclirc": "toml",
+    "*tmux.conf": "tmux"
+  }
+}
