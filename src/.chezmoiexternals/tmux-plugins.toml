@@ -1,0 +1,39 @@
+['.local/share/tpm']
+type = 'archive'
+url = 'https://github.com/tmux-plugins/tpm/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '*/tests']
+
+['.local/share/tmux-plugins/tmux-resurrect']
+type = 'archive'
+url = 'https://github.com/tmux-plugins/tmux-resurrect/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '*/tests', '*/video']
+
+['.local/share/tmux-plugins/tmux-continuum']
+type = 'archive'
+url = 'https://github.com/tmux-plugins/tmux-resurrect/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '*/tests', '*/video']
+
+['.local/share/tmux-plugins/tmux-plugin-sysstat']
+type = 'archive'
+url = 'https://github.com/samoshkin/tmux-plugin-sysstat/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/screenshots']
+
+['.local/share/tmux-plugins/Morantron/tmux-fingers']
+type = 'archive'
+url = 'https://github.com/Morantron/tmux-fingers/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '*/Dockerfile', '*/**/*.svg']
