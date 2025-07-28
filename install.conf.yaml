@@ -27,9 +27,7 @@
     #   path: submodules/prezto/runcoms/*
     #   prefix: '.'
     #   # exclude: [ README.md ]
-    ~/.vimrc: submodules/vimrc/vimrcs/basic.vim
 
-#
 # Setup commands
 # @audit make sure these are idempotent
 #
