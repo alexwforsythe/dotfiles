@@ -16,7 +16,7 @@ features:
 - [x] use /bin/bash (or /bin/dash)
 
 ```shell
-  brew services start skhd --file="$DOTFILES_DIR/configs/macos/homebrew.mxcl.skhd.plist"
+brew services start skhd --file="$XDG_CONFIG_HOME/skhd/homebrew.mxcl.skhd.plist"
 ```
 
 ## Mode hotkeys

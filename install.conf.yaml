@@ -22,10 +22,6 @@
     ~/:
       glob: true
       path: configs/.*
-    ~/:
-      glob: true
-      path: configs/macos/.*
-      if: '[ "$(uname)" = Darwin ]'
     # ~/:
     #   glob: true
     #   path: submodules/prezto/runcoms/*
@@ -50,84 +46,72 @@
 
 # MacOS
 - shell:
-  -
-    command: defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-    description: Enabling key key repeat
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: defaults write com.googlecode.iterm2 PrefsCustomFolder "$HOME/.config/iterm2"
-    description: Setting iTerm2 config directory
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: xcode-select --install
-    description: Installing Xcode CLI tools
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)
-    description: Installing homebrew
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: brew update
-    description: Updating homebrew
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: brew bundle
-    description: Installing homebrew bundle
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: brew services start skhd
-    description: Registering skhd
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: brew services start yabai
-    description: Registering yabai
-    if: '[ "$(uname)" = Darwin ]'
+    - command: defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+      description: Enabling key key repeat
+      if: '[ "$(uname)" = Darwin ]'
+    - command: defaults write com.googlecode.iterm2 PrefsCustomFolder
+        "$HOME/.config/iterm2"
+      description: Setting iTerm2 config directory
+      if: '[ "$(uname)" = Darwin ]'
+    - command: xcode-select --install
+      description: Installing Xcode CLI tools
+      if: '[ "$(uname)" = Darwin ]'
+    - command: /bin/bash -c "$(curl -fsSL
+        https://raw.githubusercontent.com/Homebrew/install/master/install.sh)
+      description: Installing homebrew
+      if: '[ "$(uname)" = Darwin ]'
+    - command: brew update
+      description: Updating homebrew
+      if: '[ "$(uname)" = Darwin ]'
+    - command: brew bundle
+      description: Installing homebrew bundle
+      if: '[ "$(uname)" = Darwin ]'
+    - command: brew services start skhd
+      description: Registering skhd
+      if: '[ "$(uname)" = Darwin ]'
+    - command: brew services start yabai
+      description: Registering yabai
+      if: '[ "$(uname)" = Darwin ]'
 
 - shell:
-  - [chsh -s "$(command -v zsh)", Making zsh the default shell]
-  - [$HOME/.zprezto/init.zsh, Initializing prezto]
-  - [source $HOME/.zshrc, Loading installed zsh settings] # @todo maybe unnecessary with prezto
-  - [vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa", Installing Vim plugins]
-  - [nvm install --lts, Installing Node.js LTS]
-  - [npm install -g npm, Upgrading npm]
-  - [npm install -g, Installing npm packages]
+    - [chsh -s "$(command -v zsh)", Making zsh the default shell]
+    - [$HOME/.zprezto/init.zsh, Initializing prezto]
+    - [source $HOME/.zshrc, Loading installed zsh settings] # @todo maybe unnecessary with prezto
+    - [
+        vim -es -u vimrc -i NONE -c "PlugInstall" -c "qa",
+        Installing Vim plugins,
+      ]
+    - [nvm install --lts, Installing Node.js LTS]
+    - [npm install -g npm, Upgrading npm]
+    - [npm install -g, Installing npm packages]
 
-#
-# Updates
-#
+    #
+    # Updates
+    #
 
-# Everything before this point should be idempotent. The following steps should
-# upgrade all the dependencies installed on the first run.
-  -
-    command: brew update
-    description: Updating homebrew packages
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: brew upgrade
-    description: Upgrading homebrew packages
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: mas upgrade
-    description: Upgrading App Store apps
-    if: '[ "$(uname)" = Darwin ]'
-  -
-    command: sudo apt update
-    description: Updating packages
-    if: '[ "$(uname)" = Linux ] '
-  -
-    command: sudo apt upgrade
-    description: Upgrading packages
-    if: '[ "$(uname)" = Linux ] '
-  -
-    command: sudo apt autoremove
-    description: Pruning packages
-    if: '[ "$(uname)" = Linux ] '
-  -
-    command: nvm upgrade
-    description: Upgrading nvm
-  -
-    command: npm -g update
-    description: Updating npm
-  -
-    command: npm -g upgrade
-    description: Upgrading npm
+    # Everything before this point should be idempotent. The following steps should
+    # upgrade all the dependencies installed on the first run.
+    - command: brew update
+      description: Updating homebrew packages
+      if: '[ "$(uname)" = Darwin ]'
+    - command: brew upgrade
+      description: Upgrading homebrew packages
+      if: '[ "$(uname)" = Darwin ]'
+    - command: mas upgrade
+      description: Upgrading App Store apps
+      if: '[ "$(uname)" = Darwin ]'
+    - command: sudo apt update
+      description: Updating packages
+      if: '[ "$(uname)" = Linux ] '
+    - command: sudo apt upgrade
+      description: Upgrading packages
+      if: '[ "$(uname)" = Linux ] '
+    - command: sudo apt autoremove
+      description: Pruning packages
+      if: '[ "$(uname)" = Linux ] '
+    - command: nvm upgrade
+      description: Upgrading nvm
+    - command: npm -g update
+      description: Updating npm
+    - command: npm -g upgrade
+      description: Upgrading npm
