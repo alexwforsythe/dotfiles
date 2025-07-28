@@ -2,6 +2,7 @@
   "files.associations": {
     "*bash_profile": "shellscript",
     "*bashrc": "shellscript",
+    "*delta.conf": "ini",
     "*editrc": "inputrc",
     "*gitconfig": "ini",
     "*inputrc": "inputrc",
