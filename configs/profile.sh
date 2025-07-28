@@ -48,15 +48,6 @@ export LESS="--hilite-search \
 # Config
 #
 
-# https://specifications.freedesktop.org/basedir-spec/latest/
-# @todo replace all instances with these var, including ~/.config, etc
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_CACHE_HOME="$HOME/.cache"
-
-export DOTFILES_DIR="$XDG_DATA_HOME/dotfiles"
-
 # Readline config:
 # https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
 # @todo maybe link to ~/.inputrc
@@ -85,20 +76,6 @@ export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins
 export TINTED_SHELL_ENABLE_BASE16_VARS=1
 export TINTED_SHELL_ENABLE_BASE24_VARS=1
 export TINTY_DIR="$XDG_DATA_HOME/tinted-theming/tinty"
-
-#
-# Helpers
-#
-
-helpers="$DOTFILES_DIR/configs/helpers.sh"
-# shellcheck disable=1090
-if [ ! -r "$helpers" ] || ! source "$helpers"; then
-  printf '[error] %s\n' "file not loaded: $helpers"
-  return 1
-fi
-
-log:debug "file loaded: $helpers"
-unset helpers
 
 #
 # Theme
