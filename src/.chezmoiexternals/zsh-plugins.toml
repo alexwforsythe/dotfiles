@@ -1,0 +1,109 @@
+#
+# prezto
+#
+
+['.local/share/prezto']
+type = 'archive'
+url = 'https://github.com/sorin-ionescu/prezto/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '*/runcoms']
+
+['.local/share/prezto/modules/autosuggestions/external']
+type = 'archive'
+url = 'https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*']
+
+['.local/share/prezto/modules/completions/external']
+type = 'archive'
+url = 'https://github.com/zsh-users/zsh-completions/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*']
+
+['.local/share/prezto/modules/history-substring-search/external']
+type = 'archive'
+url = 'https://github.com/zsh-users/zsh-history-substring-search/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*']
+
+['.local/share/prezto/modules/prompt/external/agnoster']
+type = 'archive'
+url = 'https://github.com/agnoster/agnoster-zsh-theme/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['**/*.gif', '**/*.png']
+
+['.local/share/prezto/modules/prompt/external/powerline']
+type = 'archive'
+url = 'https://github.com/davidjrice/prezto_powerline/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['**/*.gif', '**/*.png']
+
+['.local/share/prezto/modules/prompt/external/pure']
+type = 'archive'
+url = 'https://github.com/sindresorhus/pure/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '**/*.png']
+
+['.local/share/prezto/modules/prompt/external/powerlevel10k']
+type = 'archive'
+url = 'https://github.com/romkatv/powerlevel10k/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/*.png', '*/gitstatus/src', '**/.*']
+
+['.local/share/prezto/modules/syntax-highlighting/external']
+type = 'archive'
+url = 'https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = [
+    '*/.editorconfig',
+    '*/.git*',
+    '*/highlighters/**/test-data',
+    '*/images',
+    '*/tests',
+]
+
+#
+# Other
+#
+
+['.local/share/zsh-plugins/zsh-autocomplete']
+type = 'archive'
+url = 'https://github.com/marlonrichert/zsh-autocomplete/archive/main.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '*/Tests']
+
+['.local/share/zsh-plugins/zsh-autopair']
+type = 'archive'
+url = 'https://github.com/hlissner/zsh-autopair/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '*/tests']
+
+['.local/share/zsh-plugins/fzf-tab']
+type = 'archive'
+url = 'https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['**/.*', '*/test']
