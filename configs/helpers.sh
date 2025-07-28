@@ -101,7 +101,7 @@ run:if-file() {
 }
 
 iscmd() {
-    hash "$1" >/dev/null
+    hash "$1" >/dev/null 2>&1
 }
 
 run:if-cmd() {
