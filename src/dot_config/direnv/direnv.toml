@@ -1,0 +1,7 @@
+[global]
+# Auto-loads .env files when allowing a directory.
+# load_dotenv = true
+
+[whitelist]
+# Auto-load .envrc* in workspace subdirs.
+prefix = ["~/workspace"]
