@@ -74,10 +74,13 @@ export SAVEHIST=10000
 # shellcheck disable=2034
 typeset -gU cdpath fpath mailpath manpath path
 
-# Register user funcs, which can be called after running `autoload $func` or
+# Register user funcs and autoload them to make them callable. They can also be
 # invoked as scripts.
 # https://zsh.sourceforge.io/Intro/intro_4.html
-fpath+=$XDG_CONFIG_HOME/shell/zsh/functions
+# @todo load last, but need plugin helpers early
+# shellcheck disable=2206
+fpath=($XDG_CONFIG_HOME/shell/zsh/functions $fpath)
+autoload -Uz "$XDG_CONFIG_HOME/shell/zsh/functions"/*(.:t)
 
 # @audit
 # eval "$(brew shellenv)"
@@ -167,7 +170,7 @@ zstyle ':autocomplete:*' widget-style menu-select
 # Plugins
 #
 
-source:file "$XDG_DATA_HOME/prezto/init.zsh"
+source:file "$XDG_CONFIG_HOME/shell/zsh/plugins.zsh"
 # Load p10k immediately after plugins for a fast prompt.
 # https://github.com/romkatv/zsh-bench
 source:file "$XDG_CONFIG_HOME/shell/zsh/p10k.zsh"
@@ -346,15 +349,6 @@ bindkey -M viins "^j" down-line-or-search
 
 # https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/widgets.md
 autoload -Uz tetris tetriscurses
-
-#
-# User functions
-#
-
-autoload -Uz colors fpath matrix path uptime-trimmed
-run:if-cmd tinty autoload -Uz tinty
-run:if-cmd rg run:if-cmd delta autoload -Uz rgp
-run:if-cmd gcloud autoload -Uz gcloud-purge
 
 #
 # Aliases
