@@ -2,15 +2,15 @@
 # prezto
 #
 
-['.local/share/prezto']
+['.local/share/zsh-plugins/prezto']
 type = 'archive'
 url = 'https://github.com/sorin-ionescu/prezto/archive/master.tar.gz'
 exact = true
-stripComponents = 1
+stripComponents = 2
 refreshPeriod = '168h'
-exclude = ['*/.*', '*/runcoms']
+include = ['*/modules/**']
 
-['.local/share/prezto/modules/autosuggestions/external']
+['.local/share/zsh-plugins/prezto/autosuggestions/external']
 type = 'archive'
 url = 'https://github.com/zsh-users/zsh-autosuggestions/archive/master.tar.gz'
 exact = true
@@ -18,7 +18,7 @@ stripComponents = 1
 refreshPeriod = '168h'
 exclude = ['*/.*']
 
-['.local/share/prezto/modules/completions/external']
+['.local/share/zsh-plugins/prezto/completion/external']
 type = 'archive'
 url = 'https://github.com/zsh-users/zsh-completions/archive/master.tar.gz'
 exact = true
@@ -26,7 +26,7 @@ stripComponents = 1
 refreshPeriod = '168h'
 exclude = ['*/.*']
 
-['.local/share/prezto/modules/history-substring-search/external']
+['.local/share/zsh-plugins/prezto/history-substring-search/external']
 type = 'archive'
 url = 'https://github.com/zsh-users/zsh-history-substring-search/archive/master.tar.gz'
 exact = true
@@ -34,31 +34,7 @@ stripComponents = 1
 refreshPeriod = '168h'
 exclude = ['*/.*']
 
-['.local/share/prezto/modules/prompt/external/agnoster']
-type = 'archive'
-url = 'https://github.com/agnoster/agnoster-zsh-theme/archive/master.tar.gz'
-exact = true
-stripComponents = 1
-refreshPeriod = '168h'
-exclude = ['**/*.gif', '**/*.png']
-
-['.local/share/prezto/modules/prompt/external/powerline']
-type = 'archive'
-url = 'https://github.com/davidjrice/prezto_powerline/archive/master.tar.gz'
-exact = true
-stripComponents = 1
-refreshPeriod = '168h'
-exclude = ['**/*.gif', '**/*.png']
-
-['.local/share/prezto/modules/prompt/external/pure']
-type = 'archive'
-url = 'https://github.com/sindresorhus/pure/archive/master.tar.gz'
-exact = true
-stripComponents = 1
-refreshPeriod = '168h'
-exclude = ['*/.*', '**/*.png']
-
-['.local/share/prezto/modules/prompt/external/powerlevel10k']
+['.local/share/zsh-plugins/powerlevel10k']
 type = 'archive'
 url = 'https://github.com/romkatv/powerlevel10k/archive/master.tar.gz'
 exact = true
@@ -66,7 +42,7 @@ stripComponents = 1
 refreshPeriod = '168h'
 exclude = ['*/*.png', '*/gitstatus/src', '**/.*']
 
-['.local/share/prezto/modules/syntax-highlighting/external']
+['.local/share/zsh-plugins/prezto/syntax-highlighting/external']
 type = 'archive'
 url = 'https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz'
 exact = true

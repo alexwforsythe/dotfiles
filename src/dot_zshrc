@@ -167,7 +167,7 @@ zstyle ':autocomplete:*' widget-style menu-select
 # Plugins
 #
 
-source:file "$XDG_DATA_HOME/prezto/init.zsh"
+source:file "$XDG_CONFIG_HOME/shell/zsh/plugins.zsh"
 # Load p10k immediately after plugins for a fast prompt.
 # https://github.com/romkatv/zsh-bench
 source:file "$XDG_CONFIG_HOME/shell/zsh/p10k.zsh"

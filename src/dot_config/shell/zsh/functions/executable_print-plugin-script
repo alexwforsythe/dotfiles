@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+
+# Generates an init script that loads the given plugin(s) and prints it for
+# sourcing. This helper is only meant to be called from load-plugins, or for
+# debugging.
+#
+# Source: https://github.com/mattmc3/zsh_unplugged/blob/main/antidote.lite.zsh
+
+emulate -L zsh
+setopt extendedglob globdots nomonitor
+
+local plugin
+local inits=()
+for plugin in $@; do
+    inits=(
+        {$ZPLUGINDIR,$XDG_CACHE_HOME/zsh-plugins}/$plugin/${plugin:t}.{plugin.zsh,zsh-theme,zsh,sh}(N)
+        $ZPLUGINDIR/$plugin/*.{plugin.zsh,zsh-theme,zsh,sh}(N)
+        $ZPLUGINDIR/$plugin(N)
+        ${plugin}/*.{plugin.zsh,zsh-theme,zsh,sh}(N)
+        ${plugin}(N)
+    )
+    if (( $#inits == 0 )); then
+        log:error "No init found for plugin: $plugin"
+        continue
+    fi
+
+    plugin=$inits[1]
+    # Add functions to $fpath.
+    echo "fpath+=($plugin/functions(-/FN))"
+    echo "source:file $plugin"
+done

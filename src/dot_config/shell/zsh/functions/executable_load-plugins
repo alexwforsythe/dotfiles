@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+# shellcheck shell=bash
+
+# Loads the given plugin(s) by generating an init script and then sourcing it.
+#
+# Source: https://github.com/mattmc3/zsh_unplugged/blob/main/antidote.lite.zsh
+
+emulate -L zsh
+setopt nomonitor
+
+autoload -Uz print-plugin-script
+
+# shellcheck disable=1090,2068
+source <(print-plugin-script $@)
+
+unfunction print-plugin-script
