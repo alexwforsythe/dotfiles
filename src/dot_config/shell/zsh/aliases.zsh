@@ -10,6 +10,7 @@
 # https://github.com/sharkdp/bat?tab=readme-ov-file#highlighting---help-messages
 #
 
+local flag pre
 if iscmd bat; then
     for flag in help help-all help-list help-hidden help-list-hidden longhelp fullhelp; do
         for pre in -- -; do
