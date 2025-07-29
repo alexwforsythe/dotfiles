@@ -354,7 +354,7 @@ autoload -Uz tetris tetriscurses
 # User functions
 #
 
-autoload -Uz print-colors print-fpath print-matrix print-path uptime-trimmed
+autoload -Uz colors fpath matrix path uptime-trimmed
 run:if-cmd tinty autoload -Uz tinty
 run:if-cmd rg run:if-cmd delta autoload -Uz rgp
 run:if-cmd gcloud autoload -Uz gcloud-purge
