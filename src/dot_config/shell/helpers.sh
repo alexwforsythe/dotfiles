@@ -31,7 +31,7 @@ _end=$'\e[0m'
 log:debug() { ((RC_LOG_LEVEL > log_level_debug)) || printf "[${_cyn}debug${_end}] %s\n" "$@"; }
 log:info() { ((RC_LOG_LEVEL > log_level_info)) || printf "[${_grn}info${_end}] %s\n" "$@"; }
 log:warn() { ((RC_LOG_LEVEL > log_level_warn)) || printf "[${_yel}warn${_end}] %s\n" "$@"; }
-log:error() { ((RC_LOG_LEVEL > log_level_error)) || printf "[${_red}error${_end}] %s\n" "$@"; }
+log:error() { ((RC_LOG_LEVEL > log_level_error)) || printf "[${_red}error${_end}] %s\n" "$@" >&2; }
 
 #
 # Helpers
