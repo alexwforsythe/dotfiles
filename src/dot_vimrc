@@ -428,10 +428,12 @@ let g:netrw_banner = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " vim-plug: load plugins
-call plug#begin('~/.vim/plugged') " @todo can we use $HOME?
+call plug#begin(expand('$HOME') . '/.vim/plugged') " @todo can we use $HOME?
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
-Plug '/opt/homebrew/bin/fzf' " @todo use env var?
+" https://github.com/junegunn/fzf/blob/master/README-VIM.md
+" https://github.com/junegunn/fzf.vim
+Plug expand($FZF_DIR) . '/opt/fzf'
 "  Plug 'vimpostor/vim-tpipeline' " @audit doesn't work
 Plug 'tinted-theming/base16-vim'
 Plug 'airblade/vim-gitgutter'
@@ -497,8 +499,6 @@ let g:tmuxline_theme = 'lightline_insert'
 " vim-go: use gopls
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
-
-" @todo learn: https://github.com/junegunn/fzf.vim
 
 " Generate the fzf color theme
 "  - See https://github.com/junegunn/fzf/blob/master/ADVANCED.md#generating-fzf-color-theme-from-vim-color-schemes
