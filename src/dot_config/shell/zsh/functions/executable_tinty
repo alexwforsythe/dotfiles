@@ -5,11 +5,12 @@
 # sources its scripts after running the command.
 #
 # https://github.com/tinted-theming/tinty/blob/main/USAGE.md#sourcing-scripts-that-set-environment-variables
+
+# shellcheck disable=2168
+local start_ms pre_run_file
 if iscmd fd; then
-    start_ms
     start_ms="@$(date +%s%3N)"
 else
-    pre_run_file
     pre_run_file="$TINTY_DIR/artifacts/last_init_timestamp"
     touch -m "$pre_run_file"
 fi
