@@ -1,0 +1,44 @@
+# @todo this file needs to be linked from dotfiles, or env var to set path to
+# xdg_config_home!
+shell = "zsh -c '{}'"
+default-scheme = 'base16-tomorrow-night-eighties'
+preferred-schemes = [
+    'base16-tomorrow',
+    'base16-tomorrow-night',
+    'base16-tomorrow-night-eighties',
+]
+
+[[items]]
+name = 'tinted-shell'
+path = 'https://github.com/tinted-theming/tinted-shell'
+themes-dir = 'scripts'
+hook = 'source %f'
+supported-systems = ['base16', 'base24']
+
+[[items]]
+path = 'https://github.com/tinted-theming/tinted-delta'
+name = 'tinted-delta'
+themes-dir = "configs"
+supported-systems = ['base16', 'base24']
+
+[[items]]
+name = 'tinted-vim'
+path = 'https://github.com/tinted-theming/tinted-vim'
+themes-dir = 'colors'
+supported-systems = ['base16']
+
+[[items]]
+path = 'https://github.com/tinted-theming/tinted-fzf'
+name = 'tinted-fzf'
+themes-dir = 'sh'
+hook = 'source $DOTFILES_DIR/configs/fzf-rc.sh'
+
+# @todo add hook for pulling btop theme from github
+
+# @audit still needed with tinted-shell?
+[[items]]
+path = 'https://github.com/tinted-theming/tinted-terminal'
+name = 'tinted-terminal'
+themes-dir = 'themes-16/iterm2-applescripts'
+hook = 'source $DOTFILES_DIR/configs/shellrc.sh'
+supported-systems = ['base16', 'base24']
