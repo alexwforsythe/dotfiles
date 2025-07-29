@@ -24,7 +24,7 @@
 rchelpers="${XDG_CONFIG_HOME:-$HOME/.config}/shell/helpers.sh"
 # shellcheck disable=1090
 if [ ! -r "$rchelpers" ] || ! source "$rchelpers"; then
-    printf '[error] %s\n' "file not loaded: $rchelpers"
+    printf '[error] %s\n' "file not loaded: $rchelpers" >&2
     return 1
 fi
 log:debug "file loaded: $rchelpers"
@@ -226,9 +226,6 @@ zstyle ':completion:*:git*:*' menu select=2
 
 # Remove mode switching delay for vicmd and viins.
 export KEYTIMEOUT=1
-
-
-
 
 # Extend (don't override) the built-in hooks to set the cursor mode.
 # https://zsh.sourceforge.io/Doc/Release/User-Contributions.html
