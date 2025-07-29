@@ -1,4 +1,5 @@
 # Taps: brew tap
+tap homebrew/command-not-found # for prezto/command-not-found
 tap koekeishiya/formulae
 tap oven-sh/bun
 tap rilldata/tap
@@ -39,7 +40,7 @@ brew httpie
 brew imessage-exporter
 brew jq
 brew koekeishiya/formulae/yabai
-brew mas # needed for appstore commands
+brew mas # for appstore commands
 brew lua-language-server
 brew luarocks
 brew MisterTea/et/et
