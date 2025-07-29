@@ -19,7 +19,7 @@ esac
 rchelpers="${XDG_CONFIG_HOME:-$HOME/.config}/shell/helpers.sh"
 # shellcheck disable=1090
 if [ ! -r "$rchelpers" ] || ! source "$rchelpers"; then
-    printf '[error] %s\n' "file not loaded: $rchelpers"
+    printf '[error] %s\n' "file not loaded: $rchelpers" >&2
     return 1
 fi
 log:debug "file loaded: $rchelpers"
