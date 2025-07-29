@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 # shellcheck shell=bash
 
+# shellcheck disable=2168
+local val trimmed
 val=$(uptime)
 trimmed=$(printf '%s' "$val#$val%%[![:space:]]*")
 echo "$trimmed" | tr -s '[:blank:],' ',' | cut -d ',' -f 3-4
