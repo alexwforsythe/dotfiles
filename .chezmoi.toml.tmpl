@@ -11,3 +11,29 @@
 # framework name in paths.
 # https://www.chezmoi.io/user-guide/advanced/customize-your-source-directory
 sourceDir = "$HOME/.local/share/dotfiles"
+
+# Display progress bars.
+progress = true
+
+[edit]
+command = "code"
+args = ['--reuse-window', '--wait']
+
+[diff]
+pager = "delta"
+
+# Show human-friendly diffs for plist files.
+# https://www.chezmoi.io/user-guide/tools/diff/#show-human-friendly-diffs-for-binary-files
+[[textconv]]
+pattern = "**/*.plist"
+command = "plutil"
+args = ["-convert", "xml1", "-o", "-", "-"]
+
+# Use VSCode as the merge tool.
+# https://www.chezmoi.io/user-guide/tools/merge/#use-vscode-as-the-merge-tool
+[merge]
+command = "sh"
+args = [
+    "-c",
+    "cp {{ "{{" }} .Target {{ "}}" }} {{ "{{" }} .Target {{ "}}" }}.base && code --reuse-window --wait --merge {{ "{{" }} .Destination {{ "}}" }} {{ "{{" }} .Target {{ "}}" }} {{ "{{" }} .Target {{ "}}" }}.base {{ "{{" }} .Source {{ "}}" }}",
+]
