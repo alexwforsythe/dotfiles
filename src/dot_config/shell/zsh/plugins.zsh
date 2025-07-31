@@ -26,6 +26,7 @@ plugins=(
     prezto/helper
     prezto/environment
     prezto/spectrum
+    prezto/gnu-utility
     prezto/utility
     prezto/git
     prezto/completion
