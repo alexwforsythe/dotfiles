@@ -81,7 +81,7 @@ fzf_keybinds_guide=$(
 # @todo add fdignore and common excludes for find
 if iscmd fd; then
     header_lines_find=0
-    _cmd_find_base=(fd --full-path --strip-cwd-prefix --hidden --follow --exclude .git)
+    _cmd_find_base=(fd --full-path --strip-cwd-prefix --hidden --follow)
     _cmd_find() {
         case $1 in
         f) echo "${_cmd_find_base[@]}" --type f "$2" ;;
@@ -93,7 +93,7 @@ else
     log:warn "command not found: fd"
     header_lines_find=1
     _cmd_find() {
-        local _cmd_find_base=(find "$1" -not -path './.git*' -not -path './node_modules*')
+        local _cmd_find_base=(find "$1" \( -path './.git' -o -path './node_modules' \) -prune -false)
         case $1 in
         f) echo "${_cmd_find_base[@]}" -type f ;;
         d) echo "${_cmd_find_base[@]}" -type d ;;

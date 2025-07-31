@@ -1,0 +1,27 @@
+.bundle/cache/
+.cache/
+.cargo/registry/
+.docker/buildx/refs/
+.gem/specs/
+.git/
+.kube/cache/
+.local/{lib,state}/
+.npm/_cacache/
+.pex/
+.pyenv/versions/
+.rbenv/versions/
+.vscode/extensions/
+go/pkg/mod/
+node_modules/
+pip_cache/
+system/Gem/
+yarn/berry/
+*.pyc
+
+# macos
+Code/User/History/
+Library/
+# Library/{Application Support,Containers,Developer}/**/{*cache*,*Cache*,}/
+# Library/Caches/
+.DS_Store
+Cache.db*
