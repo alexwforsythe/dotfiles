@@ -16,7 +16,7 @@ plugins=(
     #
     # From the READMEs:
     #  - first: helper -> environment
-    #  - spectrum -> gnu-utility -> utility -> git/node/python -> completion
+    #  - spectrum -> gnu-utility -> utility -> archive -> git/node/python -> completion
     #  - history?
     #  - completion -> fzf-tab -> autosuggestions
     #  - syntax-highlighting -> editor -> history-substring-search -> autosuggestions -> prompt
@@ -28,6 +28,7 @@ plugins=(
     prezto/spectrum
     prezto/gnu-utility
     prezto/utility
+    prezto/archive
     prezto/git
     prezto/completion
     prezto/history
