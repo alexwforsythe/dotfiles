@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# General
+#
+
 alias sudo="sudo --preserve-env=VISUAL,EDITOR,GIT_EDITOR"
 
 # Use Xcode make on MacOS to override any other versions that might be
@@ -11,7 +15,32 @@ fi
 
 alias v="\$VISUAL"
 
-# git (extends prezto/modules/git)
+#
+# chezmoi: https://github.com/mass8326/zsh-chezmoi/blob/main/chezmoi.plugin.zsh
+#
+
+# Status
+alias ch="chezmoi"
+alias chd="chezmoi diff"
+alias chst="chezmoi status"
+alias chdoc="chezmoi doctor"
+
+# Editing source
+alias cha="chezmoi add"
+alias chr="chezmoi re-add"
+alias che="chezmoi edit"
+alias chea="chezmoi edit --apply"
+alias chcd="chezmoi cd"
+
+# Updating target
+alias chap="chezmoi apply"
+alias chup="chezmoi update"
+alias chug="chezmoi upgrade"
+
+#
+# git: extends prezto/modules/git
+#
+
 alias gis="git status"
 alias gbl='git branch --verbose -v'
 alias gpr="git pull --rebase origin master"
@@ -21,11 +50,17 @@ alias gcop="git checkout '@{-1}'"
 alias gwip="git add -A && git commit -m 'wip'"
 alias grim="git rebase --interactive \$(git merge-base HEAD origin/master)"
 
-# docker (extends prezto/modules/docker)
+#
+# docker: extends prezto/modules/docker
+#
 alias dkB="docker builder"
 alias dkBpr="docker builder prune"
 alias dkBprA="docker builder prune --all"
 alias dkprA="docker container prune && docker image prune && docker volume prune"
+
+#
+# Helpers
+#
 
 # Print the PATH with new lines.
 path() {
