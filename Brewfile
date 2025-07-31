@@ -12,17 +12,10 @@ brew bat
 brew btop
 brew bufbuild/buf/buf
 brew chezmoi
-# Install coreutils to get gls (GNU ls), which supports colorization from
-# LS_COLORS (instead of bash's LSCOLORS).
-#
+# Install GNU coreutils to get gls and gdircolors, which support colorization
+# from LS_COLORS (instead of bash's LSCOLORS).
 # https://github.com/sharkdp/vivid#on-macos
-#
-# @todo old note
-# Prepend gnubin to path to use gls and gdircolors instead of ls and
-# dircolors. Unlike the macOS builtins, the GNU versions read and write to
-# LS_COLORS instead of LSCOLORS. Most zsh plugins--including completion--use
-# LS_COLORS, so this leads to more consistent output colorization.
-brew coreutils
+brew coreutils # for prezto/gnu-utils
 brew crystal # for tmux-fingers
 # brew derailed/k9s/k9s
 brew direnv

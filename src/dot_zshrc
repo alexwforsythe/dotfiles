@@ -82,14 +82,6 @@ typeset -gU cdpath fpath mailpath manpath path
 fpath=($XDG_CONFIG_HOME/shell/zsh/functions $fpath)
 autoload -Uz "$XDG_CONFIG_HOME/shell/zsh/functions"/*(.:t)
 
-# @audit
-# eval "$(brew shellenv)"
-# gnubin="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
-# if [ ! -d "$gnubin" ]; then
-#   brew install coreutils
-# fi
-# path=($gnubin $path)
-
 #
 # Instant prompt
 #
