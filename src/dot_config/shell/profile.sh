@@ -100,7 +100,7 @@ path-append \
   /bin \
   /sbin
 
-if [ -z "$HOMEBREW_PREFIX" ]; then
+if [ -n "$IS_MACOS" ] && [ -z "$HOMEBREW_PREFIX" ]; then
   # Set homebrew prefix and add bins to path.
   if [ -d /opt/homebrew/bin ]; then
     path-prepend /opt/homebrew/bin
