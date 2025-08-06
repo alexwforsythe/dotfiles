@@ -210,76 +210,6 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*:git*:*' menu select=2
 
 #
-# Key bindings
-#
-
-# @todo
-#  - history substring search
-#   - up/down line
-#   - accept
-#   - accept and enter
-
-# Remove mode switching delay for vicmd and viins.
-export KEYTIMEOUT=1
-
-# Extend (don't override) the built-in hooks to set the cursor mode.
-# https://zsh.sourceforge.io/Doc/Release/User-Contributions.html
-autoload -Uz set-cursor-mode add-zle-hook-widget
-add-zle-hook-widget zle-line-init set-cursor-mode
-add-zle-hook-widget zle-keymap-select set-cursor-mode
-
-# Natural text editing
-# @todo can we copy some from iterm2's key mappings?
-# bindkey "\e[1;3C" forward-word
-# bindkey "\e[1;3D" backward-word
-# bindkey "\e[[3~" forward-delete-char # @todo delete word, add forward delete
-
-# Open tmux launcher when space is pressed in vicmd mode (like VSpaceCode).
-# @todo move this to tmux-launcher.plugin.zsh and add zstyle option to configure
-# key
-if [ -n "$IS_TMUX" ]; then
-  tmux-which-key() { tmux show-wk-menu-root; }
-  zle -N tmux-which-key
-  bindkey -M vicmd " " tmux-which-key
-fi
-
-#
-# Expand aliases when pressing space. Use ctrl-space to skip expansion.
-# glob-alias is defined by the editor plugin.
-#
-# https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/aliases.md#automatically-expand-aliases
-#
-
-setopt ALIASES # Expand aliases.
-
-# space expands all aliases, including global
-bindkey -M viins " " glob-alias
-
-# control-space to make a normal space
-bindkey -M viins "^ " magic-space
-
-# # normal space during searches
-bindkey -M isearch " " magic-space
-
-#
-# Add vim key bindings for completion menus.
-#
-# Note: must be loaded after compinit (i.e. prezto/init.zsh)
-#
-# https://thevaluable.dev/zsh-install-configure-mouseless/
-#
-
-# Load complist for access to the menuselect keymap.
-zmodload zsh/complist
-# Toggle interactive mode
-# bindkey -M menuselect '^F' vi-insert
-# @todo can we just globally map these to arrow keys?
-bindkey -M menuselect '^h' backward-char
-bindkey -M menuselect '^j' down-line-or-history
-bindkey -M menuselect '^k' up-line-or-history
-bindkey -M menuselect '^l' forward-char
-
-#
 # vim-surround
 #
 # https://thevaluable.dev/zsh-install-configure-mouseless/
@@ -325,22 +255,18 @@ for m in visual viopp; do
   done
 done
 
-# History substring search
-# @todo trigger history menu or fzf?
-# bindkey -M viins "$key_info[Control]K" history-substring-search-up
-# bindkey -M viins "$key_info[Control]J" history-substring-search-down
-bindkey -M viins "^k" up-line-or-search
-bindkey -M viins "^j" down-line-or-search
-
-# @todo history-incremental-search doesn't trigger with ^r (with fzf
-# disabled)
-
 #
 # builtin functions
 #
 
 # https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/widgets.md
 autoload -Uz tetris tetriscurses
+
+#
+# Keybinds
+#
+
+source:file "$XDG_CONFIG_HOME/shell/zsh/keybinds.zsh"
 
 #
 # Aliases
