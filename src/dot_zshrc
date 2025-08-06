@@ -159,10 +159,6 @@ fi
 # ngrok
 eval:if-cmd ngrok ngrok completion
 
-# dbt
-# @todo prompt for sudo if file dne
-# sudo curl https://raw.githubusercontent.com/dbt-labs/dbt-completion.bash/master/_dbt -o /usr/share/zsh/site-functions/_dbt
-
 # zsh-autocomplete: this config must be set before loading the plugin and cannot
 # be changed at runtime.
 zstyle ':autocomplete:*' widget-style menu-select

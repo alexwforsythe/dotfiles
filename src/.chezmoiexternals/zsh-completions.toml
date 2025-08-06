@@ -1,0 +1,5 @@
+# dbt
+['.local/share/zsh-plugins/external-completions/functions/_dbt']
+type = 'file'
+url = 'https://raw.githubusercontent.com/dbt-labs/dbt-completion.bash/master/_dbt'
+refreshPeriod = '168h'
