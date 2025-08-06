@@ -112,29 +112,41 @@ export HISTORY_SUBSTRING_SEARCH_FUZZY=1
 # homebrew
 if [ -n "$HOMEBREW_PREFIX" ]; then
   # Register homebrew completions so they'll be loaded by the completion plugin.
+  #  - completions/zsh: completions for the brew command
+  #  - share/zsh/site-functions: completions for commands installed via brew
+  #  - share/bash-completion/completions: bash completions in zsh format (in
+  #    case one isn't defined in zsh/site-functions)
+  #
   # @todo this should be done by the completion plugin, maybe try updating it?
   # @todo I needed to run these commands to fix zcompinit security issues from
   # docker completions:
   # compaudit | xargs chown -R $(whoami)
   # compaudit | xargs chmod go-w
-  fpath+=$HOMEBREW_PREFIX/completions/zsh
-  fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
-  fpath+=$HOMEBREW_PREFIX/share/bash-completion/completions
+  fpath+=("$HOMEBREW_PREFIX"/share/bash-completion/completions)
+  # shellcheck disable=1036,2128,2206
+  fpath=(
+    "$HOMEBREW_PREFIX"/completions/zsh(/N)
+    "$HOMEBREW_PREFIX"/share/zsh/site-functions(/N)
+    /usr/share/zsh/site-functions(/N)
+    $fpath
+  )
 
-  # Rename bash completions for git so the completion plugin loads its own
-  # (better) ones instead:
-  # https://stackoverflow.com/questions/65833258/git-completion-on-zsh-not-listing-ambiguous-options-on-macos
-  brew_completions_dir="$HOMEBREW_PREFIX/share/zsh/site-functions"
-  if [ -r "$brew_completions_dir/_git" ]; then
-    mv "$brew_completions_dir/_git" "$brew_completions_dir/git_renamed"
-  fi
-  unset brew_completions_dir
+  # The git completions installed by brew are worse than the default ones that
+  # ship with zsh, so disable them by removing their file permissions. The
+  # external completions frome felipec take precendence either way, but this is
+  # the appropriate fallback.
+  for f in _git git-completion.bash; do
+    if [ -r "$HOMEBREW_PREFIX/share/zsh/site-functions/$f" ]; then
+      chmod 0 "$HOMEBREW_PREFIX/share/zsh/site-functions/$f"
+    fi
+  done
 fi
 
 # Load bash completions because there might be some that zsh doesn't have. We
 # load these before prezto so the completion plugin will override any
 # conflicting definitions, because zsh completions are usually better.
-if ! autoload -Uz bashcompinit || ! bashcompinit; then
+autoload -Uz bashcompinit
+if ! bashcompinit; then
   log:warn "failed to load bash completions"
 fi
 
