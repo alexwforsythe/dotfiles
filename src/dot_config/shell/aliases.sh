@@ -4,7 +4,14 @@
 # General
 #
 
+# Print the PATH with new lines.
+alias ppath="echo \${PATH//:/\n}"
 alias sudo="sudo --preserve-env=VISUAL,EDITOR,GIT_EDITOR"
+alias v="\$VISUAL"
+
+alias sa="alias | fzf"
+alias senv="env | fzf"
+alias spath="ppath | fzf"
 
 # Use Xcode make on MacOS to override any other versions that might be
 # added later.
@@ -12,8 +19,6 @@ if $IS_MACOS; then
     run:if-file /Library/Developer/CommandLineTools/usr/bin/make \
         alias make=/Library/Developer/CommandLineTools/usr/bin/make
 fi
-
-alias v="\$VISUAL"
 
 #
 # chezmoi: https://github.com/mass8326/zsh-chezmoi/blob/main/chezmoi.plugin.zsh
@@ -61,11 +66,6 @@ alias dkprA="docker container prune && docker image prune && docker volume prune
 #
 # Helpers
 #
-
-# Print the PATH with new lines.
-path() {
-    echo "${PATH//:/\n}"
-}
 
 # Go up N directories (default is 1).
 # https://github.com/peterhurford/up.zsh
