@@ -1,6 +1,12 @@
 #!/usr/bin/env zsh
 # shellcheck shell=bash
 
+# completealiases treats aliases as separate commands for completion, instead of
+# expanding them first. Disable it so completions can be inferred automatically.
+unsetopt completealiases
+
+alias sfuncs="functions | bat --language=zsh"
+
 #
 # --help
 #
