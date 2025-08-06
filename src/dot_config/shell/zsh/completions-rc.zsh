@@ -2,6 +2,38 @@
 # shellcheck shell=bash
 
 #
+# Settings
+#
+
+# @todo if completions dump is expired (20h, prezto completion module), reload
+# in background:
+# # Recompile the completion dump in the background to increase startup speed.
+# _comp_path="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/zcompdump"
+# autoload -Uz zrecompile
+# zrecompile -p -M "$_comp_path"
+
+# Only show completions for exact matches.
+unsetopt completeinword
+# Complete globs instead of inserting them. The expansion will be shown in the
+# zsh-autocomplete menu anyway.
+setopt globcomplete
+
+# Override the match (ma) color to be more subtle--fg white, bg gray, bold--to
+# match our fzf theme.
+# @todo update based on new fzf theme
+zstyle ':completion:*' list-colors "ma=38;5;251;48;5;237;1"
+
+# ignore completion to functions starting with _
+zstyle ':completion:*:functions' ignored-patterns '_*'
+# menu selection with a cursor will be used when the number of possible matches doesn't fit the screen
+zstyle ':completion:*' menu select=long
+# menu selection with a cursor will be used for git commands
+zstyle ':completion:*:git*:*' menu select=2
+
+# @audit auto-select first item?
+setopt menucomplete
+
+#
 # Formats
 #
 # 󰅩 󰅪  󰅴 󰅲
