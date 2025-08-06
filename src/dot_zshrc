@@ -221,6 +221,8 @@ zstyle ':completion:*' menu select=long
 # menu selection with a cursor will be used for git commands
 zstyle ':completion:*:git*:*' menu select=2
 
+source:file "$XDG_CONFIG_HOME/shell/zsh/completions-rc.zsh"
+
 #
 # vim-surround
 #
