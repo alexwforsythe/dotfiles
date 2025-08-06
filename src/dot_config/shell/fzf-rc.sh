@@ -151,13 +151,16 @@ opts_fzf_path=(
     --bind "'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'" # @todo doesn't work
 )
 
+# zoxide: https://github.com/ajeetdsouza/zoxide?tab=readme-ov-file#environment-variables
 if iscmd tree; then
     cmd_preview_dir="tree -C {} | head -200"
     opts_preview_dir=("$cmd_preview_dir")
+    export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS ${opts_fzf_path[*]} --preview='tree -C {-1} | head -200'"
 else
     log:warn "command not found: tree"
     cmd_preview_dir="ls -lahF {} | head -200"
     opts_preview_dir=("$cmd_preview_dir" --header-lines=1)
+    export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS ${opts_fzf_path[*]} --preview='ls -lahF {} | head -200' --header-lines=1"
 fi
 if iscmd bat; then
     cmd_preview_file="bat --color=always --style=grid,header,header-filesize --line-range :500 {}"
@@ -166,7 +169,7 @@ else
     cmd_preview_file="cat -n {} | head -500"
 fi
 
-opts_preview_path=("[[ -d {} ]] && $cmd_preview_dir || $cmd_preview_file")
+opts_preview_path=("[ -d {} ] && $cmd_preview_dir || $cmd_preview_file")
 export FZF_CTRL_R_OPTS="--layout=default --preview='echo {}' --preview-window=down:3:hidden:wrap"
 export FZF_ALT_C_OPTS="${opts_fzf_path[*]} --preview='${opts_preview_dir[*]}'"
 export FZF_CTRL_T_OPTS="${opts_fzf_path[*]} --preview='${opts_preview_path[*]}'"

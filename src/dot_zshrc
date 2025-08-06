@@ -192,7 +192,6 @@ add-zsh-hook chpwd chpwd_recent_dirs
 # zstyle ':completion:*:*:cdr:*:*' menu selection
 
 # zoxide (load after compinit, fzf-rc, zsh-autocomplete)
-export _ZO_FZF_OPTS="$FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS"
 eval:if-cmd zoxide zoxide init zsh # @audit-ok
 
 #
