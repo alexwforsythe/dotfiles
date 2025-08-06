@@ -219,52 +219,6 @@ zstyle ':completion:*:git*:*' menu select=2
 source:file "$XDG_CONFIG_HOME/shell/zsh/completions-rc.zsh"
 
 #
-# vim-surround
-#
-# https://thevaluable.dev/zsh-install-configure-mouseless/
-#
-
-autoload -Uz surround
-
-zle -N add-surround surround
-zle -N change-surround surround
-zle -N delete-surround surround
-
-bindkey -M vicmd ys add-surround
-bindkey -M visual S add-surround
-bindkey -M vicmd cs change-surround
-bindkey -M vicmd ds delete-surround
-
-#
-# zsh-bracketed
-#
-# https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-quoted
-#
-
-autoload -Uz select-quoted
-zle -N select-quoted
-for m in visual viopp; do
-  for c in {a,i}{\',\",\`}; do
-    bindkey -M $m $c select-quoted
-  done
-done
-
-#
-# zsh-quoted
-#
-# https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-bracketed
-#
-
-autoload -Uz select-bracketed
-zle -N select-bracketed
-for m in visual viopp; do
-  # shellcheck disable=2296
-  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-    bindkey -M $m $c select-bracketed
-  done
-done
-
-#
 # builtin functions
 #
 

@@ -46,6 +46,9 @@ plugins=(
     # prezto/tmux
 
     # other plugins:
+    select-bracketed
+    select-quoted
+    vim-surround
     # zsh-autopair
     zsh-autocomplete
     # forgit
