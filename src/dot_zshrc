@@ -50,19 +50,6 @@ fi
 # Disable the log builtin, so we don't conflict with /usr/bin/log
 disable log
 
-# Use extended glob patterns.
-setopt extendedglob
-# Include hidden files.
-setopt globdots
-# Remove superfluous blanks before recording entry.
-setopt histreduceblanks
-# No beeping
-unsetopt beep
-# No c-s/c-q output freezing
-unsetopt flowcontrol
-# Try to avoid the 'zsh: no matches found...'
-unsetopt nomatch
-
 export HISTSIZE=10000
 export SAVEHIST=10000
 
@@ -214,6 +201,34 @@ source:file "$XDG_CONFIG_HOME/shell/zsh/keybinds.zsh"
 #
 
 source:file "$XDG_CONFIG_HOME/shell/zsh/aliases.zsh"
+
+#
+# Options
+#
+#  - Should be set after loading plugins to avoid being overridden
+#  - Reference: https://zsh.sourceforge.io/Doc/Release/Options.html
+#  - Examples
+#    - https://github.com/willghatch/zsh-saneopt/tree/master
+#    - https://github.com/sorin-ionescu/prezto/tree/master/modules
+#
+
+# Correctly display UTF-8 with combining characters.
+if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
+  setopt combiningchars
+fi
+
+# Use extended glob patterns.
+setopt extendedglob
+# Include hidden files when expanding globs.
+setopt globdots
+# Remove superfluous blanks before recording entry.
+setopt histreduceblanks
+# No beeping
+unsetopt beep
+# No c-s/c-q output freezing
+unsetopt flowcontrol
+# Try to avoid the 'zsh: no matches found...'
+unsetopt nomatch
 
 # @note Uncomment the following line to print startup time.
 # zprof
