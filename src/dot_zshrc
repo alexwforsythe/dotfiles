@@ -129,14 +129,6 @@ if [ -n "$HOMEBREW_PREFIX" ]; then
   done
 fi
 
-# Load bash completions because there might be some that zsh doesn't have. We
-# load these before prezto so the completion plugin will override any
-# conflicting definitions, because zsh completions are usually better.
-autoload -Uz bashcompinit
-if ! bashcompinit; then
-  log:warn "failed to load bash completions"
-fi
-
 # gcloud
 if [ -d "$HOMEBREW_PREFIX" ]; then
     source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.zsh.inc"
