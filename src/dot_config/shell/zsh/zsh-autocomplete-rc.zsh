@@ -1,71 +1,57 @@
 #!/usr/bin/env zsh
+# shellcheck shell=bash
 
 #
-# zsh-autocomplete
+# zsh-autocomplete-rc.zsh: configures zsh-autocomplete and should be loaded
+# before the plugin
 #
 # https://github.com/marlonrichert/zsh-autocomplete/blob/main/.zshrc
 #
-# @todo
-#  - history menu above prompt?
-#  - "do you want to display x items?"
-#    - always no so it doesn't steal input
-#    - or just pipe into fzf
-#  - use ctrl+h/j/k/l to navigate menus, and opt+h/j/k/l to navigate panes
-#  - decide on a completion hotkey (ctrl+. or something)
-#
 
-zstyle ':autocomplete:*' min-delay 0.3 # seconds (float)
-# Wait this many seconds for typing to stop, before showing completions.
+# Wait this many seconds for typing to stop, before showing completions:
+zstyle ':autocomplete:*' delay 0.3 # seconds (float)
 
+# Waits at most this many seconds for completion to finish:
+zstyle ':autocomplete:*' timeout 2.0 # seconds (float)
+
+# Wait until this many characters have been typed, before showing completions:
 zstyle ':autocomplete:*' min-input 2 # characters (int)
-# Wait until this many characters have been typed, before showing completions.
 
-# This setting cannot be changed at runtime.
-zstyle ':autocomplete:*' fzf-completion yes
-# no:  Tab uses Zsh's completion system only.
-# yes: Tab first tries Fzf's completion, then falls back to Zsh's.
+# Stop completions from showing whenever the current word consists of two or
+# more dots:
+zstyle ':autocomplete:*' ignored-input '..##'
 
 # Add a space after these completions:
-zstyle ':autocomplete:*' add-space \
-    executables aliases functions builtins reserved-words commands
+# (default:)
+# zstyle ':autocomplete:*' add-space \
+#     executables aliases functions builtins reserved-words commands
 
-#
-# Configs in this section should come AFTER sourcing zsh-autocomplete.
-#
+# Make any completion widget first insert the longest sequence of characters
+# that will complete to all completions shown, if any, before inserting actual
+# completions.
+zstyle ':autocomplete:*' insert-unambiguous yes
+# all tab widgets
+zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+# all history widgets
+zstyle ':autocomplete:*history*:*' insert-unambiguous yes
+# ^S
+zstyle ':autocomplete:menu-search:*' insert-unambiguous yes
+# When using the above, if you want each widget to first try to insert only the
+# longest prefix that will complete to all completions shown, if any, then add
+# the following:
+# zstyle ':completion:*:*' matcher-list 'm:{[:lower:]-}={[:upper:]_}' '+r:|[.]=**'
+# Note, though, that this will also slightly change what completions are listed
+# initially. This is a limitation of the underlying implementation in Zsh.
 
-# Up arrow:
-# @audit wtf are these in-strings?
-# bindkey '\e[A' up-line-or-search
-# bindkey '\eOA' up-line-or-search
-bindkey "$key_info[Up]" up-line-or-search
-bindkey -M vicmd 'k' up-line-or-search
-# up-line-or-search:  Open history menu.
-# up-line-or-history: Cycle to previous history line.
+# You can customize the way the common substring is presented. The following
+# sets the presentation to the default:
+# @audit what does this do, can't see it
+# builtin zstyle ':autocomplete:*:unambiguous' format \
+#     $'%{\e[0;2m%}%Bcommon substring:%b %0F%11K%d%f%k'
 
-# Down arrow:
-# bindkey '\e[B' down-line-or-select
-# bindkey '\eOB' down-line-or-select
-bindkey "$key_info[Down]" down-line-or-select
-bindkey -M vicmd 'j' down-line-or-history
-# down-line-or-select:  Open history menu.
-# down-line-or-history: Cycle to next history line.
+# This will make zsh-autocomplete behave as if you pressed ctrl+r at the start
+# of each new command line:
+# zstyle ':autocomplete:*' default-context history-incremental-search-backward
 
-# @todo should we replace it with fzf? should we also make tab open fzf if it's
-# more items than can be displayed in a menu?
-# Control-Space:
-# bindkey '\0' list-expand
-bindkey '^_' list-expand
-# list-expand:      Reveal hidden completions.
-# set-mark-command: Activate text selection.
-
-# Uncomment the following lines to disable live history search:
-# @todo don't we want this if fzf is inactive?
-zle -A {.,}history-incremental-search-forward
-zle -A {.,}history-incremental-search-backward
-
-# Return key in completion menu & history menu:
-bindkey -M menuselect '\r' accept-line
-# .accept-line: Accept command line.
-# accept-line:  Accept selection and exit menu.
-
-# @todo bindkey escape to close menu!
+# @todo rename this file, and source zsh-autocomplete here and the replace the
+# plugin with this script (like prezto wrappers)
