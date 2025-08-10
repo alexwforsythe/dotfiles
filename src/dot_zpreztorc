@@ -94,13 +94,13 @@ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 # zstyle ':prezto:module:history-substring-search' case-sensitive 'yes'
 
 # Enable search for fuzzy matches.
-# zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
+zstyle ':prezto:module:history-substring-search' fuzzy 'yes'
 
 # Enable search uniqueness.
-# zstyle ':prezto:module:history-substring-search' unique 'yes'
+zstyle ':prezto:module:history-substring-search' unique 'yes'
 
 # Enable prefixed search.
-# zstyle ':prezto:module:history-substring-search' prefixed 'yes'
+zstyle ':prezto:module:history-substring-search' prefixed 'yes'
 
 #
 # macOS

@@ -93,9 +93,6 @@ run:if-cmd direnv emulate zsh -c "$(direnv hook zsh)"
 # Completions
 #
 
-# Use fuzzy searching for history substring search
-export HISTORY_SUBSTRING_SEARCH_FUZZY=1
-
 # homebrew
 if [ -n "$HOMEBREW_PREFIX" ]; then
   # Register homebrew completions so they'll be loaded by the completion plugin.
