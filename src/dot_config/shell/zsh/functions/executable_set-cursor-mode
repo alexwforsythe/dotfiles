@@ -8,9 +8,10 @@
 #  - https://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode
 #
 # For cursor shapes, see:
-# https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/vi-mode#cursor-styles
 case $KEYMAP in
-vicmd) echo -ne '\e[1 q' ;;        # blinking block
-main | viins) echo -ne '\e[5 q' ;; # blinking beam
-*) echo -ne '\e[3 q' ;;            # blinking underline
+vicmd) echo -ne '\e[1 q' ;;                  # blinking block
+main | viins | command) echo -ne '\e[5 q' ;; # blinking beam
+visual) echo -ne '\e[2 q' ;;                 # block
+isearch | *) echo -ne '\e[3 q' ;;            # blinking underline
 esac

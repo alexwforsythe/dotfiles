@@ -181,8 +181,11 @@ zstyle ':prezto:module:syntax-highlighting' highlighters \
   'brackets' \
   'pattern' \
   'line' \
-  'cursor' \
   'root'
+# Disable the cursor highlighter so we can set its shape based on the vi mode
+# (see keybinds.zsh).
+# https://github.com/zsh-users/zsh-syntax-highlighting/issues/171
+#  'cursor'
 
 # Set syntax highlighting styles.
 # zstyle ':prezto:module:syntax-highlighting' styles \
