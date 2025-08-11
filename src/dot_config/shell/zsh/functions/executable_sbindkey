@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+# shellcheck shell=bash
+
+# Searches keybinds for the given map.
+#
+# Usage: sbindkey keymap
+bindkey -M "$1" -L | bat -pp -l=zsh | fzf

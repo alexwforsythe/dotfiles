@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+# shellcheck shell=bash
+
+# Searches zstyles.
+#
+# Usage: szstyle context? style?
+if [ -n "$2" ]; then
+    zstyle -L "$1" "$2" | bat -l=zsh
+else
+    zstyle -L "$1" | bat -pp -l=zsh | fzf
+fi
