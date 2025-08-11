@@ -1,0 +1,3 @@
+#compdef rgp
+
+_rg --context=2 --json

@@ -1,0 +1,3 @@
+#compdef gcloud-purge
+
+_gcloud pubsub subscriptions seek

@@ -1,6 +1,6 @@
 {
   "files.associations": {
-    "**/zsh/**/*functions/*": "shellscript",
+    "**/zsh/**/*{functions,completions}/*": "shellscript",
     "*bash_profile": "shellscript",
     "*bashrc": "shellscript",
     "*delta.conf": "ini",

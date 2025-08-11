@@ -1,0 +1,3 @@
+#compdef sbindkey
+
+_bindkey -M
