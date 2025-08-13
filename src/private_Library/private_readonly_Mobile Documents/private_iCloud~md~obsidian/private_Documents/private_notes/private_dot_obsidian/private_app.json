@@ -1,0 +1,15 @@
+{
+  "propertiesInDocument": "hidden",
+  "vimMode": true,
+  "promptDelete": false,
+  "alwaysUpdateLinks": true,
+  "showInlineTitle": false,
+  "newFileLocation": "current",
+  "trashOption": "local",
+  "attachmentFolderPath": "./_attachments",
+  "userIgnoreFilters": [
+    "_config/",
+    "_templates/",
+    "/_.*/"
+  ]
+}

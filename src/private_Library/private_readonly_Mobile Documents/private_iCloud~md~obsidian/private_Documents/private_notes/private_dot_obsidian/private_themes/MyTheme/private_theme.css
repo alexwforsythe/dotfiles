@@ -1,0 +1,380 @@
+/* https://docs.obsidian.md/Reference/CSS+variables/CSS+variables */
+/* https://github.com/gammons/base16-obsidian */
+/* https://github.com/tinted-theming/base16-vscode/blob/master/templates/default.mustache */
+
+:root {
+  --base00: #2d2d2d;
+  --base01: #393939;
+  --base02: #515151;
+  --base026f: #5151516f;
+  --base03: #999999;
+  --base036f: #9999996f;
+  --base04: #b4b7b4;
+  --base046f: #b4b7b46f;
+  --base05: #cccccc;
+  --base06: #e0e0e0;
+  --base07: #ffffff;
+  --base08: #f2777a;
+  --base09: #f99157;
+  --base0A: #ffcc66;
+  --base0B: #99cc99;
+  --base0C: #66cccc;
+  --base0D: #6699cc;
+  --base0E: #cc99cc;
+  --base0F: #a3685a;
+
+  --color-red: var(--base08);
+  --color-orange: var(--base09);
+  --color-yellow: var(--base0A);
+  --color-green: var(--base0B);
+  --color-cyan: var(--base0C);
+  --color-blue: var(--base0D);
+  --color-purple: var(--base0E);
+  --color-pink: var(--base0F);
+
+  --color-red-rgb: rgb(var(--base08));
+  --color-orange-rgb: rgb(var(--base09));
+  --color-yellow-rgb: rgb(var(--base0A));
+  --color-green-rgb: rgb(var(--base0B));
+  --color-cyan-rgb: rgb(var(--base0C));
+  --color-blue-rgb: rgb(var(--base0D));
+  --color-purple-rgb: rgb(var(--base0E));
+  --color-pink-rgb: rgb(var(--base0F));
+}
+
+.theme-dark {
+  /* Foundations */
+
+  /* Colors */
+  /* --color-base-00: #1e1e1e;
+  --color-base-05: var(--base00);
+  --color-base-10: #242424;
+  --color-base-20: #262626;
+  --color-base-25: #2a2a2a;
+  --color-base-30: var(--base01);
+  --color-base-35: #3f3f3f;
+  --color-base-40: var(--base02);
+  --color-base-50: #666666;
+  --color-base-60: var(--base03);
+  --color-base-70: var(--base04);
+  --color-base-100: var(--base05); */
+
+  --background-primary: var(--base00);
+  /* --background-primary-alt: var(--base01); */
+  --background-secondary: var(--base01);
+  /* --background-secondary-alt: var(--base00); */
+  /* --background-modifier-hover: var(--base02); */
+  /* --background-modifier-active-hover: var(--base02); */
+  /* --background-modifier-border: var(--base01); */
+  /* --background-modifier-border-hover: var(--base02); */
+  --background-modifier-border-focus: var(--base02);
+  --background-modifier-error-rgb: var(--color-red-rgb);
+  --background-modifier-error: var(--base08);
+  /* --background-modifier-error-hover: #f00; */
+  --background-modifier-success-rgb: var(--color-green-rgb);
+  --background-modifier-success: #f00;
+  /* --background-modifier-message: #f00; */
+  /* --background-modifier-form-field: #f00; */
+
+  /* --interactive-normal: var(--base01);
+  --interactive-hover: var(--base02);
+  --interactive-accent: var(--base0D);
+  --interactive-accent-hsl: #f00;
+  --interactive-accent-hover: #f00; */
+
+  /* --text-normal: var(--base06); */
+  /* --text-muted: var(--base04); */
+  --text-faint: var(--base03);
+  /* --text-on-accent: var(--base07); */
+  --text-on-accent-inverted: #f00;
+  --text-success: var(--base0B);
+  --text-warning: var(--base0A);
+  --text-error: var(--base08);
+  --text-accent: var(--base0D);
+  --text-accent-hover: var(--base0C);
+
+  --text-selection: var(--base01);
+  /* --text-highlight-bg: var(--base0A); */
+
+  /* Icons */
+  --icon-color: var(--base04);
+  --icon-color-hover: var(--base05);
+  /* --icon-color-active: var(--interactive-accent); */
+  --icon-color-focused: var(--base06);
+
+  /* Typography */
+  --bold-color: var(--base08);
+  --italic-color: var(--base08);
+
+  /* Components */
+
+  /* Checkbox */
+  /* --checkbox-marker-color: var(--background-primary);
+  --checkbox-color: var(--base0D);
+  --checkbox-color-hover: var(--base0C);
+  --checkbox-border-color: var(--base03);
+  --checkbox-border-color-hover: var(--base04);
+  --checklist-done-color: var(--base04); */
+
+  /* Dragging */
+  /* --drag-ghost-text-color: var(--base07); */
+
+  /* Indentation Guides */
+  --indentation-guide-color: var(--base02);
+  --indentation-guide-color-active: var(--base03);
+
+  /* Modal */
+  /* --modal-background: var(--base00);
+  --modal-border-color: var(--base02); */
+
+  /* Multi-select */
+  --pill-color: #f00;
+  /* --pill-color-hover: var(--base04); */
+  /* --pill-color-remove: var(--base03); */
+  /* --pill-color-remove-hover: var(--base04); */
+  /* --pill-background: var(--base00); */
+  /* --pill-background-hover: var(--base00); */
+  --pill-border-color: #f00;
+  --pill-border-color-hover: #f00;
+
+  /* Navigation */
+  /* --nav-item-color: var(--base04); */
+  /* --nav-item-color-hover: var(--base05); */
+  /* --nav-item-color-active: var(--base06); */
+  /* --nav-item-color-selected: var(--base06); */
+  /* --nav-item-color-highlighted: var(--base0D); */
+  /* --nav-item-background-hover: var(--base02); */
+  /* --nav-item-background-active: var(--base03); */
+  /* --nav-item-background-selected: var(--base0D) */
+  /* --nav-indentation-guide-color: var(--base02); */
+  /* --nav-collapse-icon-color: var(--base03); */
+  /* --nav-collapse-icon-color-collapsed: var(--base03); */
+
+  /* Prompt */
+  /* --prompt-border-color: var(--base02); */
+
+  /* Slider */
+  /* --slider-thumb-border-color: var(--base04);
+  --slider-track-background: var(--base01); */
+
+  /* Tabs */
+  --tab-background-active: var(--base00);
+  --tab-text-color: var(--base03);
+  --tab-text-color-active: var(--base04);
+  --tab-text-color-focused: var(--base03);
+  --tab-text-color-focused-active: var(--base05);
+  --tab-text-color-focused-highlighted: #f00;
+  --tab-text-color-focused-active-current: var(--base05);
+  --tab-divider-color: var(--base02);
+  --tab-outline-color: var(--base02);
+
+  /* Toggle */
+  /* --toggle-thumb-color: var(--base07); */
+
+  /* Editor */
+
+  /* Blockquote */
+  --blockquote-background-color: var(--base01);
+  --blockquote-border-color: var(--base0D);
+  /* --blockquote-color: var(--base06); */
+
+  /* Callout */
+  /* --callout-title-color: #f00;
+  --callout-content-background: #f00; */
+
+  /* Code */
+  /* --code-background: var(--base00); */
+
+  /* Embed */
+  --embed-background: var(--base01);
+
+  /* Headings */
+  /* @todo add an option to use default font color */
+  /* --heading-formatting: var(--base03);
+  --h1-color: var(--base06);
+  --h2-color: var(--base06);
+  --h3-color: var(--base06);
+  --h4-color: var(--base06);
+  --h5-color: var(--base06);
+  --h6-color: var(--base06); */
+  --heading-formatting: #f00;
+  --h1-color: var(--base0B);
+  --h2-color: var(--base0C);
+  --h3-color: var(--base0D);
+  --h4-color: var(--base0E);
+  --h5-color: var(--base09);
+  --h6-color: var(--base0A);
+
+  /* Horizontal rule */
+  /* --hr-color: var(--base03); */
+
+  /* Inline title */
+  /* --inline-title-color: var(--base06); */
+  --inline-title-color: var(--base0A);
+
+  /* Link */
+  --link-color: var(--base0D);
+  /* --link-color-hover: var(--base0C); */
+  --link-unresolved-color: rgba(var(--base0D), 0.8);
+  --link-unresolved-decoration-color: rgba(var(--base0D), 0.8);
+  --link-external-color: var(--base0D);
+  /* --link-external-color-hover: var(--base0C); */
+
+  /* List */
+  /* --list-marker-color: var(--base03);
+  --list-marker-color-hover: var(--base03);
+  --list-marker-color-collapsed: var(--base0D); */
+
+  /* Properties */
+  --metadata-background: var(--base00);
+  --metadata-border-color: #f00;
+  --metadata-divider-color: var(--base02);
+  --metadata-divider-color-hover: #f00;
+  --metadata-divider-color-focus: var(--base03);
+  --metadata-property-background: var(--base01);
+  --metadata-property-background-hover: var(--base01);
+  --metadata-property-background-active: #f00;
+  /* --metadata-label-background-hover: var(--base02); */
+  --metadata-label-background-active: var(--base02);
+  /* --metadata-label-text-color: var(--base04); */
+  --metadata-label-text-color-hover: #f00;
+  /* --metadata-input-text-color: var(--base06); */
+  /* --metadata-input-background-hover: var(--base02); */
+  --metadata-input-background-active: var(--base02);
+
+  /* Table */
+  /* --table-background: var(--base01); */
+  --table-border-color: var(--base02);
+  /* --table-header-background: var(--base01); */
+  --table-header-background-hover: var(--base01);
+  --table-header-border-color: var(--base02);
+  /* --table-header-color: var(--base06); */
+  /* @todo option? */
+  /* --table-header-color: var(--base0E);  */
+  /* --table-text-color: var(--base0E); */
+  /* --table-column-alt-background: var(--base01); */
+  --table-row-background-hover: var(--base02);
+  --table-row-alt-background: var(--base01);
+
+  /* Tag */
+  /* --tag-color: var(--base0D); */
+  /* --tag-color-hover: var(--base0D); */ /* lighter base0D */
+  /* --tag-background: var(--base02); */
+  /* --tag-background-hover: #666666; */
+  --tag-border-color: #f00;
+  --tag-border-color-hover: #f00;
+
+  /* Plugins */
+
+  /* Canvas */
+  /* --canvas-background: var(--base00); */
+  /* --canvas-card-label-color: var(--base03); */
+  --canvas-dot-pattern: var(--base02);
+  --canvas-color-1: var(--base08);
+  --canvas-color-2: var(--base09);
+  --canvas-color-3: var(--base0A);
+  --canvas-color-4: var(--base0B);
+  --canvas-color-5: var(--base0C);
+  --canvas-color-6: var(--base0D);
+
+  /* File explorer */
+  /* --vault-name-color: var(--base06); */
+
+  /* Graph */
+  /* --graph-text: var(--base06); */
+  --graph-line: var(--base02);
+  /* --graph-node: var(--base04); */
+  --graph-node-unresolved: var(--base08);
+  /* --graph-node-focused: var(--interactive-accent); */
+  --graph-node-tag: var(--base0B);
+  --graph-node-attachment: var(--base09);
+
+  /* Search */
+  /* --search-clear-button-color: var(--base04); */
+  /* --search-icon-color: var(--base04); */
+  /* --search-result-background: var(--base00); */
+
+  /* Publish */
+
+  /* Site components */
+  --component-title-color: var(--base06);
+  --outline-heading-color: var(--base05);
+  --outline-heading-color-hover: var(--base07);
+  --outline-heading-color-active: var(--base05);
+
+  /* Site header */
+  --site-name-color: var(--base05);
+  --site-name-color-hover: var(--base06);
+  --site-menu-icon-color: var(--base04);
+  --site-menu-icon-color-hover: var(--base05);
+
+  /* Site navigation */
+  /* @todo */
+  /* --nav-collapse-icon-color: var(--base04);
+  --nav-collapse-icon-color-hover: var(--base05);
+  --nav-parent-item-color: var(--base01);
+  --nav-parent-item-color-active: var(--base01);
+  --nav-item-color: var(--base01);
+  --nav-item-color-hover: var(--base01);
+  --nav-item-color-active: var(--base01);
+  --nav-item-border-color: var(--base01);
+  --nav-item-border-color-hover: var(--base01);
+  --nav-item-border-color-active: var(--base01); */
+
+  /* Site pages */
+  --page-title-color: var(--base06);
+
+  /* Site sidebars */
+  --sidebar-left-background: var(--base01);
+  --sidebar-left-border-color: var(--base02);
+  --sidebar-right-background: var(--base01);
+  --sidebar-right-border-color: var(--base02);
+
+  /* Window */
+
+  /* Divider */
+  --divider-color: var(--base01);
+  --divider-color-hover: var(--interactive-accent-hover);
+
+  /* Ribbon */
+  --ribbon-background: var(--base00);
+  --ribbon-background-collapsed: var(--base00);
+
+  /* Scrollbar */
+  --scrollbar-bg: #f00;
+  --scrollbar-thumb-bg: var(--base026f);
+  --scrollbar-active-thumb-bg: var(--base036f);
+
+  /* Status bar */
+  --status-bar-background: var(--base0D);
+  /* --status-bar-border-color: var(--base04); */
+  --status-bar-text-color: var(--base07);
+
+  /* Window frame */
+  --titlebar-background: var(--base00);
+  --titlebar-background-focused: var(--base01);
+  --titlebar-border-color: #f00;
+  --titlebar-text-color: var(--base03);
+  --titlebar-text-color-focused: var(--base05);
+}
+
+.theme-light {
+  /* Foundations */
+
+  /* Colors */
+  --background-primary: var(--base07);
+  --background-secondary: var(--base06);
+
+  --color-base-00: var(--base07);
+  --color-base-05: #fcfcfc;
+  --color-base-10: #fafafa;
+  --color-base-20: #f6f6f6;
+  --color-base-25: #e3e3e3;
+  --color-base-30: var(--base06);
+  --color-base-35: var(--base05);
+  --color-base-40: var(--base04);
+  --color-base-50: #ababab;
+  --color-base-60: #707070;
+  --color-base-70: var(--base02);
+  --color-base-100: var(--base00);
+}
