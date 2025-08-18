@@ -49,6 +49,7 @@ plugins=(
     select-bracketed
     select-quoted
     vim-surround
+    run-help
     # zsh-autopair
     zsh-autocomplete
     # forgit
