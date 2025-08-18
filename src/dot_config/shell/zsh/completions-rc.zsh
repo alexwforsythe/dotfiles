@@ -141,5 +141,16 @@ _tagfmt tree-ish-to-index-files 
 _tagfmt tree-ishs  # 
 _tagfmt untracked-files  # 
 
-# docker ( containers,  images)
-# @todo
+# docker
+_tagfmt containers-running 
+_tagfmt containers-stopped 
+_tagfmt context-list 
+_tagfmt docker-images 
+_tagfmt docker-repos 
+_tagfmt networks-list 
+_tagfmt nodes-list 
+_tagfmt plugins-list 
+_tagfmt secrets-list 
+_tagfmt services-list  # 
+_tagfmt stacks-list 
+_tagfmt volumes-list 
