@@ -1,11 +1,3 @@
-['.local/share/tpm']
-type = 'archive'
-url = 'https://github.com/tmux-plugins/tpm/archive/master.tar.gz'
-exact = true
-stripComponents = 1
-refreshPeriod = '168h'
-exclude = ['*/.*', '*/tests']
-
 ['.local/share/tmux-plugins/tmux-resurrect']
 type = 'archive'
 url = 'https://github.com/tmux-plugins/tmux-resurrect/archive/master.tar.gz'

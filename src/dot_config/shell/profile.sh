@@ -67,10 +67,6 @@ export GOOGLE_APPLICATION_CREDENTIALS="$XDG_CONFIG_HOME/gcloud/application_defau
 # go
 export GOPATH="$HOME/go"
 
-# tmux
-# This should be where tmux plugins are installed, not tpm itself.
-export TMUX_PLUGIN_MANAGER_PATH="$XDG_DATA_HOME/tmux-plugins"
-
 # tinty: https://github.com/tinted-theming/tinted-shell?tab=readme-ov-file#customization
 export TINTED_SHELL_ENABLE_BASE16_VARS=1
 export TINTED_SHELL_ENABLE_BASE24_VARS=1
