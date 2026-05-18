@@ -2,3 +2,6 @@
 # directories, which causes chezmoi to report changes.
 # https://www.chezmoi.io/user-guide/include-files-from-elsewhere/#include-a-subdirectory-from-a-url
 **/*.zwc
+
+# Ignore bytecode compiled from python modules.
+**/__pycache__

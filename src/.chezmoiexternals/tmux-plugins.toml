@@ -30,6 +30,22 @@ stripComponents = 1
 refreshPeriod = '168h'
 exclude = ['*/screenshots']
 
+['.local/share/tmux-plugins/tmux-which-key']
+type = 'archive'
+url = 'https://github.com/alexwforsythe/tmux-which-key/archive/working.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*', '*/demo', '*/nix']
+
+['.local/share/tmux-plugins/tmux-which-key/plugin/pyyaml']
+type = 'archive'
+url = 'https://github.com/yaml/pyyaml/archive/refs/tags/{{ (gitHubLatestRelease "yaml/pyyaml").TagName }}.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+include = ['*/lib/**']
+
 ['.local/share/tmux-plugins/Morantron/tmux-fingers']
 type = 'archive'
 url = 'https://github.com/Morantron/tmux-fingers/archive/master.tar.gz'
