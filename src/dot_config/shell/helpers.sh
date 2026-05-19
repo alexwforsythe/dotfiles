@@ -92,7 +92,7 @@ run-cmds() {
 }
 
 run:if-file() {
-    if [[ ! -r $1 ]]; then
+    if [ ! -r "$1" ]; then
         log:warn "file not found: $1"
         return 1
     fi

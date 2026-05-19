@@ -22,7 +22,7 @@ setup:pyenv() {
 }
 
 setup:virtualenvwrapper() {
-    if [[ ! -d $python_bin_dir ]]; then
+    if [ ! -d "$python_bin_dir" ]; then
         log:error "dir not found: $python_bin_dir"
         return 1
     fi
