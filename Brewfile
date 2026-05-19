@@ -19,7 +19,6 @@ brew coreutils # for prezto/gnu-utils
 brew crystal # for tmux-fingers
 # brew derailed/k9s/k9s
 brew direnv
-brew docker
 brew fd
 brew fnm
 brew fzf
@@ -71,6 +70,7 @@ brew zoxide
 # Apps: brew install --cask
 # cask alt-tab
 cask bitwarden
+cask docker-desktop
 cask font-meslo-lg-nerd-font
 cask font-jetbrains-mono-nerd-font # for ligaturizer
 cask gcloud-cli
