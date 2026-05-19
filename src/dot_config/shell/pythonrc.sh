@@ -10,6 +10,12 @@ setup:pyenv() {
         return
     fi
 
+    # Load pyenv automatically (output of `pyenv init {bash,zsh}`):
+    export PYENV_ROOT="$HOME/.pyenv"
+    if [ -d "$PYENV_ROOT/bin" ]; then
+        export PATH="$PYENV_ROOT/bin:$PATH"
+    fi
+
     # Install pyenv as a shell function and enable shims & autocompletion:
     # https://github.com/pyenv/pyenv#set-up-your-shell-environment-for-pyenv
     if ! eval "$(pyenv init -)"; then
