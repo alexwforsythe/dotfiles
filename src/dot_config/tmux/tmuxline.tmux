@@ -21,7 +21,7 @@ set -g @mode-color "#{?client_prefix,magenta,#{?pane_in_mode,yellow,#{?pane_sync
 
 set -g @continuum-backup-age-sec "#{e|-|:%s,#{@continuum-save-last-timestamp}}"
 set -g @continuum-backup-stale "#{>:#{E:@continuum-backup-age-sec},#{e|*|:60,#{@continuum-save-interval}}}"
-set -g @continuum-restore-status "#{?#{@continuum-save-interval},#{?#{==:#{@continuum-restore},on},#[fg=green]󰙰,},}"
+set -g @continuum-restore-status "#{?#{@continuum-save-interval},#{?#{==:#{@continuum-restore},on},#[fg=green]󰙰,},}" # 󱧧 󰁯 󱄍 󱍸 󰓧
 
 set -g @host-ping "google.com"
 set -g @cmd-ping "#(ping -o -t 3 #{@host-ping}; echo $?)"
@@ -57,7 +57,7 @@ set -g window-status-separator ""
 # @todo dedupe styles into defaults and refactors into user options for reuse
 
 set -g status-left "#[fg=colour238,bg=#{E:@mode-color}]  #h #[fg=#{E:@mode-color},bg=colour239]"
-set -ga status-left "#[fg=colour248] 󰖲 ╱ #S "
+set -ga status-left "#[fg=colour248] 󰖲 ╱ #S " # 
 set -ga status-left "#[default]#[fg=colour239]#[default]"
 
 set -g window-status-format "#[fg=colour238]#[default]"
@@ -70,14 +70,14 @@ set -ga window-status-current-format "#[fg=colour239,bg=colour238]"
 set -g status-right "#[fg=colour238,bg=colour238]#[#{status-style}] "
 # set -ga status-right "#{client_termname} "
 set -ga status-right "╱ "
-set -ga status-right "#{?#{@continuum-save-interval},#{?#{@continuum-save-last-timestamp},#[fg=#{?#{E:@continuum-backup-stale},yellow,green}]󰆓,? #[fg=red]󰆓}#[#{status-style}] #{t/p:@continuum-save-last-timestamp},off 󰠘} "
+set -ga status-right "#{?#{@continuum-save-interval},#{?#{@continuum-save-last-timestamp},#[fg=#{?#{E:@continuum-backup-stale},yellow,green}]󰆓,? #[fg=red]󰆓}#[#{status-style}] #{t/p:@continuum-save-last-timestamp},off 󰠘} " # 󰠘  󰽂 󱣪 󱙃 󰽃
 set -ga status-right "#{E:@continuum-restore-status}#[#{status-style}] "
 set -ga status-right "#[fg=colour239]#[default] "
 
-set -g @sysstat_cpu_view_tmpl "#[fg=#{cpu.color}]󰄨#[default] #{cpu.pused}"
-set -g @sysstat_mem_view_tmpl "#[fg=#{mem.color}]󰍛#[default] #{mem.pused}"
+set -g @sysstat_cpu_view_tmpl "#[fg=#{cpu.color}]#[default] #{cpu.pused}"
+set -g @sysstat_mem_view_tmpl "#[fg=#{mem.color}]#[default] #{mem.pused}"
 set -ga status-right "#{sysstat_mem}#[default]  #{sysstat_cpu}#[default] "
 set -ga status-right "#[fg=green]󰜷#[default] #{E:@cmd-uptime} "
-set -ga status-right "#{?#{E:@cmd-ping},#[fg=yellow]󰛵,#[fg=green]󰛳}#[default] "
+set -ga status-right "#{?#{E:@cmd-ping},#[fg=yellow]󰛵,#[fg=green]󰛳}#[default] " # 󰅛 󰱓 󰲛  󰱟 󰲊
 set -ga status-right "#[fg=colour246]"
-set -ga status-right "#[fg=colour238,bg=colour246] 󰃭 %b %d ╱ 󰅐 %R "
+set -ga status-right "#[fg=colour238,bg=colour246] 󰃭 %b %d ╱ 󰅐 %R " #  󰃶 
