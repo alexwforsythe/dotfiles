@@ -100,9 +100,14 @@ autoload -Uz "$XDG_CONFIG_HOME/shell/zsh/functions"/*(.:t)
 # https://github.com/romkatv/powerlevel10k/issues/1203
 # shellcheck disable=2296
 p10k_cache="${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
-run:if-cmd direnv emulate zsh -c "$(direnv export zsh)"
-source:file "$p10k_cache"
-run:if-cmd direnv emulate zsh -c "$(direnv hook zsh)"
+# shellcheck disable=2144,2157
+if hash direnv >/dev/null 2>&1 && [[ -n .env*(#q-.N) ]]; then
+  eval direnv export zsh
+  source:file "$p10k_cache"
+  eval direnv hook zsh
+else
+  source:file "$p10k_cache"
+fi
 
 #
 # Plugins
