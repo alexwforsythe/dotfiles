@@ -183,23 +183,10 @@ eval:if-cmd zoxide zoxide init zsh # @audit-ok
 
 source:file "$XDG_CONFIG_HOME/shell/zsh/completions-rc.zsh"
 
-#
-# builtin functions
-#
-
 # https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/widgets.md
 autoload -Uz tetris tetriscurses
 
-#
-# Keybinds
-#
-
 source:file "$XDG_CONFIG_HOME/shell/zsh/keybinds.zsh"
-
-#
-# Aliases
-#
-
 source:file "$XDG_CONFIG_HOME/shell/zsh/aliases.zsh"
 
 # @note Uncomment the following line to print startup time.
