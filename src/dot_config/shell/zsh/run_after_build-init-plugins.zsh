@@ -1,15 +1,18 @@
 #!/usr/bin/env zsh
 # shellcheck shell=bash
 
-#
-# plugins.zsh: defines the list of enabled zsh plugins and loads them.
-#
-# Example: https://github.com/mattmc3/zsh_unplugged/blob/main/examples/antidote_lite_example.zsh
-#
+emulate -LR zsh
+# setopt nomonitor
 
-# Define pmodload as a no-op because prezto modules call it to load prereq
-# modules. This means the order of modules in $plugins is extra important.
-pmodload() {}
+#
+# build-init-plugins: defines the list of enabled zsh plugins and builds an init
+# script to load them. The init script should be sourced by .zshrc.
+#
+#  - This script is run automatically after each call to `chezmoi apply`, which
+#    ensures the init script is always up-to-date
+#  - Writing the script to a file instead of printing it to stdout makes it
+#    easier to debug and caches the output for slightly better performance
+#
 
 plugins=(
     # prezto modules
@@ -27,7 +30,7 @@ plugins=(
     # https://github.com/marlonrichert/zsh-autocomplete/discussions/808#discussioncomment-13648377
     #
     # load the config first
-    $ZDOTDIR/.zpreztorc
+    $ZDOTDIR/.zpreztorc # @todo to .config
     prezto/helper
     prezto/environment
     prezto/spectrum
@@ -70,8 +73,8 @@ plugins=(
     powerlevel10k
 )
 
-autoload -Uz load-plugins
-load-plugins $plugins
+autoload -Uz print-init-plugins
+print-init-plugins $plugins >"$XDG_CONFIG_HOME/shell/zsh/load-plugins.zsh"
 
-# Remove pmodload now that all prezto modules have been loaded.
-unfunction pmodload
+# Use this line instead to load the plugins directly:
+# source <(print-init-plugins $plugins)

@@ -116,7 +116,7 @@ fi
 # zsh-autocomplete
 source:file "$XDG_CONFIG_HOME/shell/zsh/zsh-autocomplete-rc.zsh"
 
-source:file "$XDG_CONFIG_HOME/shell/zsh/plugins.zsh"
+source:file "$XDG_CONFIG_HOME/shell/zsh/load-plugins.zsh"
 # Load p10k immediately after plugins for a fast prompt.
 # https://github.com/romkatv/zsh-bench
 source:file "$XDG_CONFIG_HOME/shell/zsh/p10k.zsh"
