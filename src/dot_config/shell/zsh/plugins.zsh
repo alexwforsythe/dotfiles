@@ -40,6 +40,7 @@ plugins=(
     # zsh-users/zsh-completions: still in prezto until we stop using
     # prezto/completion:
     prezto/completion/external
+    external-completions
     zsh-autocomplete
 
     prezto/history

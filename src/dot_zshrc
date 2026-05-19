@@ -105,59 +105,6 @@ source:file "$p10k_cache"
 run:if-cmd direnv emulate zsh -c "$(direnv hook zsh)"
 
 #
-# Completions
-#
-
-# homebrew
-if [ -n "$HOMEBREW_PREFIX" ]; then
-  # Register homebrew completions so they'll be loaded by the completion plugin.
-  #  - completions/zsh: completions for the brew command
-  #  - share/zsh/site-functions: completions for commands installed via brew
-  #  - share/bash-completion/completions: bash completions in zsh format (in
-  #    case one isn't defined in zsh/site-functions)
-  #
-  # @todo this should be done by the completion plugin, maybe try updating it?
-  # @todo I needed to run these commands to fix zcompinit security issues from
-  # docker completions:
-  # compaudit | xargs chown -R $(whoami)
-  # compaudit | xargs chmod go-w
-  fpath+=("$HOMEBREW_PREFIX"/share/bash-completion/completions)
-  # shellcheck disable=1036,2128,2206
-  fpath=(
-    "$HOMEBREW_PREFIX"/completions/zsh(/N)
-    "$HOMEBREW_PREFIX"/share/zsh/site-functions(/N)
-    /usr/share/zsh/site-functions(/N)
-    $fpath
-  )
-
-  # The git completions installed by brew are worse than the default ones that
-  # ship with zsh, so disable them by removing their file permissions. The
-  # external completions frome felipec take precendence either way, but this is
-  # the appropriate fallback.
-  for f in _git git-completion.bash; do
-    if [ -r "$HOMEBREW_PREFIX/share/zsh/site-functions/$f" ]; then
-      chmod 0 "$HOMEBREW_PREFIX/share/zsh/site-functions/$f"
-    fi
-  done
-fi
-
-# gcloud
-if [ -d "$HOMEBREW_PREFIX" ]; then
-    source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.zsh.inc"
-    source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.zsh.inc"
-fi
-
-# ngrok
-eval:if-cmd ngrok ngrok completion
-
-# zsh-autocomplete: this config must be set before loading the plugin and cannot
-# be changed at runtime.
-zstyle ':autocomplete:*' widget-style menu-select
-# complete-word: (Shift-)Tab inserts the top (bottom) completion.
-# menu-complete: Press again to cycle to next (previous) completion.
-# menu-select:   Same as `menu-complete`, but updates selection in menu.
-
-#
 # Plugins
 #
 
