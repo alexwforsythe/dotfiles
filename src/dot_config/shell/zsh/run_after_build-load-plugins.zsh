@@ -5,7 +5,7 @@ emulate -LR zsh
 # setopt nomonitor
 
 #
-# build-init-plugins: defines the list of enabled zsh plugins and builds an init
+# build-load-plugins: defines the list of enabled zsh plugins and builds an init
 # script to load them. The init script should be sourced by .zshrc.
 #
 #  - This script is run automatically after each call to `chezmoi apply`, which
@@ -73,8 +73,8 @@ plugins=(
     powerlevel10k
 )
 
-autoload -Uz print-init-plugins
-print-init-plugins $plugins >"$XDG_CONFIG_HOME/shell/zsh/load-plugins.zsh"
+autoload -Uz print-load-plugins
+print-load-plugins $plugins >"$XDG_CONFIG_HOME/shell/zsh/load-plugins.zsh"
 
 # Use this line instead to load the plugins directly:
-# source <(print-init-plugins $plugins)
+# source <(print-load-plugins $plugins)
