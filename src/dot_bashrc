@@ -74,7 +74,6 @@ fi
 
 # gcloud
 if [ -n "$HOMEBREW_PREFIX" ]; then
-    source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/path.bash.inc"
     source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.bash.inc"
 fi
 
