@@ -60,6 +60,12 @@ exclude = [
 # Other
 #
 
+# DBT aliases
+['.local/share/zsh-plugins/dbt/dbt.plugin.zsh']
+type = 'file'
+url = 'https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/refs/heads/master/plugins/dbt/dbt.plugin.zsh'
+refreshPeriod = '168h'
+
 ['.local/share/zsh-plugins/fzf-tab']
 type = 'archive'
 url = 'https://github.com/Aloxaf/fzf-tab/archive/master.tar.gz'
