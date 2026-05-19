@@ -80,7 +80,7 @@ url = 'https://github.com/marlonrichert/zsh-autocomplete/archive/main.tar.gz'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
-exclude = ['*/.*', '*/Tests']
+exclude = ['*/.*', '*/Tests', '*/*test']
 
 ['.local/share/zsh-plugins/zsh-autopair']
 type = 'archive'
