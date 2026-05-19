@@ -36,8 +36,12 @@ plugins=(
     prezto/archive
     prezto/editor
     prezto/git
-    prezto/completion
+
+    # zsh-users/zsh-completions: still in prezto until we stop using
+    # prezto/completion:
+    prezto/completion/external
     zsh-autocomplete
+
     prezto/history
     prezto/syntax-highlighting
     prezto/history-substring-search
