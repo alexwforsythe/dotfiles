@@ -8,6 +8,41 @@
 #
 
 #
+# Colors
+#
+# https://github.com/zdharma/color
+#
+
+# usage: pprint(color, style?)
+function pprint() {
+    local fg
+    case $1 in
+    black | b) fg='30' ;;
+    red | r) fg='31' ;;
+    green | g) fg='32' ;;
+    yellow | y) fg='33' ;;
+    blue | bl) fg='34' ;;
+    magenta | m) fg='35' ;;
+    cyan | c) fg='36' ;;
+    white | w) fg='37' ;;
+    # Fall back to 256-color mode.
+    *) fg="38;5;$1" ;;
+    esac
+    shift
+
+    local style=0
+    case $1 in
+    bold | b) style=1 && shift ;;
+    italic | i) style=2 && shift ;;
+    underline | u) style=4 && shift ;;
+    inverse | in) style=7 && shift ;;
+    strikethrough | s) style=9 && shift ;;
+    esac
+
+    printf '\033[%d;%sm%s\033[0;m' $style "$fg" "$@"
+}
+
+#
 # Logging
 #
 
@@ -16,22 +51,17 @@ log_level_info=2
 log_level_warn=3
 log_level_error=4
 
-if [ -z "$RC_LOG_LEVEL" ]; then
-    export RC_LOG_LEVEL=$log_level_debug
-fi
+export RC_LOG_LEVEL=$log_level_debug
 
-_red=$'\e[1;31m'
-_grn=$'\e[1;32m'
-_yel=$'\e[1;33m'
-_blu=$'\e[1;34m'
-_mag=$'\e[1;35m'
-_cyn=$'\e[1;36m'
-_end=$'\e[0m'
+_pre_debug=$(pprint c b "debug ")
+_pre_info=$(pprint g b "info ")
+_pre_warn=$(pprint y b "warn ")
+_pre_error=$(pprint r b "error ")
 
-log:debug() { ((RC_LOG_LEVEL > log_level_debug)) || printf "[${_cyn}debug${_end}] %s\n" "$@"; }
-log:info() { ((RC_LOG_LEVEL > log_level_info)) || printf "[${_grn}info${_end}] %s\n" "$@"; }
-log:warn() { ((RC_LOG_LEVEL > log_level_warn)) || printf "[${_yel}warn${_end}] %s\n" "$@"; }
-log:error() { ((RC_LOG_LEVEL > log_level_error)) || printf "[${_red}error${_end}] %s\n" "$@" >&2; }
+log:debug() { ((RC_LOG_LEVEL > log_level_debug)) || printf '%s %s\n' "$_pre_debug" "$@"; }
+log:info() { ((RC_LOG_LEVEL > log_level_info)) || printf '%s %s\n' "$_pre_info" "$@"; }
+log:warn() { ((RC_LOG_LEVEL > log_level_warn)) || printf '%s %s\n' "$_pre_warn" "$@"; }
+log:error() { ((RC_LOG_LEVEL > log_level_error)) || printf '%s %s\n' "$_pre_error" "$@" >&2; }
 
 #
 # Helpers
