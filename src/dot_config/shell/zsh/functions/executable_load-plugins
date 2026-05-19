@@ -8,9 +8,9 @@
 emulate -L zsh
 setopt nomonitor
 
-autoload -Uz print-plugin-script
+autoload -Uz print-init-plugins
 
 # shellcheck disable=1090,2068
-source <(print-plugin-script $@)
+source <(print-init-plugins $@)
 
-unfunction print-plugin-script
+unfunction print-init-plugins
