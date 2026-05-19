@@ -87,3 +87,4 @@ cask zoom
 
 # App Store
 appstore 1246969117 Steam Link
+appstore 497799835 Xcode
