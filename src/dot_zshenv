@@ -22,3 +22,7 @@ if [ -r "${XDG_CONFIG_HOME:-$HOME/.config}/shell/env.sh" ]; then
   # shellcheck disable=1091
   source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/env.sh"
 fi
+
+# Some plugins check this instead of $HOME
+export ZDOTDIR="$HOME"
+export ZPLUGINDIR="$XDG_DATA_HOME/zsh-plugins"
