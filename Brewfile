@@ -1,5 +1,4 @@
 # Taps: brew tap
-tap homebrew/command-not-found # for prezto/command-not-found
 tap koekeishiya/formulae
 tap oven-sh/bun
 tap rilldata/tap
