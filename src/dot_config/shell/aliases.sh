@@ -48,12 +48,12 @@ alias chug="chezmoi upgrade"
 
 alias gis="git status"
 alias gbl='git branch --verbose -v'
-alias gpr="git pull --rebase origin master"
+alias gpr="git pull --rebase origin main"
 alias gcpa="git cherry-pick --abort"
 alias gcpc="git cherry-pick --continue"
 alias gcop="git switch '@{-1}'"
 alias gwip="git add -A && git commit -m 'wip'"
-alias grim="git rebase --interactive \$(git merge-base HEAD origin/master)"
+alias grim="git rebase --interactive \$(git merge-base HEAD origin/main)"
 
 # branches
 alias gbs="git switch"
