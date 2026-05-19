@@ -161,6 +161,9 @@ zstyle ':autocomplete:*' widget-style menu-select
 # Plugins
 #
 
+# zsh-autocomplete
+source:file "$XDG_CONFIG_HOME/shell/zsh/zsh-autocomplete-rc.zsh"
+
 source:file "$XDG_CONFIG_HOME/shell/zsh/plugins.zsh"
 # Load p10k immediately after plugins for a fast prompt.
 # https://github.com/romkatv/zsh-bench
@@ -172,9 +175,6 @@ source:file "$XDG_CONFIG_HOME/shell/shellrc.sh"
 source:file "$FZF_DIR/shell/completion.zsh" # @audit-ok
 source:file "$FZF_DIR/shell/key-bindings.zsh" # @audit-ok
 # source:file "$XDG_CONFIG_HOME/shell/zsh/fzf-tab-rc.zsh"
-
-# zsh-autocomplete
-source:file "$XDG_CONFIG_HOME/shell/zsh/zsh-autocomplete-rc.zsh"
 
 source:file "$XDG_CONFIG_HOME/shell/zsh/cdr.zsh"
 

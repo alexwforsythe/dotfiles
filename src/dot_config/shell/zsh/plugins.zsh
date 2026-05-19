@@ -16,10 +16,15 @@ plugins=(
     #
     # From the READMEs:
     #  - first: helper -> environment
-    #  - spectrum -> gnu-utility -> utility -> archive -> git/node/python -> completion
-    #  - history?
+    #  - spectrum -> gnu-utility -> utility -> archive
+    #  - utility -> git/node/python -> completion
     #  - completion -> fzf-tab -> autosuggestions
-    #  - syntax-highlighting -> editor -> history-substring-search -> autosuggestions -> prompt
+    #  - editor -> anything that uses bindkey, e.g. zsh-autocomplete
+    #  - syntax-highlighting -> history-substring-search -> autosuggestions ->
+    #    prompt
+    #
+    # autocomplete -> {compinit,syntax-highlighting,autosuggestions}:
+    # https://github.com/marlonrichert/zsh-autocomplete/discussions/808#discussioncomment-13648377
     #
     # load the config first
     $ZDOTDIR/.zpreztorc
@@ -29,11 +34,12 @@ plugins=(
     prezto/gnu-utility
     prezto/utility
     prezto/archive
+    prezto/editor
     prezto/git
     prezto/completion
+    zsh-autocomplete
     prezto/history
     prezto/syntax-highlighting
-    prezto/editor
     prezto/history-substring-search
     prezto/autosuggestions
     prezto/directory
@@ -51,7 +57,6 @@ plugins=(
     vim-surround
     run-help
     # zsh-autopair
-    zsh-autocomplete
     # forgit
     # fzf-tab
 
