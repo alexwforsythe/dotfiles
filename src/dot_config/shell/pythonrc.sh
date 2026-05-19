@@ -28,9 +28,9 @@ setup:virtualenvwrapper() {
     fi
 
     # Install pip if missing: https://pip.pypa.io/en/stable/installation/
-    if ! command -v pip >/dev/null; then
-        if ! python -m ensurepip --upgrade; then
-            log:error "module not installed: pip"
+    if ! iscmd pip3; then
+        if ! python3 -m ensurepip --upgrade; then
+            log:error "module not installed: pip3"
             return 1
         fi
     fi
@@ -62,8 +62,8 @@ setup:virtualenvwrapper() {
     source:file "$venvwrapper_path"
 }
 
-if ! command -v python >/dev/null; then
-    log:debug "command not found: python"
+if ! iscmd python3; then
+    log:debug "command not found: python3"
     return
 fi
 
