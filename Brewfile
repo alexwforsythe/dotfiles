@@ -41,6 +41,7 @@ brew mycli
 brew mysql@8.0
 # brew ncdu # @todo try & configure
 brew neovim
+# brew ngrok
 brew node
 brew openjdk # for the PlantUML VSCode extension
 brew oven-sh/bun/bun
