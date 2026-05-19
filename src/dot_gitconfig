@@ -38,7 +38,7 @@ conflictstyle = zdiff3
 tool = vscode
 
 [mergetool "vscode"]
-cmd = code --reuse-window --wait $MERGED
+cmd = code --reuse-window --wait --merge $REMOTE $LOCAL $BASE $MERGED
 keepBackup = false
 
 [branch]
