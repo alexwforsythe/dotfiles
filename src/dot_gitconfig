@@ -6,51 +6,51 @@
 #
 
 [user]
-name = Alex Forsythe
-email = alexwforsythe@gmail.com
+    name = Alex Forsythe
+    email = alexwforsythe@gmail.com
 
 [core]
-filemode = false
-pager = delta
-editor = code --reuse-window --wait
+    filemode = false
+    pager = delta
+    editor = code --reuse-window --wait
 
 [interactive]
-diffFilter = delta --color-only
+    diffFilter = delta --color-only
 
 [alias]
-alias = config --get-regexp alias
-summon = "!summon () { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b; }; summon"
-attic = "!attic() { b=$1; git tag archive/$b $b; git branch -D $b; }; attic"
+    alias = config --get-regexp alias
+    summon = "!summon() { b=$1; git fetch origin +refs/heads/$b:refs/remotes/origin/$b $b:$b; }; summon"
+    attic = "!attic() { b=$1; git tag archive/$b $b; git branch -D $b; }; attic"
 
 [color]
-ui = true
+    ui = true
 
 [pull]
-rebase = true
+    rebase = true
 
 [diff]
-colorMoved = default
-tool = vscode
+    colorMoved = default
+    tool = vscode
 
 [merge]
-# https://dandavison.github.io/delta/merge-conflicts.html
-conflictstyle = zdiff3
-tool = vscode
+    # https://dandavison.github.io/delta/merge-conflicts.html
+    conflictstyle = zdiff3
+    tool = vscode
 
 [mergetool "vscode"]
-cmd = code --reuse-window --wait --merge $REMOTE $LOCAL $BASE $MERGED
-keepBackup = false
+    cmd = code --reuse-window --wait --merge $REMOTE $LOCAL $BASE $MERGED
+    keepBackup = false
 
 [branch]
-sort = -committerdate
+    sort = -committerdate
 
 [filter "lfs"]
-clean = git-lfs clean -- %f
-smudge = git-lfs smudge -- %f
-process = git-lfs filter-process
-required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 
 [include]
-path = ~/.config/git/delta.conf
-# https://github.com/tinted-theming/tinty/blob/main/USAGE.md#delta
-path = ~/.local/share/tinted-theming/tinty/tinted-delta-configs-file.gitconfig
+    path = ~/.config/git/delta.conf
+    # https://github.com/tinted-theming/tinty/blob/main/USAGE.md#delta
+    path = ~/.local/share/tinted-theming/tinty/tinted-delta-configs-file.gitconfig
