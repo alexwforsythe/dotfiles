@@ -51,7 +51,8 @@ log_level_info=2
 log_level_warn=3
 log_level_error=4
 
-export RC_LOG_LEVEL=$log_level_debug
+RC_LOG_LEVEL=${RC_LOG_LEVEL:-$log_level_info}
+export RC_LOG_LEVEL
 
 _pre_debug=$(pprint c b "debug ")
 _pre_info=$(pprint g b "info ")
