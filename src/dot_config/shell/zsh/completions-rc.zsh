@@ -59,7 +59,7 @@ zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/prezto/zcompcache"
+zstyle ':completion::complete:*' cache-path $ZSH_COMPCACHE
 
 # Group matches and describe.
 zstyle ':completion:*:matches' group 'yes'

@@ -25,4 +25,5 @@ fi
 
 # Some plugins check this instead of $HOME
 export ZDOTDIR="$HOME"
+export ZSH_COMPCACHE="$XDG_CACHE_HOME/zsh/zcompcache"
 export ZPLUGINDIR="$XDG_DATA_HOME/zsh-plugins"

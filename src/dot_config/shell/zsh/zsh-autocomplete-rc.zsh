@@ -8,6 +8,15 @@
 # https://github.com/marlonrichert/zsh-autocomplete/blob/main/.zshrc
 #
 
+# Standard styles (used by zsh-autocomplete during initialization)
+
+# Use caching to make completion for commands such as dpkg and apt usable.
+# zsh-autocomplete will manage this cache if it's enabled.
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path $ZSH_COMPCACHE
+
+# zsh-autocomplete styles
+
 # Wait this many seconds for typing to stop, before showing completions:
 zstyle ':autocomplete:*' delay 0.3 # seconds (float)
 
