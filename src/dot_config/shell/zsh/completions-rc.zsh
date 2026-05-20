@@ -143,13 +143,6 @@ zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns '^(<->.<-
 # Settings
 #
 
-# @todo if completions dump is expired (20h, prezto completion module), reload
-# in background:
-# # Recompile the completion dump in the background to increase startup speed.
-# _comp_path="${XDG_CACHE_HOME:-$HOME/.cache}/prezto/zcompdump"
-# autoload -Uz zrecompile
-# zrecompile -p -M "$_comp_path"
-
 # Only show completions for exact matches.
 unsetopt completeinword
 # Complete globs instead of inserting them. The expansion will be shown in the

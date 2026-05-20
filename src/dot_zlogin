@@ -11,11 +11,10 @@
 # Execute code that does not affect the current session in the background.
 {
   # Compile the completion dump to increase startup speed.
-  zcompdump="$XDG_CACHE_HOME/prezto/zcompdump"
-  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
-    if command mkdir "${zcompdump}.zwc.lock" 2>/dev/null; then
-      zcompile "$zcompdump"
-      command rmdir "${zcompdump}.zwc.lock" 2>/dev/null
+  if [[ -s $ZSH_COMPDUMP && (! -s "${ZSH_COMPDUMP}.zwc" || $ZSH_COMPDUMP -nt "${ZSH_COMPDUMP}.zwc") ]]; then
+    if command mkdir "${ZSH_COMPDUMP}.zwc.lock" 2>/dev/null; then
+      zcompile "$ZSH_COMPDUMP"
+      command rmdir "${ZSH_COMPDUMP}.zwc.lock" 2>/dev/null
     fi
   fi
-} &!
+} &|

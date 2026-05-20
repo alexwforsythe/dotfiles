@@ -133,6 +133,7 @@ source:file "$XDG_CONFIG_HOME/shell/zsh/cdr.zsh"
 # zoxide (load after compinit, fzf-rc, zsh-autocomplete)
 eval:if-cmd zoxide zoxide init zsh # @audit-ok
 
+# Load completions config last so it overrides settings from other plugins.
 source:file "$XDG_CONFIG_HOME/shell/zsh/completions-rc.zsh"
 
 # https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/widgets.md

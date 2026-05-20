@@ -40,6 +40,8 @@ plugins=(
     prezto/editor
     prezto/git
 
+    # Load completion definitions before zsh-autocomplete because it calls
+    # compinit.
     # zsh-users/zsh-completions: still in prezto until we stop using
     # prezto/completion:
     prezto/completion/external

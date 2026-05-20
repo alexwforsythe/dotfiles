@@ -17,6 +17,23 @@ zstyle ':completion::complete:*' cache-path $ZSH_COMPCACHE
 
 # zsh-autocomplete styles
 
+# Load and initialize the completion system ignoring insecure directories with a
+# cache time of 20 hours, so it should almost always regenerate the first time a
+# shell is opened each day.
+#
+# Source: https://github.com/sorin-ionescu/prezto/blob/master/modules/completion/init.zsh
+if [[ $ZSH_COMPDUMP(#qNmh-20) ]]; then
+    # -C (skip function check) implies -i (skip security check).
+    zstyle ':autocomplete::compinit' arguments -C
+else
+    # Note: compinit only recompiles completions if the number of functions
+    # changes, not necessarily if any are updated.
+    zstyle ':autocomplete::compinit' arguments -i
+    # Keep $ZCOMPDUMP younger than cache time even if it isn't regenerated.
+    # Source: https://github.com/sorin-ionescu/prezto/issues/1880
+    run:if-file $ZSH_COMPDUMP touch -m $ZSH_COMPDUMP
+fi
+
 # Wait this many seconds for typing to stop, before showing completions:
 zstyle ':autocomplete:*' delay 0.3 # seconds (float)
 
