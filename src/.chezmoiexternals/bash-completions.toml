@@ -1,0 +1,5 @@
+# Advanced completions for git. Dependency of git-completion.zsh, if used.
+['.local/share/bash-plugins/external-completions/git-completion.bash']
+type = 'file'
+url = 'https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/completion/git-completion.bash'
+refreshPeriod = '168h'

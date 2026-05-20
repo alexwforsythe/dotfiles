@@ -3,3 +3,11 @@
 type = 'file'
 url = 'https://raw.githubusercontent.com/dbt-labs/dbt-completion.bash/master/_dbt'
 refreshPeriod = '168h'
+
+# Advanced completions for git. This is the zsh version of git-completion.bash.
+# It's very fast and maintained by the git team, but it's not as rich in compsys
+# features as the one that ships with zsh.
+# ['.local/share/zsh-plugins/external-completions/functions/_git']
+# type = 'file'
+# url = 'https://raw.githubusercontent.com/git/git/refs/heads/master/contrib/completion/git-completion.zsh'
+# refreshPeriod = '168h'

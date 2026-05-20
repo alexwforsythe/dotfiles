@@ -164,6 +164,11 @@ zstyle ':completion:*:git*:*' menu select=2
 # @audit auto-select first item?
 setopt menucomplete
 
+# Point _git to git-completion.bash so it doesn't have to search for it every
+# time the function loads. This is only used by the official git zsh completions
+# (git-completion.zsh), not the one that ships with zsh.
+zstyle ':completion:*:*:git:*' script $XDG_DATA_HOME/bash-plugins/external-completions/git-completion.bash
+
 #
 # Formats
 #

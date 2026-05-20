@@ -72,6 +72,9 @@ if ! shopt -oq posix; then
     source:file "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 fi
 
+# git
+source:file "$XDG_DATA_HOME/bash-plugins/external-completions/git-completion.bash"
+
 # gcloud
 if [ -n "$HOMEBREW_PREFIX" ]; then
     source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.bash.inc"
