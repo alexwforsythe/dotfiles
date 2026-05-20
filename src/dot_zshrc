@@ -48,7 +48,8 @@ if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
   setopt combiningchars
 fi
 
-# Disable the log builtin, so we don't conflict with /usr/bin/log
+# Disable the log builtin so we don't conflict with /usr/bin/log, which is used
+# for system logging on some OSes like MacOS.
 disable log
 
 export HISTSIZE=10000
