@@ -3,13 +3,13 @@
     "**/zsh{,-plugins}/**/*{functions,completions}/*": "shellscript",
     "*bash_profile": "shellscript",
     "*bashrc": "shellscript",
-    "*delta.conf": "ini",
+    "*delta.conf": "gitconfig",
     "*editrc": "inputrc",
-    "*gitconfig": "ini",
+    "*gitconfig": "gitconfig",
     "*inputrc": "inputrc",
     "*myclirc": "toml",
     "*tmux.conf": "tmux",
     "*vimrc": "viml",
-    "chezmoiignore": "gitignore"
+    ".chezmoiignore": "ignore"
   }
 }
