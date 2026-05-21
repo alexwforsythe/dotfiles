@@ -32,7 +32,7 @@ source:file $ZPLUGINDIR/prezto/editor/init.zsh
 fpath=($ZPLUGINDIR/prezto/git/functions $fpath)
 autoload -Uz git-branch-current git-commit-lost git-dir git-hub-browse git-hub-shorten-url git-info git-root git-stash-clear-interactive git-stash-dropped git-stash-recover git-submodule-move git-submodule-remove
 source:file $ZPLUGINDIR/prezto/git/alias.zsh
-source:file $ZPLUGINDIR/prezto/completion/external/zsh-completions.plugin.zsh
+source:file $ZPLUGINDIR/zsh-completions/zsh-completions.plugin.zsh
 source:file $ZPLUGINDIR/external-completions/external-completions.plugin.zsh
 source:file $ZPLUGINDIR/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source:file $ZPLUGINDIR/prezto/history/init.zsh

@@ -42,9 +42,7 @@ plugins=(
 
     # Load completion definitions before zsh-autocomplete because it calls
     # compinit.
-    # zsh-users/zsh-completions: still in prezto until we stop using
-    # prezto/completion:
-    prezto/completion/external
+    zsh-completions
     external-completions
     zsh-autocomplete
 

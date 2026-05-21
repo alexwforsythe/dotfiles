@@ -18,14 +18,6 @@ stripComponents = 1
 refreshPeriod = '168h'
 exclude = ['*/.*']
 
-['.local/share/zsh-plugins/prezto/completion/external']
-type = 'archive'
-url = 'https://github.com/zsh-users/zsh-completions/archive/master.tar.gz'
-exact = true
-stripComponents = 1
-refreshPeriod = '168h'
-exclude = ['*/.*']
-
 ['.local/share/zsh-plugins/prezto/history-substring-search/external']
 type = 'archive'
 url = 'https://github.com/zsh-users/zsh-history-substring-search/archive/master.tar.gz'
@@ -89,3 +81,11 @@ exact = true
 stripComponents = 1
 refreshPeriod = '168h'
 exclude = ['*/.*', '*/tests']
+
+['.local/share/zsh-plugins/zsh-completions']
+type = 'archive'
+url = 'https://github.com/zsh-users/zsh-completions/archive/master.tar.gz'
+exact = true
+stripComponents = 1
+refreshPeriod = '168h'
+exclude = ['*/.*']
