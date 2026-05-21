@@ -46,8 +46,6 @@ brew openjdk # for the PlantUML VSCode extension
 brew oven-sh/bun/bun
 # brew plantuml
 # brew pre-commit
-brew pyenv
-brew python
 brew rbenv
 brew rill
 brew ripgrep
@@ -61,6 +59,7 @@ brew tinted-theming/tinted/tinty
 brew tlrc
 brew tmux
 brew tree
+brew uv
 brew vhs
 brew wget
 brew yarn

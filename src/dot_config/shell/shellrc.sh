@@ -6,8 +6,6 @@
 #  - Should contain aliases, expensive commands, and other non-essential configs
 #
 
-# @audit handled by python plugin
-run:if-cmd python3 source:file "$XDG_CONFIG_HOME/shell/pythonrc.sh"
 if iscmd fzf; then
     export FZF_DIR="$HOMEBREW_PREFIX/opt/fzf"
     path-append "$FZF_DIR/bin"
