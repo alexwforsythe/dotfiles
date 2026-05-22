@@ -14,8 +14,8 @@
 
 # Temporarily change options.
 'builtin' 'local' '-a' 'p10k_config_opts'
-[[ ! -o 'aliases'         ]] || p10k_config_opts+=('aliases')
-[[ ! -o 'sh_glob'         ]] || p10k_config_opts+=('sh_glob')
+[[ ! -o 'aliases' ]] || p10k_config_opts+=('aliases')
+[[ ! -o 'sh_glob' ]] || p10k_config_opts+=('sh_glob')
 [[ ! -o 'no_brace_expand' ]] || p10k_config_opts+=('no_brace_expand')
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
@@ -32,9 +32,9 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    os_icon                 # os identifier
-    dir                     # current directory
-    vcs                     # git status
+    os_icon # os identifier
+    dir     # current directory
+    vcs     # git status
     # prompt_char           # prompt symbol
   )
 
@@ -55,46 +55,46 @@
   #  - net_iface -> tmux
   #  - tmux -> custom prompt segments
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    status                  # exit code of the last command
-    command_execution_time  # duration of the last command
-    background_jobs         # presence of background jobs
-    direnv                  # direnv status (https://direnv.net/)
-    virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    # goenv                   # go environment (https://github.com/syndbg/goenv)
-    # nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    # nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    # nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
-    # node_version          # node.js version
-    fnm                     # fnm version (@todo )
-    go_version              # go version (https://golang.org)
-    # rust_version          # rustc version (https://www.rust-lang.org)
-    # java_version          # java version (https://www.java.com/)
-    # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
-    # rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
-    # rvm                     # ruby version from rvm (https://rvm.io)
-    # luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
-    # jenv                    # java version from jenv (https://github.com/jenv/jenv)
-    # scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
-    # kubecontext             # current kubernetes context (https://kubernetes.io/)
-    # terraform               # terraform workspace (https://www.terraform.io)
-    # terraform_version     # terraform version (https://www.terraform.io)
-    aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
-    # gcloud                  # google cloud cli account and project (https://cloud.google.com/)
-    # google_app_cred         # google application credentials (https://cloud.google.com/docs/authentication/production)
-    context                 # user@hostname
-    vim_shell               # vim shell indicator (:sh)
+    status                 # exit code of the last command
+    command_execution_time # duration of the last command
+    background_jobs        # presence of background jobs
+    direnv                 # direnv status (https://direnv.net/)
+    virtualenv             # python virtual environment (https://docs.python.org/3/library/venv.html)
+    pyenv                  # python environment (https://github.com/pyenv/pyenv)
+    # goenv                  # go environment (https://github.com/syndbg/goenv)
+    # nodenv                 # node.js version from nodenv (https://github.com/nodenv/nodenv)
+    # nvm                    # node.js version from nvm (https://github.com/nvm-sh/nvm)
+    # nodeenv                # node.js environment (https://github.com/ekalinin/nodeenv)
+    # node_version # node.js version
+    fnm        # fnm version (@todo )
+    go_version # go version (https://golang.org)
+    # rust_version           # rustc version (https://www.rust-lang.org)
+    # java_version           # java version (https://www.java.com/)
+    # package                # name@version from package.json (https://docs.npmjs.com/files/package.json)
+    # rbenv                  # ruby version from rbenv (https://github.com/rbenv/rbenv)
+    # rvm                    # ruby version from rvm (https://rvm.io)
+    # luaenv                 # lua version from luaenv (https://github.com/cehoffman/luaenv)
+    # jenv                   # java version from jenv (https://github.com/jenv/jenv)
+    # scalaenv               # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
+    # kubecontext            # current kubernetes context (https://kubernetes.io/)
+    # terraform              # terraform workspace (https://www.terraform.io)
+    # terraform_version      # terraform version (https://www.terraform.io)
+    aws # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+    # gcloud                 # google cloud cli account and project (https://cloud.google.com/)
+    # google_app_cred        # google application credentials (https://cloud.google.com/docs/authentication/production)
+    context   # user@hostname
+    vim_shell # vim shell indicator (:sh)
     # @note disabled because we're using cursor animation instead.
-    # vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
-    vpn_ip                # virtual private network indicator
-    # load                  # CPU load
-    # disk_usage            # disk usage
-    # ram                   # free RAM
-    # swap                  # used swap
-    # ip                    # ip address and bandwidth usage for a specified network interface
-    # public_ip             # public IP address
-    # proxy                 # system-wide http/https/ftp proxy
-    # wifi                  # wifi speed
+    # vi_mode                # vi mode (you don't need this if you've enabled prompt_char)
+    vpn_ip # virtual private network indicator
+    # load                   # CPU load
+    # disk_usage             # disk usage
+    # ram                    # free RAM
+    # swap                   # used swap
+    # ip                     # ip address and bandwidth usage for a specified network interface
+    # public_ip              # public IP address
+    # proxy                  # system-wide http/https/ftp proxy
+    # wifi                   # wifi speed
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
@@ -350,10 +350,10 @@
     fi
 
     # Styling for different parts of Git status.
-    local       meta='%7F' # white foreground
-    local      clean='%0F' # black foreground
-    local   modified='%0F' # black foreground
-    local  untracked='%0F' # black foreground
+    local meta='%7F'       # white foreground
+    local clean='%0F'      # black foreground
+    local modified='%0F'   # black foreground
+    local untracked='%0F'  # black foreground
     local conflicted='%1F' # red foreground
 
     local res
@@ -363,27 +363,25 @@
       # If local branch name is at most 32 characters long, show it in full.
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show local branch name in full without truncation, delete the next line.
-      (( $#branch > 32 )) && branch[13,-13]="…"  # <-- this line
+      (($#branch > 32)) && branch[13,-13]="…" # <-- this line
       res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}${branch//\%/%%}"
     fi
-
-    if [[ -n $VCS_STATUS_TAG
-          # Show tag only if not on a branch.
-          # Tip: To always show tag, delete the next line.
-          && -z $VCS_STATUS_LOCAL_BRANCH  # <-- this line
-        ]]; then
+    # Show tag only if not on a branch.
+    # Tip: To always show tag, delete the next line.
+    if [[ -n $VCS_STATUS_TAG &&
+      -z $VCS_STATUS_LOCAL_BRANCH ]]; then # <-- this line
       local tag=${(V)VCS_STATUS_TAG}
       # If tag name is at most 32 characters long, show it in full.
       # Otherwise show the first 12 … the last 12.
       # Tip: To always show tag name in full without truncation, delete the next line.
-      (( $#tag > 32 )) && tag[13,-13]="…"  # <-- this line
+      (($#tag > 32)) && tag[13,-13]="…" # <-- this line
       res+="${meta}#${clean}${tag//\%/%%}"
     fi
 
     # Display the current Git commit if there is no branch and no tag.
     # Tip: To always display the current Git commit, delete the next line.
-    [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] &&  # <-- this line
-      res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
+    [[ -z $VCS_STATUS_LOCAL_BRANCH && -z $VCS_STATUS_TAG ]] \
+      && res+="${meta}@${clean}${VCS_STATUS_COMMIT[1,8]}"
 
     # Show tracking branch name if it differs from local branch.
     if [[ -n ${VCS_STATUS_REMOTE_BRANCH:#$VCS_STATUS_LOCAL_BRANCH} ]]; then
@@ -396,35 +394,35 @@
     fi
 
     # ⇣42 if behind the remote.
-    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
+    ((VCS_STATUS_COMMITS_BEHIND)) && res+=" ${clean}⇣${VCS_STATUS_COMMITS_BEHIND}"
     # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
-    (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
-    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
+    ((VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND)) && res+=" "
+    ((VCS_STATUS_COMMITS_AHEAD)) && res+="${clean}⇡${VCS_STATUS_COMMITS_AHEAD}"
     # ⇠42 if behind the push remote.
-    (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
+    ((VCS_STATUS_PUSH_COMMITS_BEHIND)) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
+    ((VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND)) && res+=" "
     # ⇢42 if ahead of the push remote; no leading space if also behind: ⇠42⇢42.
-    (( VCS_STATUS_PUSH_COMMITS_AHEAD  )) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
+    ((VCS_STATUS_PUSH_COMMITS_AHEAD)) && res+="${clean}⇢${VCS_STATUS_PUSH_COMMITS_AHEAD}"
     # *42 if have stashes.
-    (( VCS_STATUS_STASHES        )) && res+=" ${clean}*${VCS_STATUS_STASHES}"
+    ((VCS_STATUS_STASHES)) && res+=" ${clean}*${VCS_STATUS_STASHES}"
     # 'merge' if the repo is in an unusual state.
-    [[ -n $VCS_STATUS_ACTION     ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
+    [[ -n $VCS_STATUS_ACTION ]] && res+=" ${conflicted}${VCS_STATUS_ACTION}"
     # ~42 if have merge conflicts.
-    (( VCS_STATUS_NUM_CONFLICTED )) && res+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
+    ((VCS_STATUS_NUM_CONFLICTED)) && res+=" ${conflicted}~${VCS_STATUS_NUM_CONFLICTED}"
     # +42 if have staged changes.
-    (( VCS_STATUS_NUM_STAGED     )) && res+=" ${modified}+${VCS_STATUS_NUM_STAGED}"
+    ((VCS_STATUS_NUM_STAGED)) && res+=" ${modified}+${VCS_STATUS_NUM_STAGED}"
     # !42 if have unstaged changes.
-    (( VCS_STATUS_NUM_UNSTAGED   )) && res+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
+    ((VCS_STATUS_NUM_UNSTAGED)) && res+=" ${modified}!${VCS_STATUS_NUM_UNSTAGED}"
     # ?42 if have untracked files. It's really a question mark, your font isn't broken.
     # See POWERLEVEL9K_VCS_UNTRACKED_ICON above if you want to use a different icon.
     # Remove the next line if you don't want to see untracked files at all.
-    (( VCS_STATUS_NUM_UNTRACKED  )) && res+=" ${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
+    ((VCS_STATUS_NUM_UNTRACKED)) && res+=" ${untracked}${(g::)POWERLEVEL9K_VCS_UNTRACKED_ICON}${VCS_STATUS_NUM_UNTRACKED}"
     # "─" if the number of unstaged files is unknown. This can happen due to
     # POWERLEVEL9K_VCS_MAX_INDEX_SIZE_DIRTY (see below) being set to a non-negative number lower
     # than the number of files in the Git index, or due to bash.showDirtyState being set to false
     # in the repository config. The number of staged and untracked files may also be unknown
     # in this case.
-    (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}─"
+    ((VCS_STATUS_HAS_UNSTAGED == -1)) && res+=" ${modified}─"
 
     typeset -g my_git_format=$res
   }
@@ -749,9 +747,9 @@
   #   typeset -g POWERLEVEL9K_AWS_TEST_VISUAL_IDENTIFIER_EXPANSION='⭐'
   #   typeset -g POWERLEVEL9K_AWS_TEST_CONTENT_EXPANSION='> ${P9K_CONTENT} <'
   typeset -g POWERLEVEL9K_AWS_CLASSES=(
-      # '*prod*'  PROD    # These values are examples that are unlikely
-      # '*test*'  TEST    # to match your needs. Customize them as needed.
-      '*'       DEFAULT)
+    # '*prod*'  PROD    # These values are examples that are unlikely
+    # '*test*'  TEST    # to match your needs. Customize them as needed.
+    '*' DEFAULT)
   typeset -g POWERLEVEL9K_AWS_DEFAULT_FOREGROUND=3
   typeset -g POWERLEVEL9K_AWS_DEFAULT_BACKGROUND=239
   # typeset -g POWERLEVEL9K_AWS_DEFAULT_VISUAL_IDENTIFIER_EXPANSION='⭐'
@@ -920,11 +918,11 @@
 
   # If p10k is already loaded, reload configuration.
   # This works even with POWERLEVEL9K_DISABLE_HOT_RELOAD=true.
-  (( ! $+functions[p10k] )) || p10k reload
+  ((!$+functions[p10k])) || p10k reload
 }
 
 # Tell `p10k configure` which file it should overwrite.
 typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
 
-(( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
+((${#p10k_config_opts})) && setopt ${p10k_config_opts[@]}
 'builtin' 'unset' 'p10k_config_opts'
