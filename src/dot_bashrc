@@ -98,3 +98,9 @@ source:file "$FZF_DIR/shell/key-bindings.bash" # @audit-ok
 # colorize output. Here's a good reference:
 # https://the.exa.website/docs/colour-themes
 run:if-cmd gdircolors eval "$(gdircolors)"
+
+#
+# Hooks
+#
+
+eval:if-cmd direnv eval "$(direnv hook bash)"
