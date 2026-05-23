@@ -115,7 +115,7 @@ source:file "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
 # zsh-autocomplete
 source:file "$XDG_CONFIG_HOME/shell/zsh/zsh-autocomplete-rc.zsh"
 
-source:file "$XDG_CONFIG_HOME/shell/zsh/load-plugins.zsh"
+source:file "$XDG_CONFIG_HOME/shell/zsh/gen/load-plugins.zsh"
 # Load p10k immediately after plugins for a fast prompt.
 # https://github.com/romkatv/zsh-bench
 source:file "$XDG_CONFIG_HOME/shell/zsh/p10k.zsh"
@@ -140,7 +140,7 @@ source:file "$XDG_CONFIG_HOME/shell/zsh/aliases.zsh"
 
 # Initialize commands like direnv, zoxide, etc. This could be a bit slow, so
 # load it last.
-source:file "$XDG_CONFIG_HOME/shell/zsh/init-commands.zsh"
+source:file "$XDG_CONFIG_HOME/shell/zsh/gen/init-commands.zsh"
 
 # @note Uncomment the following line to print startup time.
 # zprof

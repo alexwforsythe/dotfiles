@@ -1,19 +1,6 @@
 #!/usr/bin/env zsh
 # shellcheck shell=bash
 
-emulate -LR zsh
-# setopt nomonitor
-
-#
-# build-load-plugins: defines the list of enabled zsh plugins and builds an init
-# script to load them. The init script should be sourced by .zshrc.
-#
-#  - This script is run automatically after each call to `chezmoi apply`, which
-#    ensures the init script is always up-to-date
-#  - Writing the script to a file instead of printing it to stdout makes it
-#    easier to debug and caches the output for slightly better performance
-#
-
 plugins=(
     # prezto modules
     #
@@ -73,9 +60,3 @@ plugins=(
     # depend on it
     powerlevel10k
 )
-
-autoload -Uz print-load-plugins
-print-load-plugins $plugins >"$XDG_CONFIG_HOME/shell/zsh/load-plugins.zsh"
-
-# Use this line instead to load the plugins directly:
-# source <(print-load-plugins $plugins)
