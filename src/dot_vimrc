@@ -53,6 +53,9 @@ nmap <leader>w :w!<cr>
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
+" Prepend mise shims to PATH
+let $PATH = $XDG_DATA_HOME . '/mise/shims:' . $PATH
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface

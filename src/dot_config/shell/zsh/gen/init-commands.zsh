@@ -8,20 +8,70 @@
 # shell. Should be called by ~/.zshrc.
 #
 
-# direnv
+# mise
 
-_direnv_hook() {
-  trap -- '' SIGINT
-  eval "$("/opt/homebrew/bin/direnv" export zsh)"
-  trap - SIGINT
-}
-typeset -ag precmd_functions
-if (( ! ${precmd_functions[(I)_direnv_hook]} )); then
-  precmd_functions=(_direnv_hook $precmd_functions)
+export MISE_SHELL=zsh
+if [ -z "${__MISE_ORIG_PATH:-}" ]; then
+  export __MISE_ORIG_PATH="$PATH"
 fi
-typeset -ag chpwd_functions
-if (( ! ${chpwd_functions[(I)_direnv_hook]} )); then
-  chpwd_functions=(_direnv_hook $chpwd_functions)
+export __MISE_ZSH_PRECMD_RUN=0
+export __MISE_ZSH_CHPWD_RAN=0
+
+mise() {
+  local command
+  command="${1:-}"
+  if [ "$#" = 0 ]; then
+    command /opt/homebrew/bin/mise
+    return
+  fi
+  shift
+
+  case "$command" in
+  deactivate|shell|sh)
+    # if argv doesn't contains -h,--help
+    if [[ ! " $@ " =~ " --help " ]] && [[ ! " $@ " =~ " -h " ]]; then
+      eval "$(command /opt/homebrew/bin/mise "$command" "$@")"
+      return $?
+    fi
+    ;;
+  esac
+  command /opt/homebrew/bin/mise "$command" "$@"
+}
+
+autoload -Uz add-zsh-hook
+_mise_hook() {
+  eval "$(/opt/homebrew/bin/mise hook-env -s zsh)";
+}
+_mise_hook_precmd() {
+  if [[ "${__MISE_ZSH_CHPWD_RAN:-0}" == "1" ]]; then
+    export __MISE_ZSH_CHPWD_RAN=0
+    return
+  fi
+  eval "$(/opt/homebrew/bin/mise hook-env -s zsh --reason precmd)";
+}
+_mise_hook_chpwd() {
+  export __MISE_ZSH_CHPWD_RAN=1
+  eval "$(/opt/homebrew/bin/mise hook-env -s zsh --reason chpwd)";
+}
+add-zsh-hook precmd _mise_hook_precmd
+add-zsh-hook chpwd _mise_hook_chpwd
+
+_mise_hook
+if [ -z "${_mise_cmd_not_found:-}" ]; then
+    _mise_cmd_not_found=1
+    [ -n "$(declare -f command_not_found_handler)" ] && eval "${$(declare -f command_not_found_handler)/command_not_found_handler/_command_not_found_handler}"
+
+    function command_not_found_handler() {
+        if [[ "$1" != "mise" && "$1" != "mise-"* ]] && /opt/homebrew/bin/mise hook-not-found -s zsh -- "$1"; then
+          _mise_hook
+          "$@"
+        elif [ -n "$(declare -f _command_not_found_handler)" ]; then
+            _command_not_found_handler "$@"
+        else
+            echo "zsh: command not found: $1" >&2
+            return 127
+        fi
+    }
 fi
 
 # zoxide (load after compinit, fzf-rc, zsh-autocomplete)

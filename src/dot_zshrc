@@ -138,8 +138,8 @@ autoload -Uz tetris tetriscurses
 source:file "$XDG_CONFIG_HOME/shell/zsh/keybinds.zsh"
 source:file "$XDG_CONFIG_HOME/shell/zsh/aliases.zsh"
 
-# Initialize commands like direnv, zoxide, etc. This could be a bit slow, so
-# load it last.
+# Initialize commands like mise, zoxide, etc. This could be a bit slow, so load
+# it last.
 source:file "$XDG_CONFIG_HOME/shell/zsh/gen/init-commands.zsh"
 
 # @note Uncomment the following line to print startup time.

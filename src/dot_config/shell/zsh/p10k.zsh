@@ -60,14 +60,13 @@
     background_jobs        # presence of background jobs
     direnv                 # direnv status (https://direnv.net/)
     virtualenv             # python virtual environment (https://docs.python.org/3/library/venv.html)
-    pyenv                  # python environment (https://github.com/pyenv/pyenv)
+    # pyenv                  # python environment (https://github.com/pyenv/pyenv)
     # goenv                  # go environment (https://github.com/syndbg/goenv)
     # nodenv                 # node.js version from nodenv (https://github.com/nodenv/nodenv)
     # nvm                    # node.js version from nvm (https://github.com/nvm-sh/nvm)
     # nodeenv                # node.js environment (https://github.com/ekalinin/nodeenv)
-    # node_version # node.js version
-    fnm        # fnm version (@todo )
-    go_version # go version (https://golang.org)
+    node_version # node.js version
+    go_version   # go version (https://golang.org)
     # rust_version           # rustc version (https://www.rust-lang.org)
     # java_version           # java version (https://www.java.com/)
     # package                # name@version from package.json (https://docs.npmjs.com/files/package.json)

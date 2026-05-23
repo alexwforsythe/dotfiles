@@ -1,39 +1,33 @@
 # Taps: brew tap
 tap koekeishiya/formulae
-tap oven-sh/bun
 tap rilldata/tap
 tap tinted-theming/tinted
 
 # Brews: brew install
-# brew awscli
 brew bash-completion@2
 brew bat
 brew btop
-brew bufbuild/buf/buf
 brew chezmoi
 # Install GNU coreutils to get gls and gdircolors, which support colorization
 # from LS_COLORS (instead of bash's LSCOLORS).
 # https://github.com/sharkdp/vivid#on-macos
 brew coreutils # for prezto/gnu-utils
-brew crystal # for tmux-fingers
 # brew derailed/k9s/k9s
 brew direnv
 brew fd
-brew fnm
 brew fzf
 brew gh
 brew git
 brew git-delta
 brew gnu-tar
-brew go
+brew gpg
 brew graphviz # for the PlantUML VSCode extension
 brew httpie
 brew imessage-exporter
 brew jq
 brew koekeishiya/formulae/yabai
 brew mas # for appstore commands
-brew lua-language-server
-brew luarocks
+brew mise
 brew MisterTea/et/et
 # https://thevaluable.dev/mysql-command-line-tool-mycli/
 brew mycli
@@ -41,28 +35,18 @@ brew mysql@8.0
 # brew ncdu # @todo try & configure
 brew neovim
 # brew ngrok
-brew node
-brew openjdk # for the PlantUML VSCode extension
-brew oven-sh/bun/bun
 # brew plantuml
 # brew pre-commit
-brew rbenv
 brew rill
 brew ripgrep
-brew ruby
-brew ruby-build
-brew rust
 brew sd
-brew shellcheck
-brew shfmt
+brew sqlfmt
+brew sqruff
 brew tinted-theming/tinted/tinty
 brew tlrc
 brew tmux
 brew tree
-brew uv
-brew vhs
 brew wget
-brew yarn
 brew yq
 brew zoxide
 
@@ -72,7 +56,6 @@ cask bitwarden
 cask docker-desktop
 cask font-meslo-lg-nerd-font
 cask font-jetbrains-mono-nerd-font # for ligaturizer
-cask gcloud-cli
 cask hammerspoon
 cask iterm2
 cask maccy

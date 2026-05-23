@@ -66,6 +66,7 @@ export GOOGLE_APPLICATION_CREDENTIALS="$XDG_CONFIG_HOME/gcloud/application_defau
 
 # go
 export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
 
 # tinty: https://github.com/tinted-theming/tinted-shell?tab=readme-ov-file#customization
 export TINTED_SHELL_ENABLE_BASE16_VARS=1
@@ -104,16 +105,6 @@ if [ -n "$IS_MACOS" ] && [ -z "$HOMEBREW_PREFIX" ]; then
   else
     log:warn "homebrew not found in /opt/homebrew/bin"
   fi
-fi
-
-# java: override system installation. This is needed for the PlantUML VSCode
-# extension.
-if [ -n "$HOMEBREW_PREFIX" ]; then
-  path-prepend \
-    "$HOMEBREW_PREFIX/opt/mysql@8.0/bin" \
-    "$HOMEBREW_PREFIX/opt/openjdk/bin"
-
-  # @todo link brew completions if not linked
 fi
 
 path-prepend \

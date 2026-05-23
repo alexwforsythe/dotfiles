@@ -20,18 +20,6 @@ if [ -r "$XDG_CONFIG_HOME/shell/workrc.sh" ]; then
     source:file "$XDG_CONFIG_HOME/shell/workrc.sh"
 fi
 
-#
-# Hooks
-#
-
-# node: fnm
-# @audit
-eval:if-cmd fnm fnm env --use-on-cd --log-level quiet
-
-# rbenv
-# @audit
-eval:if-cmd rbenv rbenv init -
-
 # tinty
 TINTY_SCHEME=${TINTY_SCHEME:-$(<"$TINTY_DIR/current_scheme")}
 export TINTY_SCHEME

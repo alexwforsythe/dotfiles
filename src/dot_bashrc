@@ -103,4 +103,4 @@ run:if-cmd gdircolors eval "$(gdircolors)"
 # Hooks
 #
 
-eval:if-cmd direnv eval "$(direnv hook bash)"
+eval:if-cmd mise eval mise activate bash

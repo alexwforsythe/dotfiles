@@ -17,9 +17,9 @@ cat <<EOF
 
 EOF
 
-if hash direnv >/dev/null 2>&1; then
-    printf "# direnv\n"
-    direnv hook zsh
+if hash mise >/dev/null 2>&1; then
+    printf '# mise\n\n'
+    mise activate zsh
     printf '\n'
 fi
 

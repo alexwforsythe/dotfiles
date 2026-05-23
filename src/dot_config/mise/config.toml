@@ -1,0 +1,40 @@
+[tools]
+awscli = { version = "latest", symlink_bins = "true" }
+buf = "latest"
+bun = "latest"
+cloud-sql-proxy = "latest"
+crystal = "latest"
+gcloud = "latest"
+go = "latest"
+"go:github.com/cweill/gotests/gotests" = "latest"
+"go:github.com/go-delve/delve/cmd/dlv" = "latest"
+"go:github.com/josharian/impl" = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
+golangci-lint = "latest"
+java = "lts"
+kustomize = "latest"
+lua = "latest"
+lua-language-server = { version = "latest", depends = "lua" }
+luajit = { version = "latest", depends = "lua" }
+node = "lts"
+prettier = "latest"
+python = "3"
+ruby = "latest"
+ruff = "latest"
+rust = "stable"
+shellcheck = "latest"
+shfmt = "latest"
+stylua = { version = "latest", depends = "lua" }
+ty = "latest"
+uv = "latest"
+vhs = "latest"
+yarn = { version = "latest", depends = "node" }
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "ruby"]
+
+[settings.ruby]
+compile = false
+
+[settings.python]
+uv_venv_auto = "create|source"
