@@ -13,8 +13,10 @@
 # https://github.com/zdharma/color
 #
 
-# usage: pprint(color, style?)
-function pprint() {
+# usage:
+# r_pprint color? style? arg ...
+# echo $REPLY
+r_pprint() {
     local fg
     case $1 in
     black | b) fg='30' ;;
@@ -39,7 +41,13 @@ function pprint() {
     strikethrough | s) style=9 && shift ;;
     esac
 
-    printf '\033[%d;%sm%s\033[0;m' $style "$fg" "$@"
+    printf -v REPLY '\033[%d;%sm%s\033[0;m' "$style" "$fg" "$@"
+}
+
+# usage: r_pprint color? style? arg ...
+pprint() {
+    r_pprint "$@"
+    print "$REPLY"
 }
 
 #
@@ -51,13 +59,17 @@ log_level_info=2
 log_level_warn=3
 log_level_error=4
 
-RC_LOG_LEVEL=${RC_LOG_LEVEL:-$log_level_info}
-export RC_LOG_LEVEL
+export RC_LOG_LEVEL=${RC_LOG_LEVEL:-$log_level_info}
 
-_pre_debug=$(pprint c b "debug ")
-_pre_info=$(pprint g b "info ")
-_pre_warn=$(pprint y b "warn ")
-_pre_error=$(pprint r b "error ")
+r_pprint c b "debug "
+_pre_debug=$REPLY
+r_pprint g b "info "
+_pre_info=$REPLY
+r_pprint y b "warn "
+_pre_warn=$REPLY
+r_pprint r b "error "
+_pre_error=$REPLY
+unset REPLY
 
 log:debug() { ((RC_LOG_LEVEL > log_level_debug)) || printf '%s %s\n' "$_pre_debug" "$@"; }
 log:info() { ((RC_LOG_LEVEL > log_level_info)) || printf '%s %s\n' "$_pre_info" "$@"; }

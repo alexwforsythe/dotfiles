@@ -175,12 +175,12 @@ zstyle ':completion:*:*:git:*' script $XDG_DATA_HOME/bash-plugins/external-compl
 
 zstyle ':completion:*' list-separator 
 
-_tagfmt () {
+_tagfmt() {
   # @note We use normal printf escape sequences to avoid the "do you wish to see
   # all possibilities" prompt:
   # https://github.com/marlonrichert/zsh-autocomplete/issues/654
-  zstyle ":completion:*${1:+:$1}" \
-    format $(pprint ${3:-8} bold "${2:-󰌕} ${5:-%d}${${4:+ $4}:-}")
+  r_pprint ${3:-8} bold "${2:-󰌕} ${5:-%d}${${4:+ $4}:-}"
+  zstyle ":completion:*${1:+:$1}" format $REPLY
     # format "%F{${3:-8}%B${2:-󰌕} ${5:-%d}${${4:+ $4}:-}%b%f"
 }
 
@@ -290,3 +290,5 @@ _tagfmt secrets-list 
 _tagfmt services-list  # 
 _tagfmt stacks-list 
 _tagfmt volumes-list 
+
+unfunction _tagfmt
