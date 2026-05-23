@@ -89,26 +89,24 @@ autoload -Uz "$XDG_CONFIG_HOME/shell/zsh/functions"/*(.:t)
 # Instant prompt
 #
 
+# Activate direnv before instant prompt for compatibility, if a .env* file is
+# present:
+# https://github.com/romkatv/powerlevel10k/blob/master/README.md#how-do-i-initialize-direnv-when-using-instant-prompt
+# shellcheck disable=2144,2157
+if iscmd direnv && [[ -n .env*(#q-.N) ]]; then
+  direnv export zsh
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 #
-# Activate direnv here for compatibility:
-# https://github.com/romkatv/powerlevel10k/blob/master/README.md#how-do-i-initialize-direnv-when-using-instant-prompt
-#
 # @note tmux sessions should be created after instant prompt because tmux
 # generates output to parent process:
 # https://github.com/romkatv/powerlevel10k/issues/1203
+#
 # shellcheck disable=2296
-p10k_cache="${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
-# shellcheck disable=2144,2157
-if hash direnv >/dev/null 2>&1 && [[ -n .env*(#q-.N) ]]; then
-  eval direnv export zsh
-  source:file "$p10k_cache"
-  eval direnv hook zsh
-else
-  source:file "$p10k_cache"
-fi
+source:file "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
 
 #
 # Plugins
@@ -142,6 +140,8 @@ autoload -Uz tetris tetriscurses
 
 source:file "$XDG_CONFIG_HOME/shell/zsh/keybinds.zsh"
 source:file "$XDG_CONFIG_HOME/shell/zsh/aliases.zsh"
+
+eval:if-cmd direnv eval "$(direnv hook bash)"
 
 # @note Uncomment the following line to print startup time.
 # zprof
