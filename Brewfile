@@ -47,22 +47,27 @@ brew tlrc
 brew tmux
 brew tree
 brew wget
+brew xz
 brew yq
 brew zoxide
 
 # Apps: brew install --cask
 # cask alt-tab
 cask bitwarden
+cask docker
 cask docker-desktop
 cask font-meslo-lg-nerd-font
 cask font-jetbrains-mono-nerd-font # for ligaturizer
+cask google-cloud-sdk
 cask hammerspoon
+cask inkscape
 cask iterm2
 cask maccy
 cask meetingbar
 cask multitouch
 cask obsidian
 cask slack
+cask spotify
 cask steam
 cask visual-studio-code
 cask zoom
