@@ -37,7 +37,6 @@ source:file $ZPLUGINDIR/external-completions/external-completions.plugin.zsh
 source:file $ZPLUGINDIR/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source:file $ZPLUGINDIR/prezto/history/init.zsh
 source:file $ZPLUGINDIR/prezto/syntax-highlighting/init.zsh
-source:file $ZPLUGINDIR/prezto/history-substring-search/init.zsh
 source:file $ZPLUGINDIR/prezto/autosuggestions/init.zsh
 source:file $ZPLUGINDIR/prezto/directory/init.zsh
 source:file $ZPLUGINDIR/prezto/command-not-found/init.zsh

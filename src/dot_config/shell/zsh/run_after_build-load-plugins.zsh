@@ -48,7 +48,8 @@ plugins=(
 
     prezto/history
     prezto/syntax-highlighting
-    prezto/history-substring-search
+    # Incompatible with zsh-autocomplete:
+    # prezto/history-substring-search
     prezto/autosuggestions
     prezto/directory
     prezto/command-not-found
