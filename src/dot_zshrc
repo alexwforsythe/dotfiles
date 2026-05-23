@@ -129,9 +129,6 @@ source:file "$FZF_DIR/shell/key-bindings.zsh" # @audit-ok
 
 source:file "$XDG_CONFIG_HOME/shell/zsh/cdr.zsh"
 
-# zoxide (load after compinit, fzf-rc, zsh-autocomplete)
-eval:if-cmd zoxide zoxide init zsh # @audit-ok
-
 # Load completions config last so it overrides settings from other plugins.
 source:file "$XDG_CONFIG_HOME/shell/zsh/completions-rc.zsh"
 
@@ -141,7 +138,9 @@ autoload -Uz tetris tetriscurses
 source:file "$XDG_CONFIG_HOME/shell/zsh/keybinds.zsh"
 source:file "$XDG_CONFIG_HOME/shell/zsh/aliases.zsh"
 
-eval:if-cmd direnv eval "$(direnv hook bash)"
+# Initialize commands like direnv, zoxide, etc. This could be a bit slow, so
+# load it last.
+source:file "$XDG_CONFIG_HOME/shell/zsh/init-commands.zsh"
 
 # @note Uncomment the following line to print startup time.
 # zprof
