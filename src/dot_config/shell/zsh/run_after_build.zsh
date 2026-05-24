@@ -29,7 +29,8 @@ unset plugins
 # Generate init-commands.zsh.
 print-init-commands >$gen_dir/init-commands.zsh
 
-# Recompile zsh completions. -p is required to create/add new function digests.
-# -M enables memory-mapping so multiple zsh processes can share the same dump in
-# memory.
-zrecompile -q -p -M "$ZSH_COMPDUMP"
+# Recompile zsh completions.
+#  - -p: required to create/add new functions to the digest
+#  - -U: suppress alias expansion
+#  - -M: enables memory-mapping so multiple zsh processes can share the digest
+zrecompile -p -U -M "$ZSH_COMPDUMP"
