@@ -7,13 +7,14 @@ emulate -LR zsh
 setopt extendedglob globdots
 
 #
-# build.zsh: generates scripts to be sourced by ~/.zshrc and compiles zsh
-# completions dump.
+# build.zsh: generates scripts to be sourced by ~/.zshrc and compiles them, the
+# zsh completions dump, plugins, and plugin functions.
 #
 #  - This script runs automatically after each call to `chezmoi apply`, which
 #    ensures that generated scripts stay up-to-date
 #  - Generating script files makes them easier to debug and avoids the need to
 #    `eval` command output, which can slow down shell startup
+#  - Compiling scripts and function digests reduces shell startup time
 #
 
 autoload -Uz zrecompile
@@ -147,10 +148,33 @@ EOF
 # Generate and compile scripts.
 mkdir -p $gen_dir
 print-load-plugins $plugins >$load_plugins
+zrecompile -p -U -R $load_plugins
 print-init-commands >$init_commands
+zrecompile -p -U -R $init_commands
 
 # Recompile zsh completions dump.
 #  - -p: required to create/add new functions to the digest
 #  - -U: suppress alias expansion
 #  - -M: enables memory-mapping so multiple zsh processes can share the digest
 zrecompile -p -U -M "$ZSH_COMPDUMP"
+
+# Recompile zsh plugins and their function digests.
+for plugin in $plugins; do
+    r_plugin_init init $plugin
+    r_plugin_funcs_dir funcs_dir $plugin
+    if [[ -z $init && -z $funcs_dir ]]; then
+        printf "%s\n" "Plugin not found: $plugin" >&2
+        return 1
+    fi
+
+    # -R prevents the contents from being memory-mapped (i.e. shared between
+    # shells), which is preferred for scripts.
+    zrecompile -p -U -R $init
+
+    if [[ -n $funcs_dir ]]; then
+        r_autoloadable_funcs autoloadable_funcs $funcs_dir
+        if (($#autoloadable_funcs > 0)); then
+            zrecompile -p -U $funcs_dir ${autoloadable_funcs[@]}
+        fi
+    fi
+done
