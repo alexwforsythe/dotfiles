@@ -32,7 +32,7 @@ exclude = ['*/.*', '*/demo', '*/nix']
 
 ['.local/share/tmux-plugins/tmux-which-key/plugin/pyyaml']
 type = 'archive'
-url = 'https://github.com/yaml/pyyaml/archive/refs/tags/{{ (gitHubLatestRelease "yaml/pyyaml").TagName }}.tar.gz'
+url = 'https://github.com/yaml/pyyaml/archive/refs/tags/6.0.3.tar.gz'
 exact = true
 stripComponents = 1
 refreshPeriod = '168h'
