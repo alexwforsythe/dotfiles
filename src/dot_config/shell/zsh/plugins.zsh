@@ -55,6 +55,7 @@ plugins=(
     # zsh-autopair
     # forgit
     # fzf-tab
+    dbt
 
     # prompt: loads last because it depends on other modules, but others don't
     # depend on it
