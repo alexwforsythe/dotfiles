@@ -1,34 +1,33 @@
 #!/usr/bin/env bash
 
 #
-# ~/.bashrc: executed by bash for interactive non-login shells
-#
-#  - Sourced by .bash_profile so that it's loaded for all interactive shells
-#    (similar to .zshrc)
+# ~/.bashrc: sourced by bash in interactive non-login shells
 #
 # https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files
 #
 
-# If not running interactively, don't do anything
-case $- in
-*i*) ;;
-*) return ;;
-esac
-
-# Load shared helpers (required by profile.sh).
-rchelpers="${XDG_CONFIG_HOME:-$HOME/.config}/shell/helpers.sh"
-# shellcheck disable=1090
-if [ ! -r "$rchelpers" ] || ! source "$rchelpers"; then
-    printf '[error] %s\n' "file not loaded: $rchelpers" >&2
-    return 1
+#
+# Profile
+#
+# ~/.bash_profile isn't sourced by non-login shells, so load the shared profile
+# config here. Load env.sh first, which is required by profile.sh.
+_envrc="$XDG_CONFIG_HOME/shell/env.sh"
+if [ ! -r "$_envrc" ] || ! source "$_envrc"; then
+  printf '[error] %s\n' "file not loaded: $_envrc" >&2
+  return 1
 fi
-log:debug "file loaded: $rchelpers"
-unset rchelpers
+_profile="$XDG_CONFIG_HOME/shell/profile.sh"
+if [ ! -r "$_profile" ] || ! source "$_profile"; then
+  printf '[error] %s\n' "file not loaded: $_profile" >&2
+  return 1
+fi
+log:debug "file loaded: $_envrc"
+log:debug "file loaded: $_profile"
+unset _envrc _profile
 
-# Load shared shell environment (required by profile.sh).
-source:file "$XDG_CONFIG_HOME/shell/env.sh"
-# Load shared shell profile.
-source:file "$XDG_CONFIG_HOME/shell/profile.sh"
+#
+# Options
+#
 
 # Don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
@@ -45,6 +44,10 @@ shopt -s checkwinsize
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar
+
+#
+# Prompt
+#
 
 # Set variable identifying the chroot you work in (used in the prompt below).
 if [[ -z ${debian_chroot:-} && -r /etc/debian_chroot ]]; then

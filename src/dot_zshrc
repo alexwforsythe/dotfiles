@@ -2,8 +2,8 @@
 # shellcheck shell=bash
 
 #
-# ~/.zshrc: sourced in interactive shells
-#
+# ~/.zshrc: sourced by zsh in all interactive shells
+#  - Login, non-login
 #  - Should set up options, key bindings, functions, aliases, etc.
 #
 # Guides:
@@ -20,18 +20,20 @@
 # @note Uncomment the following line to profile startup time.
 # zmodload zsh/zprof
 
-# Load shared helpers (required by profile.sh).
-rchelpers="${XDG_CONFIG_HOME:-$HOME/.config}/shell/helpers.sh"
-# shellcheck disable=1090
-if [ ! -r "$rchelpers" ] || ! source "$rchelpers"; then
-    printf '[error] %s\n' "file not loaded: $rchelpers" >&2
-    return 1
-fi
-log:debug "file loaded: $rchelpers"
-unset rchelpers
+#
+# Profile
+#
+# Load the shared shell profile here so it will be sourced in all interactive
+# shells. ~/.zprofile is only loaded in login shells, so we don't use it.
+#
 
-# Load shared shell profile.
-source:file "$XDG_CONFIG_HOME/shell/profile.sh"
+_profile="$XDG_CONFIG_HOME/shell/profile.sh"
+if [ ! -r "$_profile" ] || ! source "$_profile"; then
+  printf '[error] %s\n' "file not loaded: $_profile" >&2
+  return 1
+fi
+log:debug "file loaded: $_profile"
+unset _profile
 
 #
 # Options

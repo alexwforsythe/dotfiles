@@ -2,7 +2,7 @@
 # shellcheck shell=bash
 
 #
-# ~/.zshenv: sourced on all invocations of the shell
+# ~/.zshenv: sourced by zsh in all shells
 #
 #  - Should set the command search path and other important env vars
 #  - Should not produce output or assume the shell is attached to a tty
@@ -19,7 +19,7 @@ unsetopt globalrcs
 
 # Load shared shell environment.
 if [ -r "${XDG_CONFIG_HOME:-$HOME/.config}/shell/env.sh" ]; then
-  # shellcheck disable=1091
+  # shellcheck source=src/dot_config/shell/env.sh
   source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/env.sh"
 fi
 

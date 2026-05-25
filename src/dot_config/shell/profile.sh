@@ -1,20 +1,28 @@
 #!/usr/bin/env bash
 
 #
-# profile.sh: executed by sh for login shells
+# profile.sh: executed by bash and zsh in all interactive shells
 #
 #  - Contains initial environment setup for bash and zsh
-#    - bash: sourced by .bash_profile
-#    - zsh: sourced by .zshrc
+#    - bash: sourced by ~/.bash_profile (login) and ~/.bashrc (non-login)
+#    - zsh: sourced by ~/.zshrc (all)
 #  - Should not run any external commands or expensive operations because the
 #    prompt and other plugins aren't set up yet
 #
 
+# Load shared helpers.
+_rchelpers="$XDG_CONFIG_HOME/shell/helpers.sh"
+# shellcheck source=src/dot_config/shell/helpers.sh
+if [ ! -r "$_rchelpers" ] || ! source "$_rchelpers"; then
+  printf '[error] %s\n' "file not loaded: $_rchelpers" >&2
+  return 1
+fi
+log:debug "file loaded: $_rchelpers"
+unset _rchelpers
+
 #
 # Terminal
 #
-
-export LANG="${LANG:-'en_US.UTF-8'}"
 
 if [[ $OSTYPE == darwin* ]]; then
   export IS_MACOS=true
@@ -27,75 +35,19 @@ if [ -n "$TMUX" ] || [ "${TERM%%[-.]*}" = "tmux" ]; then
 fi
 
 #
-# Default commands
+# Theme
 #
-
-export EDITOR=vim
-export VISUAL=$EDITOR
-export PAGER=less
-export LESS="--hilite-search \
---hilite-unread \
---ignore-case \
---LONG-PROMPT \
---mouse \
---quiet \
---quit-if-one-screen \
---RAW-CONTROL-CHARS \
---window=-4 \
---use-color"
-
-#
-# Config
-#
-
-# Readline config:
-# https://www.gnu.org/software/bash/manual/html_node/Readline-Init-File.html
-# @todo maybe link to ~/.inputrc
-export INPUTRC="$HOME/.inputrc"
-
-#
-# Environment
-#
-
-# js
-export YARN_CACHE_FOLDER="$XDG_CACHE_HOME/yarn/v6"
-export BUN_INSTALL_CACHE_DIR="$XDG_CACHE_HOME/bun/install/cache"
-
-# gcloud
-export GOOGLE_APPLICATION_CREDENTIALS="$XDG_CONFIG_HOME/gcloud/application_default_credentials.json"
-
-# go
-export GOPATH="$HOME/go"
-export GOBIN="$GOPATH/bin"
 
 # tinty: https://github.com/tinted-theming/tinted-shell?tab=readme-ov-file#customization
 export TINTED_SHELL_ENABLE_BASE16_VARS=1
 export TINTED_SHELL_ENABLE_BASE24_VARS=1
 export TINTY_DIR="$XDG_DATA_HOME/tinted-theming/tinty"
 
-#
-# Theme
-#
-
 # Load shell color theme early (before prompt plugins) so colors look good for
 # the rest of setup.
 #
 # https://github.com/tinted-theming/tinted-shell/blob/main/USAGE.md#oh-my-zsh
 source:file "$TINTY_DIR/tinted-shell-scripts-file.sh"
-
-#
-# Path
-#
-# Set the list of directories where the shell searches for programs.
-#
-
-path-append \
-  /usr/local/bin \
-  /usr/local/sbin \
-  /usr/bin \
-  /usr/sbin \
-  /bin \
-  /sbin
 
 if [ -n "$IS_MACOS" ] && [ -z "$HOMEBREW_PREFIX" ]; then
   # Set homebrew prefix and add bins to path.
@@ -106,12 +58,6 @@ if [ -n "$IS_MACOS" ] && [ -z "$HOMEBREW_PREFIX" ]; then
     log:warn "homebrew not found in /opt/homebrew/bin"
   fi
 fi
-
-path-prepend \
-  "$HOME/.local/bin" \
-  "$HOME/.local/sbin" \
-  "$HOME/.cargo/bin" \
-  "$GOPATH/bin"
 
 #
 # Environment: path/command-dependent

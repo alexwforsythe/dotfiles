@@ -1,18 +1,14 @@
 #!/usr/bin/env bash
 
 #
-# ~/.bash_profile: executed by bash for interactive login shells
-#
-#  - Should not run any external commands or expensive operations because the
-#    prompt and other plugins aren't set up yet
+# ~/.bash_profile: sourced by bash in interactive login shells
 #
 # https://www.gnu.org/software/bash/manual/bash.html#Bash-Startup-Files
 #
 
-# Load .bashrc so login shells behave the same as non-login shells (it isn't
-# sourced automatically by login shells).
-# shellcheck disable=1091
-if [ ! -r "$HOME/.bashrc" ] || ! source "$HOME/.bashrc"; then
-    printf '[error] %s\n' "file not loaded: $HOME/.bashrc" >&2
-    return 1
+# Login shells don't source ~/.bashrc, and non-login shells don't source this
+# file, so load ~/.bashrc here to make them behave the same.
+if [ -r "$HOME/.bashrc" ]; then
+    # shellcheck source=src/dot_bashrc
+    source "$HOME/.bashrc"
 fi

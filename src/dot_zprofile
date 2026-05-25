@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+# shellcheck shell=bash
+
+#
+# ~/.zprofile: sourced by zsh in all login shells
+#  - Interactive, non-interactive
+#    - Should not produce output or assume the shell is attached to a tty
+#  - Sourced after ~/.zshenv (all) and before ~/.zshrc (interactive)
+#
+# https://zsh.sourceforge.io/Intro/intro_3.html
+#
+
+# no-op: The shared shell profile is sourced in ~/.zshrc so it will be loaded in
+# all interactive shells.
