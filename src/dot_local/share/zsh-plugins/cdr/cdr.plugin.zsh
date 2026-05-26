@@ -2,7 +2,7 @@
 # shellcheck shell=bash
 
 #
-# cdr.zsh: sets up the cdr command to track and jump to recent directories.
+# cdr: sets up the cdr command to track and jump to recent directories.
 #
 # https://zsh.sourceforge.io/Doc/Release/User-Contributions.html#Recent-Directories
 #

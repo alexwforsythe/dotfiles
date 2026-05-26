@@ -56,6 +56,7 @@ plugins=(
     vim-surround
     run-help
     # zsh-autopair
+    cdr
     # forgit
     # fzf-tab
     dbt
