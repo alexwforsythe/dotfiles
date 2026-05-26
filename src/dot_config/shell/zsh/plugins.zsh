@@ -89,8 +89,9 @@ plugins=(
     $zsh_cfg/aliases.zsh
 
     # Initialize commands like mise, zoxide, etc. This could be a bit slow, so
-    # load it last.
-    $zsh_cfg/gen/init-commands.zsh
+    # load them last.
+    $zsh_cfg/gen/mise-activate.zsh
+    $zsh_cfg/gen/zoxide-init.zsh
 )
 
 unset zsh_cfg
