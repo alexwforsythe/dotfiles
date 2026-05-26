@@ -135,6 +135,10 @@ print-init-commands() {
 EOF
 
     if hash mise >/dev/null 2>&1; then
+        # Make sure mise is deactivated first, otherwise `activate` will print
+        # deactivation commands.
+        mise deactivate >/dev/null 2>&1
+
         printf '# mise\n\n'
         mise activate zsh
         printf '\n'
