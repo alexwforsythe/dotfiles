@@ -2,6 +2,9 @@
 # shellcheck shell=bash
 
 plugins=(
+    # Load first so the prompt is ready ASAP.
+    p10k-instant-prompt
+
     # prezto modules
     #
     # From the READMEs:
