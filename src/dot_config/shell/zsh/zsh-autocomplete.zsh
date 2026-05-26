@@ -2,8 +2,8 @@
 # shellcheck shell=bash
 
 #
-# zsh-autocomplete-rc.zsh: configures zsh-autocomplete and should be loaded
-# before the plugin
+# zsh-autocomplete.zsh: configures zsh-autocomplete and should be loaded before
+# the plugin
 #
 # https://github.com/marlonrichert/zsh-autocomplete/blob/main/.zshrc
 #
@@ -17,9 +17,9 @@ zstyle ':completion::complete:*' cache-path $ZSH_COMPCACHE
 
 # zsh-autocomplete styles
 
-# Load and initialize the completion system ignoring insecure directories with a
-# cache time of 20 hours, so it should almost always regenerate the first time a
-# shell is opened each day.
+# Load and initialize the completion system--ignoring insecure directories--with
+# a cache time of 20 hours, so it should almost always recompile if completions
+# changed the first time a shell is opened each day.
 #
 # Source: https://github.com/sorin-ionescu/prezto/blob/master/modules/completion/init.zsh
 if [[ $ZSH_COMPDUMP(#qNmh-20) ]]; then

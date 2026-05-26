@@ -2,9 +2,8 @@
 # shellcheck shell=bash
 
 #
-# external-completions: adds external completion definitions (e.g. homebrew) to
-# fpath so they will be picked up by the completion system.
-#
+# completions/register.zsh: adds external completion definitions (e.g. homebrew)
+# to fpath so they will be picked up by the completion system.
 #  - Should be loaded before any plugins that might call compinit, e.g.
 #    zsh-autocomplete
 #
@@ -60,6 +59,3 @@ fi
 # ngrok
 # @todo cache to file, change on upgrade (or just cache eval)
 # eval:if-cmd ngrok ngrok completion
-
-# Prepend user completions last so they take the highest priority.
-fpath=("$XDG_CONFIG_HOME/shell/zsh/completions" $fpath)

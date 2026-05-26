@@ -2,7 +2,7 @@
 # shellcheck shell=bash
 
 #
-# completions-rc.zsh: settings for the zsh completion system
+# compsys.zsh: settings for the zsh completion system
 #
 #  - Mostly copied from prezto/completion
 #    - Can't source it because it calls compinit, which we've delegated to

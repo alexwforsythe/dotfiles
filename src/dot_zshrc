@@ -79,47 +79,18 @@ unsetopt nomatch
 # shellcheck disable=2034
 typeset -gU cdpath fpath mailpath manpath path
 
-# Register user funcs and autoload them to make them callable. They can also be
-# invoked as scripts.
-# https://zsh.sourceforge.io/Intro/intro_4.html
-# @todo load last, but need plugin helpers early
-# shellcheck disable=2206
-fpath=($XDG_CONFIG_HOME/shell/zsh/functions $fpath)
-autoload -Uz "$XDG_CONFIG_HOME/shell/zsh/functions"/*(.:t)
-
 #
 # Plugins
 #
 
-# zsh-autocomplete
-source:file "$XDG_CONFIG_HOME/shell/zsh/zsh-autocomplete-rc.zsh"
-
 source:file "$XDG_CONFIG_HOME/shell/zsh/gen/load-plugins.zsh"
-# Load p10k immediately after plugins for a fast prompt.
-# https://github.com/romkatv/zsh-bench
-source:file "$XDG_CONFIG_HOME/shell/zsh/p10k.zsh"
-source:file "$XDG_CONFIG_HOME/shell/shellrc.sh"
 
-# fzf
-# https://thevaluable.dev/fzf-shell-integration/
-source:file "$FZF_DIR/shell/completion.zsh" # @audit-ok
-source:file "$FZF_DIR/shell/key-bindings.zsh" # @audit-ok
-# source:file "$XDG_CONFIG_HOME/shell/zsh/fzf-tab-rc.zsh"
-
-source:file "$XDG_CONFIG_HOME/shell/zsh/cdr.zsh"
-
-# Load completions config last so it overrides settings from other plugins.
-source:file "$XDG_CONFIG_HOME/shell/zsh/completions-rc.zsh"
+#
+# Misc
+#
 
 # https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/widgets.md
 autoload -Uz tetris tetriscurses
-
-source:file "$XDG_CONFIG_HOME/shell/zsh/keybinds.zsh"
-source:file "$XDG_CONFIG_HOME/shell/zsh/aliases.zsh"
-
-# Initialize commands like mise, zoxide, etc. This could be a bit slow, so load
-# it last.
-source:file "$XDG_CONFIG_HOME/shell/zsh/gen/init-commands.zsh"
 
 # @note Uncomment the following line to print startup time.
 # zprof

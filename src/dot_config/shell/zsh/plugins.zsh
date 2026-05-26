@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 # shellcheck shell=bash
 
+zsh_cfg=$XDG_CONFIG_HOME/shell/zsh
+
 plugins=(
     # Load first so the prompt is ready ASAP.
     p10k-instant-prompt
@@ -20,7 +22,7 @@ plugins=(
     # https://github.com/marlonrichert/zsh-autocomplete/discussions/808#discussioncomment-13648377
     #
     # load the config first
-    $ZDOTDIR/.zpreztorc # @todo to .config
+    $ZDOTDIR/.zpreztorc
     prezto/helper
     prezto/environment
     prezto/spectrum
@@ -33,7 +35,8 @@ plugins=(
     # Load completion definitions before zsh-autocomplete because it calls
     # compinit.
     zsh-completions
-    external-completions
+    $zsh_cfg/completions
+    $zsh_cfg/zsh-autocomplete.zsh
     zsh-autocomplete
 
     prezto/history
@@ -57,11 +60,37 @@ plugins=(
     run-help
     # zsh-autopair
     cdr
+    # $zsh_config/forgit.zsh
     # forgit
+    # $zsh_config/fzf-tab.zsh
     # fzf-tab
     dbt
 
     # prompt: loads last because it depends on other modules, but others don't
     # depend on it
     powerlevel10k
+    # Load p10k config immediately after the plugin.
+    $zsh_cfg/p10k.zsh
+
+    #
+    # User configs
+    #
+
+    $XDG_CONFIG_HOME/shell/shellrc.sh
+
+    # fzf: https://thevaluable.dev/fzf-shell-integration/
+    $FZF_DIR/shell/completion.zsh
+    $FZF_DIR/shell/key-bindings.zsh
+
+    # Load completions config after plugins so it can override their settings.
+    $zsh_cfg/compsys.zsh
+    $zsh_cfg/keybinds.zsh
+    $zsh_cfg/functions
+    $zsh_cfg/aliases.zsh
+
+    # Initialize commands like mise, zoxide, etc. This could be a bit slow, so
+    # load it last.
+    $zsh_cfg/gen/init-commands.zsh
 )
+
+unset zsh_cfg
