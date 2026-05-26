@@ -42,11 +42,17 @@ r_plugin_init() {
     # print -v $1 $matches[1]
 }
 
-# Returns the functions directory for the given plugin.
+# Returns the functions directory for the given plugin. $plugin can be an
+# absolute path or relative path in $ZPLUGINDIR to a dir containing a functions
+# dir, or a functions dir.
 #
 # Usage: r_plugin_funcs_dir $rval_name $plugin
 r_plugin_funcs_dir() {
-    print -v $1 -- {$ZPLUGINDIR/,}$2/functions(FN)
+    if [[ ${2:t} == functions ]]; then
+        print -v $1 -- {$ZPLUGINDIR/,}$2/*(.NY1:h)
+    else
+        print -v $1 -- {$ZPLUGINDIR/,}$2/functions/*(.NY1:h)
+    fi
 }
 
 # Returns an array of paths to all autoloadable functions in the given
