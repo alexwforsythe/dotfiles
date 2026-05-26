@@ -60,6 +60,7 @@ plugins=(
     run-help
     # zsh-autopair
     cdr
+    $zsh_cfg/fzf.zsh
     # $zsh_config/forgit.zsh
     # forgit
     # $zsh_config/fzf-tab.zsh
@@ -77,10 +78,6 @@ plugins=(
     #
 
     $XDG_CONFIG_HOME/shell/shellrc.sh
-
-    # fzf: https://thevaluable.dev/fzf-shell-integration/
-    $FZF_DIR/shell/completion.zsh
-    $FZF_DIR/shell/key-bindings.zsh
 
     # Load completions config after plugins so it can override their settings.
     $zsh_cfg/compsys.zsh

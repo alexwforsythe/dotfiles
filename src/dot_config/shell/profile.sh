@@ -55,3 +55,7 @@ source:file "$TINTY_DIR/tinted-shell-scripts-file.sh"
 
 # Use bat for manpages: https://github.com/sharkdp/bat?tab=readme-ov-file#man
 run:if-cmd bat export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+
+if [ -n "$HOMEBREW_PREFIX" ]; then
+  export FZF_DIR="$HOMEBREW_PREFIX/opt/fzf"
+fi

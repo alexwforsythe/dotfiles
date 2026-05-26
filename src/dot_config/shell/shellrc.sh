@@ -6,14 +6,6 @@
 #  - Should contain aliases, expensive commands, and other non-essential configs
 #
 
-if iscmd fzf; then
-    export FZF_DIR="$HOMEBREW_PREFIX/opt/fzf"
-    path-append "$FZF_DIR/bin"
-    source:file "$XDG_CONFIG_HOME/shell/fzf-rc.sh"
-    # @audit removed plugin -- still want to use it?
-    # source:file "$XDG_CONFIG_HOME/shell/forgit-rc.sh"
-fi
-
 # Load aliases last to overwrite any conflicting ones defined by plugins.
 source:file "$XDG_CONFIG_HOME/shell/aliases.sh"
 if [ -r "$XDG_CONFIG_HOME/shell/workrc.sh" ]; then

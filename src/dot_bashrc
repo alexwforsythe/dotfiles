@@ -98,10 +98,12 @@ source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.bash.inc"
 
 source:file "$XDG_CONFIG_HOME/shell/shellrc.sh"
 
-# fzf
-# https://thevaluable.dev/fzf-shell-integration/
-source:file "$FZF_DIR/shell/completion.bash"   # @audit-ok
-source:file "$FZF_DIR/shell/key-bindings.bash" # @audit-ok
+# fzf: https://thevaluable.dev/fzf-shell-integration/
+if [ -n "$FZF_DIR" ] && iscmd fzf; then
+    source:file "$XDG_CONFIG_HOME/shell/fzf.sh"
+    source:file "$FZF_DIR/shell/completion.bash"
+    source:file "$FZF_DIR/shell/key-bindings.bash"
+fi
 
 # Use dircolors to set LS_COLORS to a nice theme (its output is the setter
 # command).

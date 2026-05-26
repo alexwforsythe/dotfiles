@@ -31,7 +31,7 @@ supported-systems = ['base16']
 path = 'https://github.com/tinted-theming/tinted-fzf'
 name = 'tinted-fzf'
 themes-dir = 'sh'
-hook = 'source $DOTFILES_DIR/configs/fzf-rc.sh'
+hook = 'source $XDG_CONFIG_HOME/shell/fzf.sh'
 
 # @todo add hook for pulling btop theme from github
 
@@ -40,5 +40,5 @@ hook = 'source $DOTFILES_DIR/configs/fzf-rc.sh'
 path = 'https://github.com/tinted-theming/tinted-terminal'
 name = 'tinted-terminal'
 themes-dir = 'themes-16/iterm2-applescripts'
-hook = 'source $DOTFILES_DIR/configs/shellrc.sh'
+hook = 'source $XDG_CONFIG_HOME/shell/shellrc.sh'
 supported-systems = ['base16', 'base24']
