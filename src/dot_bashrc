@@ -10,16 +10,27 @@
 # Profile
 #
 # ~/.bash_profile isn't sourced by non-login shells, so load the shared profile
-# config here. Load env.sh first, which is required by profile.sh.
+# config here.
+#
+
+# Load env.sh and brew-shellenv first, which are required by profile.sh.
 _envrc="$XDG_CONFIG_HOME/shell/env.sh"
+# shellcheck source=src/dot_config/shell/env.sh
 if [ ! -r "$_envrc" ] || ! source "$_envrc"; then
-  printf '[error] %s\n' "file not loaded: $_envrc" >&2
-  return 1
+    printf '[error] %s\n' "file not loaded: $_envrc" >&2
+    return 1
 fi
+
+# Set homebrew prefix and add bins to path.
+if hash brew >/dev/null 2>&1; then
+    eval "$(brew shellenv bash)"
+fi
+
 _profile="$XDG_CONFIG_HOME/shell/profile.sh"
+# shellcheck source=src/dot_config/shell/profile.sh
 if [ ! -r "$_profile" ] || ! source "$_profile"; then
-  printf '[error] %s\n' "file not loaded: $_profile" >&2
-  return 1
+    printf '[error] %s\n' "file not loaded: $_profile" >&2
+    return 1
 fi
 log:debug "file loaded: $_envrc"
 log:debug "file loaded: $_profile"
@@ -79,9 +90,7 @@ fi
 source:file "$XDG_DATA_HOME/bash-plugins/external-completions/git-completion.bash"
 
 # gcloud
-if [ -n "$HOMEBREW_PREFIX" ]; then
-    source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.bash.inc"
-fi
+source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.bash.inc"
 
 #
 # Plugins

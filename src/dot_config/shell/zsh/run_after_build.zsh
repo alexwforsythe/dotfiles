@@ -21,6 +21,7 @@ autoload -Uz zrecompile
 
 gen_dir=$XDG_CONFIG_HOME/shell/zsh/gen
 load_plugins=$gen_dir/load-plugins.zsh
+brew_shellenv=$gen_dir/brew-shellenv.zsh
 mise_activate=$gen_dir/mise-activate.zsh
 zoxide_init=$gen_dir/zoxide-init.zsh
 gen_file_preamble="#!/usr/bin/env zsh
@@ -123,6 +124,11 @@ EOF
 # Generate scripts.
 mkdir -p $gen_dir
 print-load-plugins $plugins >$load_plugins
+
+if hash brew >/dev/null 2>&1; then
+    print $gen_file_preamble >$brew_shellenv
+    brew shellenv zsh >>$brew_shellenv
+fi
 
 if hash mise >/dev/null 2>&1; then
     # Make sure mise is deactivated first, otherwise `activate` will print

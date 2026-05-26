@@ -49,16 +49,6 @@ export TINTY_DIR="$XDG_DATA_HOME/tinted-theming/tinty"
 # https://github.com/tinted-theming/tinted-shell/blob/main/USAGE.md#oh-my-zsh
 source:file "$TINTY_DIR/tinted-shell-scripts-file.sh"
 
-if [ -n "$IS_MACOS" ] && [ -z "$HOMEBREW_PREFIX" ]; then
-  # Set homebrew prefix and add bins to path.
-  if [ -d /opt/homebrew/bin ]; then
-    path-prepend /opt/homebrew/bin
-    eval:if-cmd brew brew shellenv
-  else
-    log:warn "homebrew not found in /opt/homebrew/bin"
-  fi
-fi
-
 #
 # Environment: path/command-dependent
 #

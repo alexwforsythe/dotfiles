@@ -27,13 +27,21 @@
 # shells. ~/.zprofile is only loaded in login shells, so we don't use it.
 #
 
+# Load brew-shellenv first, which may be required by profile.sh.
+_brew_shellenv="$XDG_CONFIG_HOME/shell/zsh/gen/brew-shellenv.zsh"
+# shellcheck source=/dev/null
+if [ -r "$_brew_shellenv" ] && ! source "$_brew_shellenv"; then
+  printf '[warn] %s\n' "file not loaded: $_brew_shellenv" >&2
+fi
 _profile="$XDG_CONFIG_HOME/shell/profile.sh"
+# shellcheck source=src/dot_config/shell/profile.sh
 if [ ! -r "$_profile" ] || ! source "$_profile"; then
   printf '[error] %s\n' "file not loaded: $_profile" >&2
   return 1
 fi
+log:debug "file loaded: $_brew_shellenv"
 log:debug "file loaded: $_profile"
-unset _profile
+unset _brew_shellenv _profile
 
 #
 # Options
