@@ -24,6 +24,7 @@ load_plugins=$gen_dir/load-plugins.zsh
 brew_shellenv=$gen_dir/brew-shellenv.zsh
 mise_activate=$gen_dir/mise-activate.zsh
 zoxide_init=$gen_dir/zoxide-init.zsh
+external_completions=$XDG_DATA_HOME/zsh-plugins/external-completions/functions
 gen_file_preamble="#!/usr/bin/env zsh
 # shellcheck shell=bash
 
@@ -128,6 +129,13 @@ print-load-plugins $plugins >$load_plugins
 if hash brew >/dev/null 2>&1; then
     print $gen_file_preamble >$brew_shellenv
     brew shellenv zsh >>$brew_shellenv
+fi
+
+if hash uv >/dev/null 2>&1; then
+    uv generate-shell-completion zsh >$external_completions/_uv
+    uvx --generate-shell-completion zsh >$external_completions/_uvx
+else
+    printf "%s\n" "[warn] uv not found, skipping uv completions"
 fi
 
 if hash mise >/dev/null 2>&1; then
