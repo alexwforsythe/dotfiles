@@ -40,5 +40,8 @@ hook = 'source $XDG_CONFIG_HOME/shell/fzf.sh'
 path = 'https://github.com/tinted-theming/tinted-terminal'
 name = 'tinted-terminal'
 themes-dir = 'themes-16/iterm2-applescripts'
-hook = 'source $XDG_CONFIG_HOME/shell/shellrc.sh'
+# hook = '''
+# cp -f $TINTY_THEME_FILE_PATH $HOME/Library/Application\ Support/iTerm2/Scripts/AutoLaunch.scpt \
+#   && osascript $TINTY_THEME_FILE_PATH
+# '''
 supported-systems = ['base16', 'base24']

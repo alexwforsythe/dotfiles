@@ -1,7 +1,8 @@
 #!/usr/bin/env zsh
 # shellcheck shell=bash
 
-zsh_cfg=$XDG_CONFIG_HOME/shell/zsh
+shell_cfg=$XDG_CONFIG_HOME/shell
+zsh_cfg=$shell_cfg/zsh
 
 plugins=(
     # Load first so the prompt is ready ASAP.
@@ -77,13 +78,14 @@ plugins=(
     # User configs
     #
 
-    $XDG_CONFIG_HOME/shell/shellrc.sh
-
-    # Load completions config after plugins so it can override their settings.
+    # Load completions config and aliases after plugins so they can override
+    # their settings.
     $zsh_cfg/compsys.zsh
     $zsh_cfg/keybinds.zsh
     $zsh_cfg/functions
+    $shell_cfg/aliases.sh
     $zsh_cfg/aliases.zsh
+    $shell_cfg/workrc.sh
 
     # Initialize commands like mise, zoxide, etc. This could be a bit slow, so
     # load them last.

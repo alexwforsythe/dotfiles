@@ -96,7 +96,7 @@ EOF
         r_plugin_init init $plugin
         r_plugin_funcs_dir funcs_dir $plugin
         if [[ -z $init && -z $funcs_dir ]]; then
-            printf "%s\n" "[error] plugin not found: $plugin" >&2
+            printf "%s\n" "[warn] plugin not found: $plugin" >&2
             continue
         fi
 
@@ -161,8 +161,8 @@ for plugin in $plugins; do
     r_plugin_init init $plugin
     r_plugin_funcs_dir funcs_dir $plugin
     if [[ -z $init && -z $funcs_dir ]]; then
-        printf "%s\n" "[error] plugin not found: $plugin" >&2
-        return 1
+        printf "%s\n" "[warn] plugin not found: $plugin" >&2
+        continue
     fi
 
     # -R prevents the contents from being memory-mapped (i.e. shared between

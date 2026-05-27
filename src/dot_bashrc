@@ -96,8 +96,6 @@ source:file "$HOMEBREW_PREFIX/share/google-cloud-sdk/completion.bash.inc"
 # Plugins
 #
 
-source:file "$XDG_CONFIG_HOME/shell/shellrc.sh"
-
 # fzf: https://thevaluable.dev/fzf-shell-integration/
 if [ -n "$FZF_DIR" ] && iscmd fzf; then
     source:file "$XDG_CONFIG_HOME/shell/fzf.sh"
@@ -112,6 +110,17 @@ fi
 # colorize output. Here's a good reference:
 # https://the.exa.website/docs/colour-themes
 run:if-cmd gdircolors eval "$(gdircolors)"
+
+#
+# Aliases
+#
+# Load aliases last to override any conflicting ones defined by plugins.
+#
+
+source:file "$XDG_CONFIG_HOME/shell/aliases.sh"
+if [ -r "$XDG_CONFIG_HOME/shell/workrc.sh" ]; then
+    source:file "$XDG_CONFIG_HOME/shell/workrc.sh"
+fi
 
 #
 # Hooks
