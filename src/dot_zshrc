@@ -55,7 +55,7 @@ unset _brew_shellenv _profile
 #
 
 # Correctly display UTF-8 with combining characters.
-if [[ "$(locale LC_CTYPE)" == "UTF-8" ]]; then
+if [[ ${LC_CTYPE:-$LANG:u} == *UTF-8* ]]; then
   setopt combiningchars
 fi
 
