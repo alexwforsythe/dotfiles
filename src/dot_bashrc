@@ -127,3 +127,4 @@ fi
 #
 
 eval:if-cmd mise eval mise activate bash
+eval:if-cmd zoxide eval zoxide init bash
