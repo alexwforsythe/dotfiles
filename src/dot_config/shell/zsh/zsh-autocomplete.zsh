@@ -8,13 +8,6 @@
 # https://github.com/marlonrichert/zsh-autocomplete/blob/main/.zshrc
 #
 
-# Standard styles (used by zsh-autocomplete during initialization)
-
-# Use caching to make completion for commands such as dpkg and apt usable.
-# zsh-autocomplete will manage this cache if it's enabled.
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path $ZSH_COMPCACHE
-
 # zsh-autocomplete styles
 
 # Load and initialize the completion system--ignoring insecure directories--with
@@ -22,7 +15,7 @@ zstyle ':completion::complete:*' cache-path $ZSH_COMPCACHE
 # changed the first time a shell is opened each day.
 #
 # Source: https://github.com/sorin-ionescu/prezto/blob/master/modules/completion/init.zsh
-if [[ $ZSH_COMPDUMP(#qNmh-20) ]]; then
+if [[ $ZCOMPDUMP(#qNmh-20) ]]; then
     # -C (skip function check) implies -i (skip security check).
     zstyle ':autocomplete::compinit' arguments -C
 else
@@ -31,7 +24,7 @@ else
     zstyle ':autocomplete::compinit' arguments -i
     # Keep $ZCOMPDUMP younger than cache time even if it isn't regenerated.
     # Source: https://github.com/sorin-ionescu/prezto/issues/1880
-    run:if-file $ZSH_COMPDUMP touch -m $ZSH_COMPDUMP
+    run:if-file $ZCOMPDUMP touch -m $ZCOMPDUMP
 fi
 
 # Wait this many seconds for typing to stop, before showing completions:

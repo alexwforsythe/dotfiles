@@ -25,7 +25,11 @@ fi
 
 # Some plugins check this instead of $HOME
 export ZDOTDIR="$HOME"
-# Used by zsh-autocomplete
-export ZSH_COMPDUMP="$XDG_CACHE_HOME/zsh/zcompdump"
-export ZSH_COMPCACHE="$XDG_CACHE_HOME/zsh/zcompcache"
 export ZPLUGINDIR="$XDG_DATA_HOME/zsh-plugins"
+
+# This is the default path used by zsh-autocomplete. Don't name it ZSH_COMPDUMP
+# because that triggers special logic for OMZ plugins, which we don't want.
+export ZCOMPDUMP="$XDG_CACHE_HOME/zsh/compdump"
+# Use the same path as zsh-autocomplete so the cache isn't duplicated if we
+# decide to run compinit manually.
+export ZCOMPCACHE="$XDG_CACHE_HOME/zsh/compcache"

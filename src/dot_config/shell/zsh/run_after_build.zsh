@@ -155,7 +155,7 @@ fi
 #  - -p: required to create/add new functions to the digest
 #  - -U: suppress alias expansion
 #  - -M: enables memory-mapping so multiple zsh processes can share the digest
-zrecompile -p -U -M "$ZSH_COMPDUMP"
+zrecompile -p -U -M "$ZCOMPDUMP"
 
 # Recompile zsh plugins and their function digests.
 for plugin in $plugins; do
