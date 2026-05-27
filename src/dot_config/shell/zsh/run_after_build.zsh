@@ -132,10 +132,11 @@ fi
 
 if hash mise >/dev/null 2>&1; then
     # Make sure mise is deactivated first, otherwise `activate` will print
-    # deactivation commands.
-    if ! mise deactivate >/dev/null 2>&1; then
+    # deactivation commands. `deactivate` prints the commands in non-interactive
+    # shells, so we need to eval them.
+    if ! eval "$(mise deactivate)"; then
         printf "[error] %s\n" "mise deactivate failed" >&2
-        return 1
+        exit 1
     fi
 
     print $gen_file_preamble >$mise_activate
