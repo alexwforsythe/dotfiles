@@ -17,8 +17,9 @@
 #  - https://github.com/romkatv/zsh4humans/blob/v5/.zshrc.mac
 #
 
-# @note Uncomment the following line to profile startup time.
-# zmodload zsh/zprof
+case $ZPROF_ENABLE in
+1 | true) zmodload zsh/zprof ;;
+esac
 
 #
 # Profile
@@ -100,5 +101,6 @@ source:file "$XDG_CONFIG_HOME/shell/zsh/gen/load-plugins.zsh"
 # https://github.com/rothgar/mastering-zsh/blob/master/docs/helpers/widgets.md
 autoload -Uz tetris tetriscurses
 
-# @note Uncomment the following line to print startup time.
-# zprof
+case $ZPROF_ENABLE in
+1 | true) zprof ;;
+esac
