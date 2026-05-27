@@ -36,6 +36,7 @@ plugins=(
     # Load completion definitions before zsh-autocomplete because it calls
     # compinit.
     zsh-completions
+    external-completions
     $zsh_cfg/completions
     $zsh_cfg/zsh-autocomplete.zsh
     zsh-autocomplete
