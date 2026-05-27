@@ -5,7 +5,7 @@
 #
 
 # Print the PATH with new lines.
-alias ppath="echo \${PATH//:/$'\n'}"
+alias ppath="echo \"\${PATH//:/$'\n'}\""
 alias sudo="sudo --preserve-env=VISUAL,EDITOR,GIT_EDITOR"
 alias v="\$VISUAL"
 
