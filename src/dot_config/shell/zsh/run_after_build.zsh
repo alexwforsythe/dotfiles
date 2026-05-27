@@ -138,6 +138,10 @@ else
     printf "%s\n" "[warn] uv not found, skipping uv completions"
 fi
 
+if hash ngrok >/dev/null 2>&1; then
+    ngrok completion >>$external_completions/_ngrok
+fi
+
 if hash mise >/dev/null 2>&1; then
     # Make sure mise is deactivated first, otherwise `activate` will print
     # deactivation commands. `deactivate` prints the commands in non-interactive
