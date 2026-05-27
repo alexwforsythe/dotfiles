@@ -9,12 +9,5 @@
 #
 
 # Execute code that does not affect the current session in the background.
-{
-  # Compile the completion dump to increase startup speed.
-  if [[ -s $ZSH_COMPDUMP && (! -s "${ZSH_COMPDUMP}.zwc" || $ZSH_COMPDUMP -nt "${ZSH_COMPDUMP}.zwc") ]]; then
-    if command mkdir "${ZSH_COMPDUMP}.zwc.lock" 2>/dev/null; then
-      zcompile -M "$ZSH_COMPDUMP"
-      command rmdir "${ZSH_COMPDUMP}.zwc.lock" 2>/dev/null
-    fi
-  fi
-} &|
+# { true; } &
+# disown
